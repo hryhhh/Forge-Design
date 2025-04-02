@@ -41,6 +41,7 @@ $font-size-h6: 1rem !default; // H6 font size
 // Font Weights
 $font-weight-normal: 400 !default; // Normal weight
 $font-weight-bold: 700 !default; // Bold weight
+$font-weight-bolder: 800 !default; // Bolder weight
 
 // Line Heights
 $line-height-base: 1.5 !default; // Base line height
@@ -49,6 +50,8 @@ $line-height-heading: 1.2 !default; // Heading line height
 // Link Styles
 $link-color: $primary-color !default; // Link color
 $link-hover-color: darken($link-color, 15%) !default; // Link hover color
+$link-focus-color: lighten($link-color, 15%) !default; // Link focus color
+$link-focus-thickness: 2px !default;
 
 // Body Styles
 $body-background-color: $background-color !default; // Body background color
