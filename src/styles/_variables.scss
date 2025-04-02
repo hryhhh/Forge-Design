@@ -1,0 +1,58 @@
+// _variables.scss
+$primary-color: #007bff !default; // Bright Blue
+$secondary-color: #28a745 !default; // Soft Green
+$accent-color: #fd7e14 !default; // Warm Orange
+$background-color: #f8f9fa !default; // Light Gray
+$text-color: #343a40 !default; // Dark Gray
+
+$neutral-light: #f5f5f5 !default; // Very Light Gray
+$neutral-light-gray: #e0e0e0 !default; // Light Gray
+$neutral-gray: #b0b0b0 !default; // Gray
+$neutral-dark-gray: #808080 !default; // Dark Gray
+$neutral-dark: #404040 !default; // Almost Black
+$neutral-black: #000000 !default; // Black
+
+// System Colors
+$success: #28a745 !default; // Green
+$warning: #ffc107 !default; // Yellow
+$danger: #dc3545 !default; // Red
+$info: #17a2b8 !default; // Cyan
+$light: #f8f9fa !default; // Light Gray
+$dark: #343a40 !default; // Dark Gray
+
+// Font Variables
+$font-family-base: 'Helvetica Neue', Arial, sans-serif !default; // Base font family
+$font-family-heading: 'Georgia', serif !default; // Heading font family
+
+// Font Sizes
+$font-size-base: 16px !default; // Base font size
+$font-size-large: 24px !default; // Large text size
+$font-size-medium: 18px !default; // Medium text size
+$font-size-small: 14px !default; // Small text size
+
+// Heading Font Sizes
+$font-size-h1: 2.5rem !default; // H1 font size
+$font-size-h2: 2rem !default; // H2 font size
+$font-size-h3: 1.75rem !default; // H3 font size
+$font-size-h4: 1.5rem !default; // H4 font size
+$font-size-h5: 1.25rem !default; // H5 font size
+$font-size-h6: 1rem !default; // H6 font size
+
+// Font Weights
+$font-weight-normal: 400 !default; // Normal weight
+$font-weight-bold: 700 !default; // Bold weight
+
+// Line Heights
+$line-height-base: 1.5 !default; // Base line height
+$line-height-heading: 1.2 !default; // Heading line height
+
+// Link Styles
+$link-color: $primary-color !default; // Link color
+$link-hover-color: darken($link-color, 15%) !default; // Link hover color
+
+// Body Styles
+$body-background-color: $background-color !default; // Body background color
+$body-color: $text-color !default; // Body text color
+$body-font-family: $font-family-base !default; // Body font family
+$body-font-size: $font-size-base !default; // Body font size
+$body-line-height: $line-height-base !default; // Body line height
