@@ -1,61 +1,83 @@
-// _variables.scss
-$primary-color: #007bff !default; // Bright Blue
-$secondary-color: #28a745 !default; // Soft Green
-$accent-color: #fd7e14 !default; // Warm Orange
-$background-color: #f8f9fa !default; // Light Gray
-$text-color: #343a40 !default; // Dark Gray
+@use "sass:color";
 
-$neutral-light: #f5f5f5 !default; // Very Light Gray
-$neutral-light-gray: #e0e0e0 !default; // Light Gray
-$neutral-gray: #b0b0b0 !default; // Gray
-$neutral-dark-gray: #808080 !default; // Dark Gray
-$neutral-dark: #404040 !default; // Almost Black
-$neutral-black: #000000 !default; // Black
+// 颜色变量
+$primary-color: #4198f5 !default; // 亮蓝色
+$secondary-color: #28a745 !default; // 柔和绿色
+$accent-color: #fd7e14 !default; // 暖橙色
+$background-color: #f8f9fa !default; // 浅灰色
+$text-color: #343a40 !default; // 深灰色
 
-// System Colors
-$success: #28a745 !default; // Green
-$warning: #ffc107 !default; // Yellow
-$danger: #dc3545 !default; // Red
-$info: #17a2b8 !default; // Cyan
-$light: #f8f9fa !default; // Light Gray
-$dark: #343a40 !default; // Dark Gray
+$neutral-light: #f5f5f5 !default; // 非常浅灰色
+$neutral-light-gray: #e0e0e0 !default; // 浅灰色
+$neutral-gray: #b0b0b0 !default; // 灰色
+$neutral-dark-gray: #808080 !default; // 深灰色
+$neutral-dark: #404040 !default; // 几乎黑色
+$neutral-black: #000000 !default; // 黑色
 
-// Font Variables
-$font-family-base: 'Helvetica Neue', Arial, sans-serif !default; // Base font family
-$font-family-heading: 'Georgia', serif !default; // Heading font family
+// 系统颜色
+$success: #28a745 !default; // 绿色
+$warning: #ffc107 !default; // 黄色
+$danger: #dc3545 !default; // 红色
+$info: #17a2b8 !default; // 青色
+$light: #f8f9fa !default; // 浅灰色
+$dark: #343a40 !default; // 深灰色
 
-// Font Sizes
-$font-size-base: 16px !default; // Base font size
-$font-size-large: 24px !default; // Large text size
-$font-size-medium: 18px !default; // Medium text size
-$font-size-small: 14px !default; // Small text size
+// 字体变量
+$font-family-base: 'Helvetica Neue', Arial, sans-serif !default; // 基础字体
+$font-family-heading: 'Georgia', serif !default; // 标题字体
 
-// Heading Font Sizes
-$font-size-h1: 2.5rem !default; // H1 font size
-$font-size-h2: 2rem !default; // H2 font size
-$font-size-h3: 1.75rem !default; // H3 font size
-$font-size-h4: 1.5rem !default; // H4 font size
-$font-size-h5: 1.25rem !default; // H5 font size
-$font-size-h6: 1rem !default; // H6 font size
+// 字体大小
+$font-size-base: 16px !default; // 基础字体大小
+$font-size-large: 24px !default; // 大字体大小
+$font-size-medium: 18px !default; // 中等字体大小
+$font-size-small: 14px !default; // 小字体大小
 
-// Font Weights
-$font-weight-normal: 400 !default; // Normal weight
-$font-weight-bold: 700 !default; // Bold weight
-$font-weight-bolder: 800 !default; // Bolder weight
+// 标题字体大小
+$font-size-h1: 2.5rem !default; // H1 字体大小
+$font-size-h2: 2rem !default; // H2 字体大小
+$font-size-h3: 1.75rem !default; // H3 字体大小
+$font-size-h4: 1.5rem !default; // H4 字体大小
+$font-size-h5: 1.25rem !default; // H5 字体大小
+$font-size-h6: 1rem !default; // H6 字体大小
 
-// Line Heights
-$line-height-base: 1.5 !default; // Base line height
-$line-height-heading: 1.2 !default; // Heading line height
+// 字体粗细
+$font-weight-normal: 400 !default; // 正常粗细
+$font-weight-bold: 700 !default; // 粗体
+$font-weight-bolder: 800 !default; // 更粗体
 
-// Link Styles
-$link-color: $primary-color !default; // Link color
-$link-hover-color: darken($link-color, 15%) !default; // Link hover color
-$link-focus-color: lighten($link-color, 15%) !default; // Link focus color
+// 行高
+$line-height-base: 1.5 !default; // 基础行高
+$line-height-heading: 1.2 !default; // 标题行高
+
+// 链接样式
+$link-color: $primary-color !default; // 链接颜色
+$link-hover-color: color.scale($link-color, $lightness: -15%) !default; // 链接悬停颜色
+$link-focus-color: color.scale($link-color, $lightness: -15%) !default; // 链接聚焦颜色
 $link-focus-thickness: 2px !default;
 
-// Body Styles
-$body-background-color: $background-color !default; // Body background color
-$body-color: $text-color !default; // Body text color
-$body-font-family: $font-family-base !default; // Body font family
-$body-font-size: $font-size-base !default; // Body font size
-$body-line-height: $line-height-base !default; // Body line height
+// 主体样式
+$body-background-color: $background-color !default; // 主体背景颜色
+$body-color: $text-color !default; // 主体文本颜色
+$body-font-family: $font-family-base !default; // 主体字体
+$body-font-size: $font-size-base !default; // 主体字体大小
+$body-line-height: $line-height-base !default; // 主体行高
+
+// 按钮样式
+$btn-bg: $primary-color!default; // 按钮背景色
+$btn-padding-x: 0.75rem !default; // 按钮水平内边距
+$btn-padding-y: 0.375rem !default; // 按钮垂直内边距
+$btn-font-size: $font-size-base !default; // 按钮字体大小
+$btn-font-weight: $font-weight-normal !default; // 按钮字体粗细
+$btn-line-height: $line-height-base !default; // 按钮行高
+$btn-border-radius: 0.25rem !default; // 按钮圆角
+$btn-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 按钮阴影
+$btn-disabled-opacity: 0.65 !default; // 禁用按钮透明度
+$btn-border-width: 1px !default; // 按钮边框宽度
+$btn-danger-bg: $danger !default; // 危险按钮背景色
+$btn-danger-border: $danger !default; // 危险按钮边框色
+$btn-danger-color: $neutral-black !default; // 危险按钮文字颜色
+$btn-danger-hover-bg: color.scale($btn-danger-bg, $lightness: -10%) !default; // 危险按钮悬停背景色
+$btn-danger-hover-border: color.scale($btn-danger-border, $lightness: -10%) !default; // 危险按钮悬停边框色
+
+$btn-link-color: $link-color !default; // 链接按钮文字颜色
+$btn-transition: all 0.15s ease-in-out !default;

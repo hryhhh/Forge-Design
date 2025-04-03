@@ -1,2 +1,4 @@
-@import 'variables';
-@import 'rebot';
+@use 'variables' as *;
+@use 'rebot' as *;
+
+@import "../components/Button/_style"

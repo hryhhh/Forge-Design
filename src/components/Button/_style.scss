@@ -1,0 +1,123 @@
+@use "../../styles/_variables.scss" as *;
+@use "sass:color";
+
+.btn {
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  color: $btn-bg; 
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: $btn-border-width solid transparent;
+  padding: $btn-padding-y $btn-padding-x;
+  font-size: $btn-font-size;
+  line-height: $btn-line-height;
+  border-radius: $btn-border-radius;
+  cursor: pointer;
+  transition: $btn-transition;
+  box-shadow: $btn-box-shadow; // 使用 $btn-box-shadow 变量
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: 0 0 0 $link-focus-thickness $link-focus-color;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: $btn-disabled-opacity;
+    pointer-events: none;
+  }
+}
+
+.btn-primary {
+  color: $neutral-black;
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    color: $neutral-black;
+    background-color: color.scale($primary-color, $lightness: -10%);
+    border-color: color.scale($primary-color, $lightness: -10%);
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 $link-focus-thickness color.scale($primary-color, $lightness: -10%);
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+}
+
+.btn-secondary {
+  color: $neutral-black;
+  background-color: $secondary-color;
+  border-color: $secondary-color;
+
+  &:hover {
+    color: $neutral-black;
+    background-color: color.scale($secondary-color, $lightness: -10%);
+    border-color: color.scale($secondary-color, $lightness: -10%);
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 $link-focus-thickness color.scale($secondary-color, $lightness: -10%);
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: $secondary-color;
+    border-color: $secondary-color;
+  }
+}
+
+.btn-danger {
+  color: $btn-danger-color;
+  background-color: $btn-danger-bg;
+  border-color: $btn-danger-border;
+
+  &:hover {
+    color: $btn-danger-color;
+    background-color: $btn-danger-hover-bg;
+    border-color: $btn-danger-hover-border;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 $link-focus-thickness $btn-danger-hover-bg;
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: $btn-danger-bg;
+    border-color: $btn-danger-border;
+  }
+}
+
+.btn-link {
+  font-weight: $font-weight-normal;
+  color: $btn-link-color;
+  background-color: transparent;
+  border-color: transparent;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+
+  &:focus,
+  &.focus {
+    text-decoration: underline;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $btn-link-color;
+    pointer-events: none;
+  }
+}
