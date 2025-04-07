@@ -1,8 +1,8 @@
 @use "sass:color";
 
 // 颜色变量
-$primary-color: #4198f5 !default; // 亮蓝色
-$secondary-color: #28a745 !default; // 柔和绿色
+$primary-color: #8fc3fb !default; // 亮蓝色
+$secondary-color: #aebed0 !default; // 柔和绿色
 $accent-color: #fd7e14 !default; // 暖橙色
 $background-color: #f8f9fa !default; // 浅灰色
 $text-color: #343a40 !default; // 深灰色
@@ -53,7 +53,7 @@ $line-height-heading: 1.2 !default; // 标题行高
 $link-color: $primary-color !default; // 链接颜色
 $link-hover-color: color.scale($link-color, $lightness: -15%) !default; // 链接悬停颜色
 $link-focus-color: color.scale($link-color, $lightness: -15%) !default; // 链接聚焦颜色
-$link-focus-thickness: 2px !default;
+$link-focus-thickness: 2px !default;// 链接聚焦厚度
 
 // 主体样式
 $body-background-color: $background-color !default; // 主体背景颜色
@@ -67,17 +67,36 @@ $btn-bg: $primary-color!default; // 按钮背景色
 $btn-padding-x: 0.75rem !default; // 按钮水平内边距
 $btn-padding-y: 0.375rem !default; // 按钮垂直内边距
 $btn-font-size: $font-size-base !default; // 按钮字体大小
+
+// 大按钮样式变量
+$btn-large-padding-x: 1rem !default; // 大按钮水平内边距
+$btn-large-padding-y: 0.5rem !default; // 大按钮垂直内边距
+$btn-large-font-size: $font-size-large !default; // 大按钮字体大小
+
+// 小按钮样式变量
+$btn-small-padding-x: 0.5rem !default; // 小按钮水平内边距
+$btn-small-padding-y: 0.25rem !default; // 小按钮垂直内边距
+$btn-small-font-size: $font-size-small !default; // 小按钮字体大小
+
 $btn-font-weight: $font-weight-normal !default; // 按钮字体粗细
 $btn-line-height: $line-height-base !default; // 按钮行高
 $btn-border-radius: 0.25rem !default; // 按钮圆角
 $btn-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 按钮阴影
-$btn-disabled-opacity: 0.65 !default; // 禁用按钮透明度
 $btn-border-width: 1px !default; // 按钮边框宽度
+
+$btn-disabled-bg: $secondary-color !default; // 禁用按钮背景色
+$btn-disabled-opacity: 0.65 !default; // 禁用按钮透明度
+
+
 $btn-danger-bg: $danger !default; // 危险按钮背景色
 $btn-danger-border: $danger !default; // 危险按钮边框色
 $btn-danger-color: $neutral-black !default; // 危险按钮文字颜色
 $btn-danger-hover-bg: color.scale($btn-danger-bg, $lightness: -10%) !default; // 危险按钮悬停背景色
 $btn-danger-hover-border: color.scale($btn-danger-border, $lightness: -10%) !default; // 危险按钮悬停边框色
 
-$btn-link-color: $link-color !default; // 链接按钮文字颜色
+$btn-hover-bg: color.scale($btn-bg, $lightness: -10%) !default; // 按钮悬停背景色
+$btn-hover-border: color.scale($btn-bg, $lightness: -10%) !default; // 按钮悬停边框色
+$btn-hover-color: $neutral-black !default; // 按钮悬停文字颜色
+
+$btn-link-color: $neutral-dark !default; // 链接按钮文字颜色
 $btn-transition: all 0.15s ease-in-out !default;

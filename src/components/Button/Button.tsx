@@ -14,7 +14,6 @@ export enum ButtonType {
   Link = "link",
 }
 
-// 定义默认属性
 interface BaseButtonProps {
   children?: React.ReactNode;
   size?: ButtonSize;
@@ -24,14 +23,11 @@ interface BaseButtonProps {
   href?: string;
 }
 
-
-
 const Button: React.FC<BaseButtonProps> = ({
   children,
   size = ButtonSize.Medium,
   btnType = ButtonType.Primary,
   disabled=false,
-   className,
   href,
 }) => {
   const classes = classNames("btn", {

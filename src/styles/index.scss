@@ -1,4 +1,4 @@
 @use 'variables' as *;
 @use 'rebot' as *;
 
-@import "../components/Button/_style"
+@use '../components/Button/style.scss' as *;

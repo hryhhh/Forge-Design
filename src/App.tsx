@@ -10,8 +10,8 @@ function App() {
       <div className="card">
         
         <Button>Hello Button</Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>Large Button</Button>
-        <Button btnType={ButtonType.Danger}>Danger Button</Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}   disabled>Large Button</Button>
+        <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>Danger Button</Button>
         <Button btnType={ButtonType.Link} href="https://www.baidu.com">Link Button</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
