@@ -1,0 +1,45 @@
+@use "../../styles/variables" as *;
+@use "sass:color";
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding-left:0;
+    margin-bottom: 30px;
+    border-bottom:$menu-border-width solid $menu-border-color;
+    box-shadow: $menu-box-shadow;
+    .menu-item{
+        padding: $menu-item-padding-y $menu-item-padding-x;
+        font-size: $menu-font-size;
+        color: $neutral-light;
+        cursor:pointer;
+        transition: $menu-transition;
+        &:hover,&:focus{
+            text-decoration: none;
+        }
+        &.is-disabled{
+            color: $menu-item-disabled-color;
+            border-bottom:$menu-border-width solid $menu-hover-border;
+        }
+        &.is-active{
+            color:$menu-item-active-color;
+            border-bottom:$menu-border-width solid $menu-hover-border;
+        }
+    }
+}
+.menu-vertical{
+    flex-direction: column;
+    border-bottom:0px;
+    margin: 10px 20px;
+    border-right: $menu-border-width solid $menu-border-color;
+    .menu-item {
+        border-bottom:2px solid transparent;
+        &.is-active,&:hover{
+            color:$menu-item-active-color;
+            border-bottom:0px;
+            border-left:2px solid $menu-item-active-color;
+        }
+    }
+}

@@ -100,3 +100,18 @@ $btn-hover-color: $neutral-black !default; // 按钮悬停文字颜色
 
 $btn-link-color: $neutral-dark !default; // 链接按钮文字颜色
 $btn-transition: all 0.15s ease-in-out !default;
+
+//Menu样式变量
+$menu-bg: $primary-color!default; // 菜单背景色
+$menu-font-size: $font-size-base!default; // 菜单字体大小
+$menu-border-color: $neutral-light-gray!default; // 菜单边框颜色
+$menu-border-width: 1px !default; // 菜单边框宽度
+$menu-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 菜单阴影
+$menu-hover-border: color.scale($menu-bg, $lightness: -10%)!default; // 菜单悬停边框色
+$menu-transition: all 0.15s ease-in-out!default; // 菜单过渡效果
+
+//Menu-item样式变量
+$menu-item-padding-x: 1rem!default; // 菜单项水平内边距
+$menu-item-padding-y: 0.5rem!default; // 菜单项垂直内边距
+$menu-item-active-color:$primary-color!default; // 菜单项激活颜色
+$menu-item-disabled-color:$neutral-gray!default; // 菜单项禁用颜色
