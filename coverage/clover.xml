@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1745033670505" clover="3.2.0">
+  <project timestamp="1745033670505" name="All files">
+    <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1" elements="15" coveredelements="15" complexity="0" loc="7" ncloc="7" packages="1" files="1" classes="1"/>
+    <file name="button.tsx" path="E:\vscode\component-lib\Forge_Design\src\components\Button\button.tsx">
+      <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="44" count="4" type="stmt"/>
+      <line num="51" count="4" type="cond" truecount="4" falsecount="0"/>
+      <line num="54" count="1" type="stmt"/>
+      <line num="55" count="1" type="stmt"/>
+      <line num="62" count="3" type="stmt"/>
+      <line num="63" count="3" type="stmt"/>
+    </file>
+  </project>
+</coverage>
