@@ -6,7 +6,6 @@ const config: Config = {
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
 
-  // 配置 Babel 转换 TypeScript 和 JSX
   transform: {
     "^.+\\.tsx?$": "babel-jest", // 使用 babel-jest 转换 TypeScript 和 JSX
   },
@@ -15,8 +14,6 @@ const config: Config = {
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
   },
-
-  // 其他配置项可以根据需要解开注释并进行设置
 };
 
 export default config;

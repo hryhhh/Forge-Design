@@ -1,45 +1,136 @@
 @use "../../styles/variables" as *;
 @use "sass:color";
-.menu{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+
+// 原始菜单
+.forge-menu {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 30px;
+  font-size: $menu-font-size;
+  color: $menu-item-color;
+  box-shadow: $menu-box-shadow;
+  transition: $menu-transition;
+
+  // 原始菜单的子菜单项
+  > .menu-item {
+    padding: $menu-item-padding-y $menu-item-padding-x;
+    cursor: pointer;
+
+    &.is-disabled {
+      color: $menu-item-disabled-color;
+      cursor: not-allowed;
+    }
+
+    &.is-active {
+      color: $menu-item-active-color;
+    }
+  }
+
+  // 下拉菜单Submenu
+  .submenu-item {
+    position: relative;
+
+    .submenu-title {
+      display: flex;
+      align-items: center;
+
+      .arrow-icon {
+        margin-left: 5px;
+        transition: transform 0.25s ease-in-out;
+      }
+
+      .arrow-icon.open {
+        transform: rotate(90deg); // 箭头图标旋转 90 度
+      }
+    }
+
+    // 点击时显示子菜单
+    .forge-submenu {
+      display: none; // 默认隐藏子菜单
+    }
+
+    &.menu-opened .forge-submenu {
+      display: block; // 当 menuOpen 为 true 时显示子菜单
+    }
+  }
+
+  // 下拉菜单Submenu的子菜单项框样式
+  .forge-submenu {
+    padding-left: 0;
     list-style: none;
-    padding-left:0;
-    margin-bottom: 30px;
-    border-bottom:$menu-border-width solid $menu-border-color;
-    box-shadow: $menu-box-shadow;
-    .menu-item{
-        padding: $menu-item-padding-y $menu-item-padding-x;
-        font-size: $menu-font-size;
-        color: $neutral-light;
-        cursor:pointer;
-        transition: $menu-transition;
-        &:hover,&:focus{
-            text-decoration: none;
-        }
-        &.is-disabled{
-            color: $menu-item-disabled-color;
-            border-bottom:$menu-border-width solid $menu-hover-border;
-        }
-        &.is-active{
-            color:$menu-item-active-color;
-            border-bottom:$menu-border-width solid $menu-hover-border;
-        }
+    width: 100%; // 确保子菜单宽度与父菜单一致
+
+    > .menu-item {
+      padding: $menu-item-padding-y $menu-item-padding-x;
+      color: $menu-item-color;
+      cursor: pointer;
+
+      transition: background-color 0.3s ease;
+
+      &:hover,
+      &:focus {
+        background-color: $menu-item-hover-bg;
+      }
+
+      &.is-active {
+        color: $menu-item-active-color;
+      }
+      &.is-disabled {
+        color: $menu-item-disabled-color;
+        cursor: not-allowed;
+      }
     }
+  }
 }
-.menu-vertical{
-    flex-direction: column;
-    border-bottom:0px;
-    margin: 10px 20px;
-    border-right: $menu-border-width solid $menu-border-color;
-    .menu-item {
-        border-bottom:2px solid transparent;
-        &.is-active,&:hover{
-            color:$menu-item-active-color;
-            border-bottom:0px;
-            border-left:2px solid $menu-item-active-color;
-        }
+
+// 水平菜单
+.menu-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  > .menu-item {
+    &:hover,
+    &:focus {
+      border-bottom: 2px solid $menu-item-active-color;
+      margin-bottom: -2px;
     }
+  }
+
+  // 水平菜单下的下拉菜单Submenu
+  .forge-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0; // 与父菜单项对齐
+    box-shadow: $menu-box-shadow;
+    border-radius: $menu-border-radius;
+    width: 100%; // 确保子菜单宽度与父菜单一致
+    text-align: center;
+  }
+}
+
+// 垂直菜单
+.menu-vertical {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0;
+  margin: 10px 20px;
+  padding: 0 20px;
+
+  > .menu-item {
+    &:hover,
+    &:focus {
+      border-left: 2px solid $menu-item-active-color;
+      margin-left: -2px;
+    }
+  }
+
+  .forge-submenu {
+    > .menu-item {
+      padding: $menu-item-padding-y $menu-item-padding-x;
+      color: $menu-item-color;
+      cursor: pointer;
+    }
+  }
 }

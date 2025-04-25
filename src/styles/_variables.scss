@@ -4,7 +4,7 @@
 $primary-color: #8fc3fb !default; // 亮蓝色
 $secondary-color: #aebed0 !default; // 柔和绿色
 $accent-color: #fd7e14 !default; // 暖橙色
-$background-color: #f8f9fa !default; // 浅灰色
+$background-color: #ffffff !default; // 浅灰色
 $text-color: #343a40 !default; // 深灰色
 
 $neutral-light: #f5f5f5 !default; // 非常浅灰色
@@ -105,13 +105,17 @@ $btn-transition: all 0.15s ease-in-out !default;
 $menu-bg: $primary-color!default; // 菜单背景色
 $menu-font-size: $font-size-base!default; // 菜单字体大小
 $menu-border-color: $neutral-light-gray!default; // 菜单边框颜色
-$menu-border-width: 1px !default; // 菜单边框宽度
+$menu-border-width: 3px !default; // 菜单边框宽度
 $menu-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 菜单阴影
 $menu-hover-border: color.scale($menu-bg, $lightness: -10%)!default; // 菜单悬停边框色
 $menu-transition: all 0.15s ease-in-out!default; // 菜单过渡效果
+$menu-border-radius: 0.25rem !default; // 菜单项圆角
 
 //Menu-item样式变量
 $menu-item-padding-x: 1rem!default; // 菜单项水平内边距
 $menu-item-padding-y: 0.5rem!default; // 菜单项垂直内边距
+$menu-item-color: $primary-color !default; // 菜单项颜色
 $menu-item-active-color:$primary-color!default; // 菜单项激活颜色
 $menu-item-disabled-color:$neutral-gray!default; // 菜单项禁用颜色
+$menu-item-hover-color:$primary-color!default; // 菜单项悬停颜色
+$menu-item-hover-bg: #E6F4FF; // 菜单项悬停背景色
