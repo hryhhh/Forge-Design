@@ -29,8 +29,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
     "menu-opened": menuOpen, // 添加 menu-opened 类以控制子菜单显示
   });
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // 防止事件冒泡到父级菜单
+  const handleClick = () => {
     setOpen(!menuOpen); // 切换子菜单的显示状态
   };
 
@@ -45,21 +44,15 @@ const SubMenu: React.FC<SubMenuProps> = ({
         const { displayName } = childElement.type as React.ComponentType;
         if (displayName === "MenuItem") {
           return React.cloneElement(childElement, { index: `${index}-${i}` });
-        } else {
-          console.error(
-            "Warning: SubMenu has a child which is not a MenuItem component"
-          );
-          return null;
         }
       }
-      return null;
     });
 
     return <ul className={subMenuClasses}>{childrenComponent}</ul>;
   };
 
   return (
-    <li className={classes} key={index}>
+    <li className={classes} key={index} data-testid={`submenu-${index}`}>
       <div
         className="submenu-title"
         onClick={handleClick} // 点击标题时触发 handleClick

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.21% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/19</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">63.63% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>7/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.21% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/19</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
@@ -128,7 +128,15 @@
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,36 +163,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,60 +203,63 @@
 import React from "react";
 import classNames from "classnames";
 import { MenuItemProps } from "./menuItem";
+&nbsp;
 type MenuMode = "horizontal" | "vertical";
-type handleClick = (index: number) =&gt; void;
+type SelectCallback = (SelectedIndex: string) =&gt; void;
+&nbsp;
 export interface MenuProps {
-  defaultIndex?: number;
+  defaultIndex?: string;
   mode?: MenuMode;
   className?: string;
-  style?: React.CSSProperties;
   children?: React.ReactNode;
-  onSelect?: (selectedIndex: number) =&gt; void;
+  onSelect?: SelectCallback;
+  defaultOpenSubMenus?: string[];
 }
 interface IMenuContext {
-  index: number;
-  onSelect?: handleClick;
+  index: string;
+  onSelect?: SelectCallback;
+  mode?: MenuMode;
+  defaultOpenSubMenus?: string[];
 }
-export const MenuContext = React.createContext&lt;IMenuContext&gt;({ index: 0 });
+&nbsp;
+export const MenuContext = React.createContext&lt;IMenuContext&gt;({ index: "0" });
 const Menu: React.FC&lt;MenuProps&gt; = ({
-  defaultIndex = <span class="branch-0 cbranch-no" title="branch not covered" >0,</span>
+  defaultIndex = <span class="branch-0 cbranch-no" title="branch not covered" >"0",</span>
   mode = "horizontal",
   className,
-  style,
   children,
   onSelect,
+  defaultOpenSubMenus = [],
 }) =&gt; {
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames("forge-menu", className, {
-    "menu-vertical": mode === "vertical",
-    "menu-horizontal": mode !== "vertical",
+    "menu-vertical": mode !== "horizontal",
+    "menu-horizontal": mode === "horizontal",
   });
-  const handleClick = (index: number) =&gt; {
+  const handleClick = (index: string) =&gt; {
     setActive(index);
-    onSelect?.(index)
+    onSelect?.(index);
   };
   const passedContext: IMenuContext = {
-    index: currentActive,
+    index: currentActive ? currentActive : <span class="branch-1 cbranch-no" title="branch not covered" >"0",</span>
     onSelect: handleClick,
+    mode,
+    defaultOpenSubMenus,
   };
   const renderChildren = () =&gt; {
     return React.Children.map(children, (child, index) =&gt; {
-      
       <span class="missing-if-branch" title="else path not taken" >E</span>if (React.isValidElement(child)) {
         const childElement = child as React.ReactElement&lt;MenuItemProps&gt;;
         const { displayName } = childElement.type as React.ComponentType;
-        if (displayName === "MenuItem"||<span class="branch-1 cbranch-no" title="branch not covered" >displayName === "SubMenu")</span> {
-          return React.cloneElement(childElement,{index})
-        } else <span class="missing-if-branch" title="else path not taken" >E</span>{
-<span class="cstat-no" title="statement not covered" >          console.error("Warning: Menu has a child which is not a MenuItem component");</span>
-<span class="cstat-no" title="statement not covered" >          return null;</span>
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (displayName === "MenuItem" || displayName === "SubMenu") {
+          return React.cloneElement(childElement, { index: index.toString() });
         }
       }
-<span class="cstat-no" title="statement not covered" >      return null</span>
+<span class="cstat-no" title="statement not covered" >      return null;</span>
     });
   };
   return (
-    &lt;ul className={classes} style={style} data-testid="test-menu"&gt;
+    &lt;ul className={classes} data-testid="test-menu"&gt;
       &lt;MenuContext.Provider value={passedContext}&gt;
         {renderChildren()}
       &lt;/MenuContext.Provider&gt;
@@ -265,7 +274,7 @@ export default Menu;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-23T12:30:17.004Z
+                at 2025-04-27T12:49:01.235Z
             </div>
         <script src="../prettify.js"></script>
         <script>

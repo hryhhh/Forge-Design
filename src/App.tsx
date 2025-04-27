@@ -12,11 +12,11 @@ function App() {
         <header className="card-header"></header>
         <Menu
           defaultIndex={'0'}
-          // onSelect={(index) => {
-          //   alert(index);
-          // }}
+          onSelect={(index) => {
+            alert(index);
+          }}
           defaultOpenSubMenus={['2']}
-          mode="vertical"
+          // mode="vertical"
         >
           <MenuItem>Item 1</MenuItem>
           <MenuItem>Item 2</MenuItem>

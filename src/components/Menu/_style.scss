@@ -40,17 +40,17 @@
       }
 
       .arrow-icon.open {
-        transform: rotate(90deg); // 箭头图标旋转 90 度
+        transform: rotate(90deg);
       }
     }
 
     // 点击时显示子菜单
     .forge-submenu {
-      display: none; // 默认隐藏子菜单
+      display: none; 
     }
 
     &.menu-opened .forge-submenu {
-      display: block; // 当 menuOpen 为 true 时显示子菜单
+      display: block; 
     }
   }
 
