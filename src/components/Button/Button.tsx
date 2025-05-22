@@ -2,24 +2,37 @@ import React from "react";
 import classNames from "classnames";
 
 export enum ButtonSize {
+  /** Small size button */
   Small = "small",
+  /** Medium size button */
   Medium = "medium",
+  /** Large size button */
   Large = "large",
 }
 
 export enum ButtonType {
+  /** Primary button style */
   Primary = "primary",
+  /** Default button style */
   Default = "default",
+  /** Danger button style */
   Danger = "danger",
+  /** Link button style */
   Link = "link",
 }
 
 interface BaseButtonProps {
+  /** Button content */
   children?: React.ReactNode;
+  /** Size of the button */
   size?: ButtonSize;
+  /** Type of the button */
   btnType?: ButtonType;
+  /** Whether the button is disabled */
   disabled?: boolean;
+  /** Custom CSS class name */
   className?: string;
+  /** Target URL if the button is a link */
   href?: string;
 }
 
@@ -32,7 +45,7 @@ type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchor
 
 // 综合类型
 export type ButtonProps = NativeButtonProps | AnchorButtonProps;
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   size = ButtonSize.Medium,
   btnType = ButtonType.Default,
