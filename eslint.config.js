@@ -6,29 +6,32 @@ import pluginReact from "eslint-plugin-react";
 
 export default defineConfig([
   {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: {
-      parser: "@typescript-eslint/parser",
-      ecmaVersion: "latest",
-      sourceType: "module",
+      parser: '@typescript-eslint/parser',
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: globals.browser,
     },
     plugins: {
-      "@typescript-eslint": tseslint,
+      '@typescript-eslint': tseslint,
       react: pluginReact,
+      prettier: 'prettier',
     },
     rules: {
-      "react/react-in-jsx-scope": "off",
+      'react/react-in-jsx-scope': 'off',
+      'prettier/prettier': 'error',
     },
     settings: {
       react: {
-        version: "detect",
+        version: 'detect',
       },
     },
     extends: [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
+      'eslint:recommended',
+      'plugin:@typescript-eslint/recommended',
+      'plugin:react/recommended',
+      'prettier',
     ],
   },
   js.configs.recommended,

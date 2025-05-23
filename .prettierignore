@@ -1,0 +1,17 @@
+# 构建输出
+dist/
+build/
+coverage/
+
+# 依赖
+node_modules/
+
+# 其他不需要格式化的文件
+*.min.js
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 特定文件
+README.md
