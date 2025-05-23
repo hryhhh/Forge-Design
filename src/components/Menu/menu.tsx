@@ -1,77 +1,77 @@
-import { useState } from "react";
-import React from "react";
-import classNames from "classnames";
-import { MenuItemProps } from "./menuItem";
+import { useState } from 'react'
+import React from 'react'
+import classNames from 'classnames'
+import { MenuItemProps } from './menuItem'
 
-type MenuMode = "horizontal" | "vertical";
-type SelectCallback = (SelectedIndex: string) => void;
+type MenuMode = 'horizontal' | 'vertical'
+type SelectCallback = (SelectedIndex: string) => void
 
 export interface MenuProps {
   /** 指定默认高亮的菜单项索引 */
-  defaultIndex?: string;
+  defaultIndex?: string
   /** 菜单类型：'horizontal'（水平）或 'vertical'（垂直），默认是 'horizontal' */
-  mode?: MenuMode;
+  mode?: MenuMode
   /** 菜单容器的自定义 CSS 类名 */
-  className?: string;
+  className?: string
   /** 菜单内容，通常为 MenuItem 和 SubMenu 组件 */
-  children?: React.ReactNode;
+  children?: React.ReactNode
   /** 选中菜单项时触发的回调，参数为选中项的索引 */
-  onSelect?: SelectCallback;
+  onSelect?: SelectCallback
   /** 默认展开的子菜单索引数组（仅在垂直模式下生效） */
-  defaultOpenSubMenus?: string[];
+  defaultOpenSubMenus?: string[]
 }
 
 interface IMenuContext {
-  index: string;
-  onSelect?: SelectCallback;
-  mode?: MenuMode;
-  defaultOpenSubMenus?: string[];
+  index: string
+  onSelect?: SelectCallback
+  mode?: MenuMode
+  defaultOpenSubMenus?: string[]
 }
 /**
  * 一个支持水平和垂直模式、嵌套子菜单的导航菜单组件。
  */
-export const MenuContext = React.createContext<IMenuContext>({ index: "0" });
+export const MenuContext = React.createContext<IMenuContext>({ index: '0' })
 export const Menu: React.FC<MenuProps> = ({
-  defaultIndex = "0",
-  mode = "horizontal",
+  defaultIndex = '0',
+  mode = 'horizontal',
   className,
   children,
   onSelect,
   defaultOpenSubMenus = [],
 }) => {
-  const [currentActive, setActive] = useState(defaultIndex);
-  const classes = classNames("forge-menu", className, {
-    "menu-vertical": mode !== "horizontal",
-    "menu-horizontal": mode === "horizontal",
-  });
+  const [currentActive, setActive] = useState(defaultIndex)
+  const classes = classNames('forge-menu', className, {
+    'menu-vertical': mode !== 'horizontal',
+    'menu-horizontal': mode === 'horizontal',
+  })
   const handleClick = (index: string) => {
-    setActive(index);
-    onSelect?.(index);
-  };
+    setActive(index)
+    onSelect?.(index)
+  }
   const passedContext: IMenuContext = {
-    index: currentActive ? currentActive : "0",
+    index: currentActive ? currentActive : '0',
     onSelect: handleClick,
     mode,
     defaultOpenSubMenus,
-  };
+  }
   const renderChildren = () => {
     return React.Children.map(children, (child, index) => {
       if (React.isValidElement(child)) {
-        const childElement = child as React.ReactElement<MenuItemProps>;
-        const { displayName } = childElement.type as React.ComponentType;
-        if (displayName === "MenuItem" || displayName === "SubMenu") {
-          return React.cloneElement(childElement, { index: index.toString() });
+        const childElement = child as React.ReactElement<MenuItemProps>
+        const { displayName } = childElement.type as React.ComponentType
+        if (displayName === 'MenuItem' || displayName === 'SubMenu') {
+          return React.cloneElement(childElement, { index: index.toString() })
         }
       }
-      return null;
-    });
-  };
+      return null
+    })
+  }
   return (
     <ul className={classes} data-testid="test-menu">
       <MenuContext.Provider value={passedContext}>
         {renderChildren()}
       </MenuContext.Provider>
     </ul>
-  );
-};
-export default Menu;
+  )
+}
+export default Menu

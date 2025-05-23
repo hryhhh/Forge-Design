@@ -1,8 +1,8 @@
-import React from "react";
-import Button, { ButtonSize, ButtonType } from "./components/Button/Button";
-import Menu from "./components/Menu/Menu";
-import MenuItem from "./components/Menu/menuItem";
-import SubMenu from "./components/Menu/subMenu";
+import React from 'react'
+import Button, { ButtonSize, ButtonType } from './components/Button/Button'
+import Menu from './components/Menu/Menu'
+import MenuItem from './components/Menu/menuItem'
+import SubMenu from './components/Menu/subMenu'
 function App() {
   return (
     <>
@@ -10,11 +10,11 @@ function App() {
       <div className="card">
         <header className="card-header"></header>
         <Menu
-          defaultIndex={"0"}
-          onSelect={(index) => {
-            alert(index);
+          defaultIndex={'0'}
+          onSelect={index => {
+            alert(index)
           }}
-          defaultOpenSubMenus={["2"]}
+          defaultOpenSubMenus={['2']}
           // mode="vertical"
         >
           <MenuItem>Item 1</MenuItem>
@@ -30,8 +30,8 @@ function App() {
         <Button>Hello Button</Button>
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-            alert(13);
+            e.preventDefault()
+            alert(13)
           }}
         >
           Button
@@ -57,7 +57,7 @@ function App() {
         learn react
       </a>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

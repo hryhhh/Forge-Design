@@ -1,84 +1,84 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react'
+import classNames from 'classnames'
 
 export enum ButtonSize {
   /** Small size button */
-  Small = "small",
+  Small = 'small',
   /** Medium size button */
-  Medium = "medium",
+  Medium = 'medium',
   /** Large size button */
-  Large = "large",
+  Large = 'large',
 }
 
 export enum ButtonType {
   /** Primary button style */
-  Primary = "primary",
+  Primary = 'primary',
   /** Default button style */
-  Default = "default",
+  Default = 'default',
   /** Danger button style */
-  Danger = "danger",
+  Danger = 'danger',
   /** Link button style */
-  Link = "link",
+  Link = 'link',
 }
 
 interface BaseButtonProps {
   /** Button content */
-  children?: React.ReactNode;
+  children?: React.ReactNode
   /** Size of the button */
-  size?: ButtonSize;
+  size?: ButtonSize
   /** Type of the button */
-  btnType?: ButtonType;
+  btnType?: ButtonType
   /** Whether the button is disabled */
-  disabled?: boolean;
+  disabled?: boolean
   /** Custom CSS class name */
-  className?: string;
+  className?: string
   /** Target URL if the button is a link */
-  href?: string;
+  href?: string
 }
 
-
 // 普通按钮类型
-type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>;
+type NativeButtonProps = BaseButtonProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement>
 
 // 链接按钮类型
-type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
+type AnchorButtonProps = BaseButtonProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
 
 // 综合类型
-export type ButtonProps = NativeButtonProps | AnchorButtonProps;
+export type ButtonProps = NativeButtonProps | AnchorButtonProps
 export const Button: React.FC<ButtonProps> = ({
   children,
   size = ButtonSize.Medium,
   btnType = ButtonType.Default,
-  disabled=false,
+  disabled = false,
   href,
   className,
   ...restProps
 }) => {
-  const classes = classNames("btn", className, {
-    
+  const classes = classNames('btn', className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     disabled: disabled,
-  });
+  })
 
   if (btnType === ButtonType.Link && href) {
     // 确保 restProps 只包含 HTMLAnchorElement 的属性
     const anchorRestProps =
-      restProps as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+      restProps as React.AnchorHTMLAttributes<HTMLAnchorElement>
     return (
       <a className={classes} href={href} {...anchorRestProps}>
         {children}
       </a>
-    );
+    )
   } else {
     const buttonRestProps =
-      restProps as React.ButtonHTMLAttributes<HTMLButtonElement>;
+      restProps as React.ButtonHTMLAttributes<HTMLButtonElement>
     return (
       <button className={classes} disabled={disabled} {...buttonRestProps}>
         {children}
       </button>
-    );
+    )
   }
-};
+}
 
-export default Button;
+export default Button
