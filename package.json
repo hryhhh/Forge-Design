@@ -1,7 +1,10 @@
 {
   "name": "forge-design",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "description": "A React component library for Forge Design System",
+  "author": "hhhhry",
+  "keywords": ["react", "component", "library", "design", "system", "forge"],
+  "version": "1.0.0",
   "main": "./build/index.js",
   "module": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -16,7 +19,8 @@
     "preview": "vite preview",
     "test": "jest --watchAll",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -76,5 +80,20 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-sass": "^0.1.0",
     "vitest": "^3.1.2"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hryhhh/Forge-Design"
+  },
+  "bugs": {
+    "url": "https://github.com/hryhhh/Forge-Design/issues"
+  },
+  "homepage": "https://github.com/hryhhh/Forge-Design",
+  "files": [
+    "build"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

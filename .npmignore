@@ -1,0 +1,24 @@
+# 开发相关文件
+node_modules/
+src/
+storybook-static/
+.vscode/
+.git/
+.gitignore
+.eslintrc.js
+tsconfig.json
+tsconfig.build.json
+.vite/
+coverage/
+dist/
+
+# 配置文件
+package-lock.json
+yarn.lock
+jest.config.js
+.babelrc
+.storybook/
+
+# 文档文件
+CHANGELOG.md
+CONTRIBUTING.md
