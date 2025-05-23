@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import classNames from "classnames";
-import { MenuContext } from "./menu";
+import { MenuContext } from "./Menu";
 export interface MenuItemProps {
   index?: string;
   className?: string;
@@ -9,7 +9,7 @@ export interface MenuItemProps {
   children?: React.ReactNode;
 }
 const MenuItem: React.FC<MenuItemProps> = ({
-  index ='0',
+  index = "0",
   className,
   disabled,
   style,

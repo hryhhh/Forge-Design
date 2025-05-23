@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Menu from "./menu";
+import Menu from "./Menu";
 import MenuItem from "./menuItem";
 import SubMenu from "./subMenu";
-import React from "react";
 
 const menuMeta: Meta<typeof Menu> = {
   title: "Menu",

@@ -12,7 +12,10 @@ export default defineConfig([
       ecmaVersion: "latest",
       sourceType: "module",
       globals: globals.browser,
-      plugins: ["@typescript-eslint", "react"],
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      react: pluginReact,
     },
     rules: {
       "react/react-in-jsx-scope": "off",

@@ -4,10 +4,10 @@ import {
   RenderResult,
   fireEvent,
   cleanup,
-  waitFor
+  waitFor,
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Menu, { MenuProps } from "./menu";
+import Menu, { MenuProps } from "./Menu";
 import MenuItem from "./menuItem";
 import SubMenu from "./subMenu";
 
@@ -43,13 +43,12 @@ const createStyleFile = () => {
       .forge-submenu.menu-opened{
       display:block;
       }
-  `
-  const style = document.createElement('style')
-  style.setAttribute('type', 'text/css')
-  style.innerHTML = cssfile
-  return style
+  `;
+  const style = document.createElement("style");
+  style.setAttribute("type", "text/css");
+  style.innerHTML = cssfile;
+  return style;
 };
-
 
 // 定义用于测试的变量
 let wrapper: RenderResult,
@@ -97,40 +96,39 @@ describe("Menu and MenuItem", () => {
   // 测试鼠标悬停在子菜单上时的行为
   it("should show dropdown items when hover on subMenu", async () => {
     expect(wrapper.queryByText("drop1")).not.toBeVisible();
-    const dropdownElement = wrapper.getByText('dropdown')
+    const dropdownElement = wrapper.getByText("dropdown");
 
     fireEvent.click(dropdownElement); // 修改为点击事件
 
     await waitFor(() => {
       expect(wrapper.queryByText("drop1")).toBeVisible();
-    })
+    });
     fireEvent.click(wrapper.getByText("drop1"));
     expect(testProps.onSelect).toHaveBeenCalledWith("3-0");
     fireEvent.click(dropdownElement); // 修改为点击事件
     await waitFor(() => {
-     expect(wrapper.queryByText("drop1")).not.toBeVisible(); 
-    })
+      expect(wrapper.queryByText("drop1")).not.toBeVisible();
+    });
   });
 
   // 测试鼠标点击子菜单标题时的行为
   it("should toggle menu-opened class when clicking on submenu title", () => {
-    const dropdownElement = wrapper.getByText('dropdown');
-    const submenu = wrapper.getByTestId('submenu-3'); // 假设子菜单的 data-testid 是 'submenu-3'
+    const dropdownElement = wrapper.getByText("dropdown");
+    const submenu = wrapper.getByTestId("submenu-3"); // 假设子菜单的 data-testid 是 'submenu-3'
 
     // 初始状态下，子菜单应该是关闭的
-    expect(submenu).not.toHaveClass('menu-opened');
+    expect(submenu).not.toHaveClass("menu-opened");
 
     // 点击子菜单标题
     fireEvent.click(dropdownElement);
 
     // 子菜单应该打开，并且添加了 menu-opened 类
-    expect(submenu).toHaveClass('menu-opened');
+    expect(submenu).toHaveClass("menu-opened");
 
     // 再次点击子菜单标题
     fireEvent.click(dropdownElement);
 
     // 子菜单应该关闭，并且移除了 menu-opened 类
-    expect(submenu).not.toHaveClass('menu-opened');
+    expect(submenu).not.toHaveClass("menu-opened");
   });
-
 });
