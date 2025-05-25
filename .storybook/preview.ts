@@ -12,8 +12,12 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        order: ['Welcome', 'Forge Design'], // 定义顶级目录顺序
+      },
+    },
   },
-  decorators: [],
 }
 
 export default preview

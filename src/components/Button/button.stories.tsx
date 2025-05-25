@@ -3,7 +3,7 @@ import Button, { ButtonSize, ButtonType } from './Button'
 // import mdx from "./Button.mdx";
 
 const buttonMeta: Meta<typeof Button> = {
-  title: 'Button',
+  title: 'Forge Design/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {

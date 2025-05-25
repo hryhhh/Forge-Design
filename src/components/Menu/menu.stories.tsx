@@ -4,7 +4,7 @@ import MenuItem from './menuItem'
 import SubMenu from './subMenu'
 
 const menuMeta: Meta<typeof Menu> = {
-  title: 'Menu',
+  title: 'Forge Design/Menu',
   component: Menu,
   tags: ['autodocs'],
   parameters: {
