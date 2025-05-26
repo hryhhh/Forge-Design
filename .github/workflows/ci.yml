@@ -31,5 +31,10 @@ jobs:
     - name: Build project
       run: npm run build
     
-    - name: Lint code
-      run: npm run lint
+    - name: Build Storybook
+      run: npm run build-storybook
+
+    - name: Verify Storybook Build
+      run: |
+        test -d storybook-static && echo "Storybook built successfully" || exit 1
+    

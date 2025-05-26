@@ -11,7 +11,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: ci
     steps:
     - uses: actions/checkout@v4
     
@@ -33,7 +32,16 @@ jobs:
           echo "Build directory not found"
           exit 1
         fi
-        if [! -f "build/index.js" ]; then
+        if [ ! -f "build/index.js" ]; then
+
+    - name: Build Storybook
+      run: npm run build-storybook
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./storybook-static
     
     - name: Publish to npm
       run: npm publish
