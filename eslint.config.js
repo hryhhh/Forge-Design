@@ -1,82 +1,72 @@
 import js from '@eslint/js'
 import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
-import pluginReactHooks from 'eslint-plugin-react-hooks'
-import pluginPrettier from 'eslint-plugin-prettier'
+import importPlugin from 'eslint-plugin-import'
 
-export default [
-  // 基础 JavaScript 推荐配置
-  js.configs.recommended,
-  // TypeScript 推荐配置
-  ...tseslint.configs.recommended,
-  // React 推荐配置
-  pluginReact.configs.flat.recommended,
-  // 配置文件排除 - 使用 JavaScript 解析器
+export default tseslint.config(
+  { ignores: ['dist', 'build', 'storybook-static'] },
   {
-    files: ['*.config.js', '*.config.ts', 'vite.config.ts'],
-    languageOptions: {
-      globals: globals.node,
-      parser: js.parser || undefined, // 使用默认 JS 解析器
-    },
-  },
-
-  // TypeScript 文件配置
-  {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
-    plugins: {
-      react: pluginReact,
-      'react-hooks': pluginReactHooks,
-      prettier: pluginPrettier,
-    },
     languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        project: [
-          './tsconfig.json',
-          './tsconfig.app.json',
-          './tsconfig.node.json',
-        ],
-        tsconfigRootDir: process.cwd(),
-        ecmaVersion: 2021,
-        sourceType: 'module',
-        ecmaFeatures: { jsx: true },
-      },
+      ecmaVersion: 2020,
       globals: globals.browser,
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      import: importPlugin,
     },
     settings: {
-      react: { version: 'detect' },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: ['./tsconfig.app.json', './tsconfig.node.json'],
+        },
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
     },
     rules: {
-      'prettier/prettier': 'warn',
-      'react/prop-types': 'off',
-      '@typescript-eslint/no-unused-vars': [
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        { allowConstantExport: true },
       ],
-      'react/react-in-jsx-scope': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
+      // 导入路径相关规则
+      'import/no-unresolved': 'error',
+      'import/named': 'error',
+      'import/default': 'error',
+      'import/namespace': 'error',
+      'import/export': 'error',
+      'import/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          js: 'never',
+          jsx: 'never',
+          ts: 'never',
+          tsx: 'never',
+        },
+      ],
+      'import/no-relative-parent-imports': 'warn',
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
+          'newlines-between': 'always',
+        },
+      ],
     },
-  },
-
-  // JavaScript 文件配置
-  {
-    files: ['**/*.{js,mjs,cjs,jsx}'],
-    plugins: {
-      react: pluginReact,
-      'react-hooks': pluginReactHooks,
-      prettier: pluginPrettier,
-    },
-    languageOptions: {
-      globals: globals.browser,
-    },
-    rules: {
-      'prettier/prettier': 'warn',
-      'react/prop-types': 'off',
-      'react/react-in-jsx-scope': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-    },
-  },
-]
+  }
+)

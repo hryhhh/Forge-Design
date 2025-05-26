@@ -5,7 +5,7 @@ import type { MenuProps } from './Menu'
 import MenuItem, { MenuItemProps } from './menuItem'
 import SubMenu, { SubMenuProps } from './subMenu'
 
-export type { MenuProps, IMenuContext } from './Menu'
+export type { MenuProps, IMenuContext, MenuMode, SelectCallback } from './Menu'
 export type { MenuItemProps } from './menuItem'
 export type { SubMenuProps } from './subMenu'
 

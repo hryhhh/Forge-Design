@@ -3,7 +3,7 @@ import { MenuContext } from './Menu';
 import type { MenuProps } from './Menu';
 import { MenuItemProps } from './menuItem';
 import { SubMenuProps } from './subMenu';
-export type { MenuProps, IMenuContext } from './Menu';
+export type { MenuProps, IMenuContext, MenuMode, SelectCallback } from './Menu';
 export type { MenuItemProps } from './menuItem';
 export type { SubMenuProps } from './subMenu';
 export type IMenuComponent = FC<MenuProps> & {

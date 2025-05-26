@@ -14,10 +14,12 @@ export type {
 
 export { ButtonSize, ButtonType } from './components/Button'
 
-// 🧩 菜单相关类型
 export type {
   MenuProps,
   MenuItemProps,
   SubMenuProps,
   IMenuComponent,
+  MenuMode,
+  SelectCallback,
+  IMenuContext,
 } from './components/Menu/index'

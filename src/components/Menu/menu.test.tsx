@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   render,
   RenderResult,
@@ -7,7 +6,8 @@ import {
   waitFor,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { Menu, MenuProps } from './index'
+import { Menu } from './index'
+import type { MenuProps } from './index'
 import MenuItem from './menuItem'
 import SubMenu from './subMenu'
 
