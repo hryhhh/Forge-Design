@@ -1,9 +1,11 @@
 import { FC } from 'react'
-import Menu, { MenuProps } from './Menu'
+import Menu from './Menu'
+import { MenuContext } from './Menu'
+import type { MenuProps } from './Menu'
 import MenuItem, { MenuItemProps } from './menuItem'
 import SubMenu, { SubMenuProps } from './subMenu'
 
-export type { MenuProps, SelectCallback, MenuMode } from './Menu'
+export type { MenuProps, IMenuContext } from './Menu'
 export type { MenuItemProps } from './menuItem'
 export type { SubMenuProps } from './subMenu'
 
@@ -12,8 +14,9 @@ export type IMenuComponent = FC<MenuProps> & {
   SubMenu: FC<SubMenuProps>
 }
 
-const TransMenu = Menu as IMenuComponent
-TransMenu.Item = MenuItem
-TransMenu.SubMenu = SubMenu
+const MenuComponent = Menu as IMenuComponent
+MenuComponent.Item = MenuItem
+MenuComponent.SubMenu = SubMenu
 
-export default TransMenu
+export { MenuComponent as Menu }
+export { MenuContext }

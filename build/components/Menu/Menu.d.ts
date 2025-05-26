@@ -2,7 +2,7 @@ import React from 'react';
 type MenuMode = 'horizontal' | 'vertical';
 type SelectCallback = (SelectedIndex: string) => void;
 export type { MenuMode, SelectCallback };
-interface MenuProps {
+export interface MenuProps {
     /** 指定默认高亮的菜单项索引 */
     defaultIndex?: string;
     /** 菜单类型：'horizontal'（水平）或 'vertical'（垂直），默认是 'horizontal' */
@@ -16,16 +16,14 @@ interface MenuProps {
     /** 默认展开的子菜单索引数组（仅在垂直模式下生效） */
     defaultOpenSubMenus?: string[];
 }
-export type { MenuProps };
 interface IMenuContext {
     index: string;
     onSelect?: SelectCallback;
     mode?: MenuMode;
     defaultOpenSubMenus?: string[];
 }
-/**
- * 一个支持水平和垂直模式、嵌套子菜单的导航菜单组件。
- */
+export type { IMenuContext };
+/** 一个支持水平和垂直模式、嵌套子菜单的导航菜单组件。 */
 export declare const MenuContext: React.Context<IMenuContext>;
-export declare const Menu: React.FC<MenuProps>;
+declare const Menu: React.FC<MenuProps>;
 export default Menu;
