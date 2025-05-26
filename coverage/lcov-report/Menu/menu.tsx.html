@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Menu/menu.tsx</title>
+    <title>Code coverage report for Menu/Menu.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">Menu</a> menu.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">Menu</a> Menu.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -140,7 +140,9 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,83 +219,84 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from "react";
-import React from "react";
-import classNames from "classnames";
-import { MenuItemProps } from "./menuItem";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from 'react'
+import React from 'react'
+import classNames from 'classnames'
+import { MenuItemProps } from './menuItem'
 &nbsp;
-type MenuMode = "horizontal" | "vertical";
-type SelectCallback = (SelectedIndex: string) =&gt; void;
+type MenuMode = 'horizontal' | 'vertical'
+type SelectCallback = (SelectedIndex: string) =&gt; void
+export type { MenuMode, SelectCallback }
 &nbsp;
 export interface MenuProps {
   /** 指定默认高亮的菜单项索引 */
-  defaultIndex?: string;
+  defaultIndex?: string
   /** 菜单类型：'horizontal'（水平）或 'vertical'（垂直），默认是 'horizontal' */
-  mode?: MenuMode;
+  mode?: MenuMode
   /** 菜单容器的自定义 CSS 类名 */
-  className?: string;
+  className?: string
   /** 菜单内容，通常为 MenuItem 和 SubMenu 组件 */
-  children?: React.ReactNode;
+  children?: React.ReactNode
   /** 选中菜单项时触发的回调，参数为选中项的索引 */
-  onSelect?: SelectCallback;
+  onSelect?: SelectCallback
   /** 默认展开的子菜单索引数组（仅在垂直模式下生效） */
-  defaultOpenSubMenus?: string[];
+  defaultOpenSubMenus?: string[]
 }
 &nbsp;
 interface IMenuContext {
-  index: string;
-  onSelect?: SelectCallback;
-  mode?: MenuMode;
-  defaultOpenSubMenus?: string[];
+  index: string
+  onSelect?: SelectCallback
+  mode?: MenuMode
+  defaultOpenSubMenus?: string[]
 }
 /**
  * 一个支持水平和垂直模式、嵌套子菜单的导航菜单组件。
  */
-export const MenuContext = React.createContext&lt;IMenuContext&gt;({ index: "0" });
+export const MenuContext = React.createContext&lt;IMenuContext&gt;({ index: '0' })
 export const Menu: React.FC&lt;MenuProps&gt; = ({
-  defaultIndex = <span class="branch-0 cbranch-no" title="branch not covered" >"0",</span>
-  mode = "horizontal",
+  defaultIndex = <span class="branch-0 cbranch-no" title="branch not covered" >'0',</span>
+  mode = 'horizontal',
   className,
   children,
   onSelect,
   defaultOpenSubMenus = [],
 }) =&gt; {
-  const [currentActive, setActive] = useState(defaultIndex);
-  const classes = classNames("forge-menu", className, {
-    "menu-vertical": mode !== "horizontal",
-    "menu-horizontal": mode === "horizontal",
-  });
+  const [currentActive, setActive] = useState(defaultIndex)
+  const classes = classNames('forge-menu', className, {
+    'menu-vertical': mode !== 'horizontal',
+    'menu-horizontal': mode === 'horizontal',
+  })
   const handleClick = (index: string) =&gt; {
-    setActive(index);
-    onSelect?.(index);
-  };
+    setActive(index)
+    onSelect?.(index)
+  }
   const passedContext: IMenuContext = {
-    index: currentActive ? currentActive : <span class="branch-1 cbranch-no" title="branch not covered" >"0",</span>
+    index: currentActive ? currentActive : <span class="branch-1 cbranch-no" title="branch not covered" >'0',</span>
     onSelect: handleClick,
     mode,
     defaultOpenSubMenus,
-  };
+  }
   const renderChildren = () =&gt; {
     return React.Children.map(children, (child, index) =&gt; {
       <span class="missing-if-branch" title="else path not taken" >E</span>if (React.isValidElement(child)) {
-        const childElement = child as React.ReactElement&lt;MenuItemProps&gt;;
-        const { displayName } = childElement.type as React.ComponentType;
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (displayName === "MenuItem" || displayName === "SubMenu") {
-          return React.cloneElement(childElement, { index: index.toString() });
+        const childElement = child as React.ReactElement&lt;MenuItemProps&gt;
+        const { displayName } = childElement.type as React.ComponentType
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (displayName === 'MenuItem' || displayName === 'SubMenu') {
+          return React.cloneElement(childElement, { index: index.toString() })
         }
       }
-<span class="cstat-no" title="statement not covered" >      return null;</span>
-    });
-  };
+<span class="cstat-no" title="statement not covered" >      return null</span>
+    })
+  }
   return (
     &lt;ul className={classes} data-testid="test-menu"&gt;
       &lt;MenuContext.Provider value={passedContext}&gt;
         {renderChildren()}
       &lt;/MenuContext.Provider&gt;
     &lt;/ul&gt;
-  );
-};
-export default Menu;
+  )
+}
+export default Menu
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -301,7 +304,7 @@ export default Menu;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T13:09:01.030Z
+                at 2025-05-26T12:55:48.021Z
             </div>
         <script src="../prettify.js"></script>
         <script>

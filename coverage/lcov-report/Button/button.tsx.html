@@ -147,7 +147,20 @@
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,7 +222,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,90 +243,96 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
-import classNames from "classnames";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+import classNames from 'classnames'
 &nbsp;
 export enum ButtonSize {
   /** Small size button */
-  Small = "small",
+  Small = 'small',
   /** Medium size button */
-  Medium = "medium",
+  Medium = 'medium',
   /** Large size button */
-  Large = "large",
+  Large = 'large',
 }
 &nbsp;
 export enum ButtonType {
   /** Primary button style */
-  Primary = "primary",
+  Primary = 'primary',
   /** Default button style */
-  Default = "default",
+  Default = 'default',
   /** Danger button style */
-  Danger = "danger",
+  Danger = 'danger',
   /** Link button style */
-  Link = "link",
+  Link = 'link',
 }
-&nbsp;
 interface BaseButtonProps {
   /** Button content */
-  children?: React.ReactNode;
+  children?: React.ReactNode
   /** Size of the button */
-  size?: ButtonSize;
+  size?: ButtonSize
   /** Type of the button */
-  btnType?: ButtonType;
+  btnType?: ButtonType
   /** Whether the button is disabled */
-  disabled?: boolean;
+  disabled?: boolean
   /** Custom CSS class name */
-  className?: string;
+  className?: string
   /** Target URL if the button is a link */
-  href?: string;
+  href?: string
 }
 &nbsp;
-&nbsp;
 // 普通按钮类型
-type NativeButtonProps = BaseButtonProps &amp; React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;;
+type NativeButtonProps = BaseButtonProps &amp;
+  React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;
 &nbsp;
 // 链接按钮类型
-type AnchorButtonProps = BaseButtonProps &amp; React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt; &amp; { href: string };
+type AnchorButtonProps = BaseButtonProps &amp;
+  React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt; &amp; { href: string }
 &nbsp;
-// 综合类型
-export type ButtonProps = NativeButtonProps | AnchorButtonProps;
+type ButtonProps = NativeButtonProps | AnchorButtonProps
+&nbsp;
+export type {
+  BaseButtonProps,
+  ButtonProps,
+  AnchorButtonProps,
+  NativeButtonProps,
+}
+&nbsp;
 export const Button: React.FC&lt;ButtonProps&gt; = ({
   children,
   size = ButtonSize.Medium,
   btnType = ButtonType.Default,
-  disabled=false,
+  disabled = false,
   href,
   className,
   ...restProps
 }) =&gt; {
-  const classes = classNames("btn", className, {
-    
+  const classes = classNames('btn', className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     disabled: disabled,
-  });
+  })
 &nbsp;
   if (btnType === ButtonType.Link &amp;&amp; href) {
     // 确保 restProps 只包含 HTMLAnchorElement 的属性
     const anchorRestProps =
-      restProps as React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt;;
+      restProps as React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt;
     return (
       &lt;a className={classes} href={href} {...anchorRestProps}&gt;
         {children}
       &lt;/a&gt;
-    );
+    )
   } else {
     const buttonRestProps =
-      restProps as React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;;
+      restProps as React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;
     return (
       &lt;button className={classes} disabled={disabled} {...buttonRestProps}&gt;
         {children}
       &lt;/button&gt;
-    );
+    )
   }
-};
+}
 &nbsp;
-export default Button;
+export default Button
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -322,7 +340,7 @@ export default Button;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T13:09:01.030Z
+                at 2025-05-26T12:55:48.021Z
             </div>
         <script src="../prettify.js"></script>
         <script>
