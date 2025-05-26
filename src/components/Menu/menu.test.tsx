@@ -7,8 +7,7 @@ import {
   waitFor,
 } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Menu from './Menu'
-import type { MenuProps } from './Menu'
+import { Menu, MenuProps } from './index'
 import MenuItem from './menuItem'
 import SubMenu from './subMenu'
 
