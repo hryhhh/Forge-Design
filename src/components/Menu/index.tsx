@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import Menu from './Menu'
-import { MenuContext } from './Menu'
-import type { MenuProps } from './Menu'
+import Menu from './menu'
+import { MenuContext } from './menu'
+import type { MenuProps } from './menu'
 import MenuItem, { MenuItemProps } from './menuItem'
 import SubMenu, { SubMenuProps } from './subMenu'
 
-export type { MenuProps, IMenuContext, MenuMode, SelectCallback } from './Menu'
+export type { MenuProps, IMenuContext, MenuMode, SelectCallback } from './menu'
 export type { MenuItemProps } from './menuItem'
 export type { SubMenuProps } from './subMenu'
 
