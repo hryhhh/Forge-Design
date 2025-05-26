@@ -53,7 +53,11 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <a href="https://vitejs.dev/guide/features.html" target="_blank">
+      <a
+        href="https://vitejs.dev/guide/features.html"
+        target="_blank"
+        rel="noreferrer"
+      >
         learn react
       </a>
     </>

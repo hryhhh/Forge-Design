@@ -5,7 +5,6 @@ storybook-static/
 .vscode/
 .git/
 .gitignore
-.eslintrc.js
 tsconfig.json
 tsconfig.build.json
 .vite/
