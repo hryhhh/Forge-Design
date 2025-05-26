@@ -20,7 +20,6 @@ export enum ButtonType {
   /** Link button style */
   Link = 'link',
 }
-
 interface BaseButtonProps {
   /** Button content */
   children?: React.ReactNode
@@ -44,8 +43,15 @@ type NativeButtonProps = BaseButtonProps &
 type AnchorButtonProps = BaseButtonProps &
   React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
 
-// 综合类型
-export type ButtonProps = NativeButtonProps | AnchorButtonProps
+type ButtonProps = NativeButtonProps | AnchorButtonProps
+
+export type {
+  BaseButtonProps,
+  ButtonProps,
+  AnchorButtonProps,
+  NativeButtonProps,
+}
+
 export const Button: React.FC<ButtonProps> = ({
   children,
   size = ButtonSize.Medium,

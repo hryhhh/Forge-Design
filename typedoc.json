@@ -1,0 +1,9 @@
+{
+  "entryPoints": ["src/index.tsx"],
+  "out": "docs",
+  "exclude": ["**/*.test.tsx", "**/*.stories.tsx"],
+  "includeVersion": true,
+  "tsconfig": "tsconfig.build.json",
+  "name": "Forge Design Library",
+  "readme": "README.md"
+}

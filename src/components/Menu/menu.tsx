@@ -5,6 +5,7 @@ import { MenuItemProps } from './menuItem'
 
 type MenuMode = 'horizontal' | 'vertical'
 type SelectCallback = (SelectedIndex: string) => void
+export type { MenuMode, SelectCallback }
 
 export interface MenuProps {
   /** 指定默认高亮的菜单项索引 */

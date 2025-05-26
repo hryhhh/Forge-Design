@@ -1,20 +1,17 @@
 {
-    "compilerOptions":{
-      "outDir": "build",
-      "module": "ESNext",
-      "target": "ES5",
-      "declaration": true,
-      "jsx": "react-jsx",
-      "types": ["react", "react-dom"],
-      "moduleResolution": "node",
-      "allowSyntheticDefaultImports": true,
-      "lib": ["ES2020", "DOM", "DOM.Iterable"]
-    },
-    "include":[
-        "src"   
-    ],
-    "exclude":[
-        "src/**/*.test.tsx",
-        "src/**/*.stories.tsx",
-    ]
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "ESNext",
+    "target": "ES5",
+    "declaration": true,
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "types": ["react", "react-dom"],
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"]
 }
