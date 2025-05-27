@@ -45,6 +45,17 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./storybook-static
+
+    - name: Check and bump version
+      run: |
+        # 检查当前版本是否已发布
+        CURRENT_VERSION=$(node -p "require('./package.json').version")
+        if npm view forge-design@$CURRENT_VERSION version 2>/dev/null; then
+          echo "Version $CURRENT_VERSION already exists, bumping patch version"
+          npm version patch
+        fi
+
+    - name: Build project
     
     - name: Publish to npm
       run: npm publish 
