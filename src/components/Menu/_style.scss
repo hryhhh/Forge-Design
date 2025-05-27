@@ -1,5 +1,5 @@
-@use "../../styles/variables" as *;
-@use "sass:color";
+@use '../../styles/variables' as *;
+@use 'sass:color';
 
 // 原始菜单
 .forge-menu {
@@ -10,7 +10,6 @@
   color: $menu-item-color;
   box-shadow: $menu-box-shadow;
   transition: $menu-transition;
-  
 
   // 原始菜单的子菜单项
   > .menu-item {
@@ -47,11 +46,11 @@
 
     // 点击时显示子菜单
     .forge-submenu {
-      display: none; 
+      display: none;
     }
 
     &.menu-opened .forge-submenu {
-      display: block; 
+      display: block;
     }
   }
 

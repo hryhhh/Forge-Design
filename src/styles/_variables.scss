@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 // 颜色变量
 $primary-color: #8fc3fb !default; // 亮蓝色
@@ -51,9 +51,15 @@ $line-height-heading: 1.2 !default; // 标题行高
 
 // 链接样式
 $link-color: $primary-color !default; // 链接颜色
-$link-hover-color: color.scale($link-color, $lightness: -15%) !default; // 链接悬停颜色
-$link-focus-color: color.scale($link-color, $lightness: -15%) !default; // 链接聚焦颜色
-$link-focus-thickness: 2px !default;// 链接聚焦厚度
+$link-hover-color: color.scale(
+  $link-color,
+  $lightness: -15%
+) !default; // 链接悬停颜色
+$link-focus-color: color.scale(
+  $link-color,
+  $lightness: -15%
+) !default; // 链接聚焦颜色
+$link-focus-thickness: 2px !default; // 链接聚焦厚度
 
 // 主体样式
 $body-background-color: $background-color !default; // 主体背景颜色
@@ -63,7 +69,7 @@ $body-font-size: $font-size-base !default; // 主体字体大小
 $body-line-height: $line-height-base !default; // 主体行高
 
 // 按钮样式
-$btn-bg: $primary-color!default; // 按钮背景色
+$btn-bg: $primary-color !default; // 按钮背景色
 $btn-padding-x: 0.75rem !default; // 按钮水平内边距
 $btn-padding-y: 0.375rem !default; // 按钮垂直内边距
 $btn-font-size: $font-size-base !default; // 按钮字体大小
@@ -87,35 +93,49 @@ $btn-border-width: 1px !default; // 按钮边框宽度
 $btn-disabled-bg: $secondary-color !default; // 禁用按钮背景色
 $btn-disabled-opacity: 0.65 !default; // 禁用按钮透明度
 
-
 $btn-danger-bg: $danger !default; // 危险按钮背景色
 $btn-danger-border: $danger !default; // 危险按钮边框色
 $btn-danger-color: $neutral-black !default; // 危险按钮文字颜色
-$btn-danger-hover-bg: color.scale($btn-danger-bg, $lightness: -10%) !default; // 危险按钮悬停背景色
-$btn-danger-hover-border: color.scale($btn-danger-border, $lightness: -10%) !default; // 危险按钮悬停边框色
+$btn-danger-hover-bg: color.scale(
+  $btn-danger-bg,
+  $lightness: -10%
+) !default; // 危险按钮悬停背景色
+$btn-danger-hover-border: color.scale(
+  $btn-danger-border,
+  $lightness: -10%
+) !default; // 危险按钮悬停边框色
 
-$btn-hover-bg: color.scale($btn-bg, $lightness: -10%) !default; // 按钮悬停背景色
-$btn-hover-border: color.scale($btn-bg, $lightness: -10%) !default; // 按钮悬停边框色
+$btn-hover-bg: color.scale(
+  $btn-bg,
+  $lightness: -10%
+) !default; // 按钮悬停背景色
+$btn-hover-border: color.scale(
+  $btn-bg,
+  $lightness: -10%
+) !default; // 按钮悬停边框色
 $btn-hover-color: $neutral-black !default; // 按钮悬停文字颜色
 
 $btn-link-color: $neutral-dark !default; // 链接按钮文字颜色
 $btn-transition: all 0.15s ease-in-out !default;
 
 //Menu样式变量
-$menu-bg: $primary-color!default; // 菜单背景色
-$menu-font-size: $font-size-base!default; // 菜单字体大小
-$menu-border-color: $neutral-light-gray!default; // 菜单边框颜色
+$menu-bg: $primary-color !default; // 菜单背景色
+$menu-font-size: $font-size-base !default; // 菜单字体大小
+$menu-border-color: $neutral-light-gray !default; // 菜单边框颜色
 $menu-border-width: 3px !default; // 菜单边框宽度
 $menu-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 菜单阴影
-$menu-hover-border: color.scale($menu-bg, $lightness: -10%)!default; // 菜单悬停边框色
-$menu-transition: all 0.15s ease-in-out!default; // 菜单过渡效果
+$menu-hover-border: color.scale(
+  $menu-bg,
+  $lightness: -10%
+) !default; // 菜单悬停边框色
+$menu-transition: all 0.15s ease-in-out !default; // 菜单过渡效果
 $menu-border-radius: 0.25rem !default; // 菜单项圆角
 
 //Menu-item样式变量
-$menu-item-padding-x: 1rem!default; // 菜单项水平内边距
-$menu-item-padding-y: 0.5rem!default; // 菜单项垂直内边距
+$menu-item-padding-x: 1rem !default; // 菜单项水平内边距
+$menu-item-padding-y: 0.5rem !default; // 菜单项垂直内边距
 $menu-item-color: $primary-color !default; // 菜单项颜色
-$menu-item-active-color:$primary-color!default; // 菜单项激活颜色
-$menu-item-disabled-color:$neutral-gray!default; // 菜单项禁用颜色
-$menu-item-hover-color:$primary-color!default; // 菜单项悬停颜色
-$menu-item-hover-bg: #E6F4FF; // 菜单项悬停背景色
+$menu-item-active-color: $primary-color !default; // 菜单项激活颜色
+$menu-item-disabled-color: $neutral-gray !default; // 菜单项禁用颜色
+$menu-item-hover-color: $primary-color !default; // 菜单项悬停颜色
+$menu-item-hover-bg: #e6f4ff; // 菜单项悬停背景色

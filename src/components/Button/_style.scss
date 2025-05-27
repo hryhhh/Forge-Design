@@ -1,10 +1,16 @@
-@use "../../styles/_variables.scss" as *;
-@use "sass:color";
+@use '../../styles/_variables.scss' as *;
+@use 'sass:color';
 
-@mixin btn-base($btn-bg, $neutral-light, $btn-border-width, $btn-padding-y, $btn-padding-x) {
+@mixin btn-base(
+  $btn-bg,
+  $neutral-light,
+  $btn-border-width,
+  $btn-padding-y,
+  $btn-padding-x
+) {
   display: inline-block;
   font-weight: $btn-font-weight;
-  color: $neutral-light; 
+  color: $neutral-light;
   background-color: $btn-bg;
   border: $btn-border-width;
   padding: $btn-padding-y $btn-padding-x;
@@ -22,7 +28,7 @@
 
   &.disabled,
   &:disabled {
-    cursor:not-allowed;
+    cursor: not-allowed;
     opacity: $btn-disabled-opacity;
   }
 }
@@ -38,8 +44,8 @@
   &.focus {
     box-shadow: 0 0 0 $link-focus-thickness $link-focus-color;
   }
-} 
-@mixin btn-disabled($btn-disabled-bg,$btn-disabled-opacity) {
+}
+@mixin btn-disabled($btn-disabled-bg, $btn-disabled-opacity) {
   &:disabled {
     background-color: $btn-disabled-bg;
     opacity: $btn-disabled-opacity;
@@ -48,44 +54,74 @@
 
 // 按钮样式
 .btn {
-  @include btn-base($btn-bg, $body-color, $btn-border-width, $btn-padding-y, $btn-padding-x);
+  @include btn-base(
+    $btn-bg,
+    $body-color,
+    $btn-border-width,
+    $btn-padding-y,
+    $btn-padding-x
+  );
 }
 
 .btn-primary {
-  @include btn-base($primary-color, $light, $btn-border-width, $btn-padding-y, $btn-padding-x);
+  @include btn-base(
+    $primary-color,
+    $light,
+    $btn-border-width,
+    $btn-padding-y,
+    $btn-padding-x
+  );
   @include btn-hover($btn-hover-bg, $btn-hover-border);
   @include btn-focus();
-  @include btn-disabled($btn-disabled-bg,$btn-disabled-opacity);
+  @include btn-disabled($btn-disabled-bg, $btn-disabled-opacity);
 }
 
 .btn-danger {
-  @include btn-base($btn-danger-bg, $body-color, $btn-danger-border, $btn-padding-y, $btn-padding-x);
+  @include btn-base(
+    $btn-danger-bg,
+    $body-color,
+    $btn-danger-border,
+    $btn-padding-y,
+    $btn-padding-x
+  );
   @include btn-hover($btn-danger-hover-bg, $btn-danger-hover-border);
   @include btn-focus();
-  @include btn-disabled($btn-disabled-bg,$btn-disabled-opacity);
+  @include btn-disabled($btn-disabled-bg, $btn-disabled-opacity);
 }
 
 .btn-link {
   color: $light;
   text-decoration: none;
-  font-style: italic; 
+  font-style: italic;
   &:hover {
     color: $link-hover-color;
     text-decoration: underline;
   }
   &:focus,
   &.focus {
-    color:$link-focus-color;
+    color: $link-focus-color;
     text-decoration: underline;
     box-shadow: 0 0 0 $link-focus-thickness $link-focus-color;
   }
 }
 .btn-large {
-  @include btn-base($btn-bg, $neutral-light, $btn-border-width, $btn-large-padding-y, $btn-large-padding-x);
+  @include btn-base(
+    $btn-bg,
+    $neutral-light,
+    $btn-border-width,
+    $btn-large-padding-y,
+    $btn-large-padding-x
+  );
   font-size: $btn-large-font-size;
 }
 
 .btn-small {
-  @include btn-base($btn-bg, $light, $btn-border-width, $btn-small-padding-y, $btn-small-padding-x);
+  @include btn-base(
+    $btn-bg,
+    $light,
+    $btn-border-width,
+    $btn-small-padding-y,
+    $btn-small-padding-x
+  );
   font-size: $btn-small-font-size;
 }
