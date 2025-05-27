@@ -5,7 +5,6 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-docs',
-    '@storybook/addon-mdx-gfm',
     '@chromatic-com/storybook',
     '@storybook/experimental-addon-test',
   ],

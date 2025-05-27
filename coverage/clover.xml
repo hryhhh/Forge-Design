@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1748316859291" clover="3.2.0">
-  <project timestamp="1748316859291" name="All files">
+<coverage generated="1748318589484" clover="3.2.0">
+  <project timestamp="1748318589484" name="All files">
     <metrics statements="55" coveredstatements="53" conditionals="35" coveredconditionals="26" methods="11" coveredmethods="10" elements="101" coveredelements="89" complexity="0" loc="55" ncloc="55" packages="2" files="7" classes="7"/>
     <package name="Button">
       <metrics statements="8" coveredstatements="8" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
@@ -27,9 +27,9 @@
       </file>
       <file name="index.tsx" path="E:\vscode\component-lib\Forge_Design\src\components\Menu\index.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
       </file>
       <file name="menu.tsx" path="E:\vscode\component-lib\Forge_Design\src\components\Menu\menu.tsx">
         <metrics statements="16" coveredstatements="15" conditionals="11" coveredconditionals="7" methods="4" coveredmethods="4"/>
