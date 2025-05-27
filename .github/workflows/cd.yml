@@ -33,6 +33,9 @@ jobs:
           exit 1
         fi
         if [ ! -f "build/index.js" ]; then
+          echo "Build file index.js not found"
+          exit 1
+        fi
 
     - name: Build Storybook
       run: npm run build-storybook
@@ -44,6 +47,6 @@ jobs:
         publish_dir: ./storybook-static
     
     - name: Publish to npm
-      run: npm publish
+      run: npm publish 
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -32,7 +32,7 @@ jobs:
     
     - name: Bump version
       run: |
-        npm version ${{ github.ref_name:1}}
+        npm version ${{ github.ref_name}}
         git push --follow-tags
     
     - name: Build Storybook
