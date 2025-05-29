@@ -5,8 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    // 调整 chunk 大小警告限制
-    chunkSizeWarningLimit: 1000, // 提高到 1MB
     rollupOptions: {
       output: {
         // 手动分割代码块

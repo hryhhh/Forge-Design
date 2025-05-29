@@ -1,46 +1,31 @@
-import React from 'react'
+import React, { type ReactNode } from 'react'
 
-export enum ButtonSize {
-  /** Small size button */
-  Small = 'small',
-  /** Medium size button */
-  Medium = 'medium',
-  /** Large size button */
-  Large = 'large',
-}
-
-export enum ButtonType {
-  /** Primary button style */
-  Primary = 'primary',
-  /** Default button style */
-  Default = 'default',
-  /** Danger button style */
-  Danger = 'danger',
-  /** Link button style */
-  Link = 'link',
-}
+export type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonType = 'default' | 'primary' | 'link' | 'danger' | 'submit'
 
 export interface BaseButtonProps {
   /** Button content */
-  children?: React.ReactNode
+  children?: ReactNode
   /** Size of the button */
   size?: ButtonSize
   /** Type of the button */
-  btnType?: ButtonType
+  type?: ButtonType
   /** Whether the button is disabled */
   disabled?: boolean
   /** Custom CSS class name */
   className?: string
-  /** Target URL if the button is a link */
+
   href?: string
 }
 
 // 普通按钮类型
 export type NativeButtonProps = BaseButtonProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement>
+  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseButtonProps>
 
 // 链接按钮类型
 export type AnchorButtonProps = BaseButtonProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseButtonProps> & {
+    href: string
+  }
 
-export type ButtonProps = NativeButtonProps | AnchorButtonProps
+export type ButtonProps = Partial<NativeButtonProps> | AnchorButtonProps

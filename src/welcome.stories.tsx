@@ -56,8 +56,8 @@ function App() {
         <p>在左侧导航栏中浏览所有可用组件。每个组件都有详细的文档和示例。</p>
 
         <div className="welcome-footer">
-          <p>版本: v1.0.0</p>
-          <p>MIT License © 2023</p>
+          <p>版本: v1.0.</p>
+          <p>MIT License © 2025</p>
         </div>
       </div>
     </div>

@@ -34,9 +34,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"]
     },
     "resolveJsonModule": true
   },
-  "include": ["src", "global.d.ts"]
+  "include": ["src", "global.d.ts", "vite-plugin-sass.d.ts"]
 }

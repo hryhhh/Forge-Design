@@ -6,8 +6,8 @@ import { ButtonSize, ButtonType, ButtonProps } from './types'
 const Button: React.FC<ButtonProps> = props => {
   const {
     children,
-    size = ButtonSize.Medium,
-    btnType = ButtonType.Default,
+    size = 'medium' as ButtonSize,
+    type = 'default' as ButtonType,
     disabled = false,
     href,
     className,
@@ -15,13 +15,12 @@ const Button: React.FC<ButtonProps> = props => {
   } = props
 
   const classes = classNames('btn', className, {
-    [`btn-${btnType}`]: btnType,
+    [`btn-${type}`]: type,
     [`btn-${size}`]: size,
     disabled: disabled,
   })
 
-  if (btnType === ButtonType.Link && href) {
-    // 确保 restProps 只包含 HTMLAnchorElement 的属性
+  if (type === 'link' && href) {
     const anchorRestProps =
       restProps as React.AnchorHTMLAttributes<HTMLAnchorElement>
     return (
@@ -32,8 +31,17 @@ const Button: React.FC<ButtonProps> = props => {
   } else {
     const buttonRestProps =
       restProps as React.ButtonHTMLAttributes<HTMLButtonElement>
+    let buttonType: 'submit' | 'reset' | 'button' = 'button'
+    if (type === 'primary') {
+      buttonType = 'button'
+    }
     return (
-      <button className={classes} disabled={disabled} {...buttonRestProps}>
+      <button
+        className={classes}
+        type={buttonType}
+        disabled={disabled}
+        {...buttonRestProps}
+      >
         {children}
       </button>
     )
