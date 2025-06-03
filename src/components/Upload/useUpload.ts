@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react'
-
 import { validateFiles, getFilePreview } from './utils'
 import { uploadFile } from './uploadService'
-import { uploadConfig } from './utils'
+import { UploadProps } from './type'
 
-export const useUpload = () => {
+export const useUpload = ({ action, cancelToken }: UploadProps) => {
   const [files, setFiles] = useState<File[]>([])
   const [dragActive, setDragActive] = useState(false)
   const [uploadStatus, setUploadStatus] = useState<Record<string, string>>({})
@@ -19,6 +18,12 @@ export const useUpload = () => {
     const { validFiles, newErrors } = validateFiles(selectedFiles)
     setFiles(prev => [...prev, ...validFiles])
     setErrors(newErrors)
+
+    const newStatus: Record<string, string> = {}
+    validFiles.forEach(file => {
+      newStatus[file.name] = '待上传'
+    })
+    setUploadStatus(prev => ({ ...prev, ...newStatus }))
   }, [])
 
   //处理文件拖拽事件，验证文件大小和类型，更新状态和错误信息
@@ -77,35 +82,42 @@ export const useUpload = () => {
   )
 
   const handleUpload = useCallback(async () => {
-    const pendingFiles = files.filter(f => !uploadStatus[f.name])
-    if (pendingFiles.length === 0) return
-
     setIsUploading(true)
 
-    try {
-      for (
-        let i = 0;
-        i < pendingFiles.length;
-        i += uploadConfig.concurrencyLimit
-      ) {
-        const promises = pendingFiles
-          .slice(i, (i += uploadConfig.concurrencyLimit))
-          .map(file =>
-            uploadFile(file, {
-              onProgress: (fileName, progress) => {
-                setUploadProgress(prev => ({ ...prev, [fileName]: progress }))
-              },
-              onStatusChange: (fileName, status) => {
-                setUploadStatus(prev => ({ ...prev, [fileName]: status }))
-              },
-            })
-          )
-        await Promise.all(promises)
+    for (const file of files) {
+      if (uploadStatus[file.name] === '待上传') {
+        try {
+          const res = await uploadFile(file, action, {
+            onProgress: (fileName, progress) => {
+              setUploadProgress(prev => ({ ...prev, [fileName]: progress }))
+            },
+            onStatusChange: (fileName, status) => {
+              setUploadStatus(prev => ({ ...prev, [fileName]: status }))
+            },
+          })
+
+          console.log(`文件 ${file.name} 上传成功, `, res)
+        } catch (err) {
+          const errorMessage = err instanceof Error ? err.message : '上传失败'
+          console.error(`文件 ${file.name} 上传失败:`, err)
+          setErrors(prev => [...prev, `文件 ${file.name} ${errorMessage}`])
+          setUploadStatus(prev => ({ ...prev, [file.name]: 'error' }))
+        }
       }
-    } finally {
-      setIsUploading(false)
     }
-  }, [files, uploadStatus])
+
+    setIsUploading(false)
+  }, [files, uploadStatus, action])
+  const handleCancel = useCallback(
+    (fileId: string) => {
+      if (cancelToken) {
+        cancelToken.cancel('Upload cancelled by user')
+        setUploadStatus(prev => ({ ...prev, [fileId]: 'cancelled' }))
+        setIsUploading(false)
+      }
+    },
+    [cancelToken]
+  )
 
   return {
     files,
@@ -120,5 +132,6 @@ export const useUpload = () => {
     handleUpload,
     getFilePreview,
     removeFile,
+    handleCancel,
   }
 }

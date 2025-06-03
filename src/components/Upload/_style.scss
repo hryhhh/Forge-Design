@@ -1,0 +1,200 @@
+@use '../../styles/_variables.scss' as *;
+@use 'sass:color';
+
+.upload-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid $neutral-light-gray;
+  border-radius: $btn-border-radius;
+  box-shadow: $btn-box-shadow;
+  transition: transform 0.3s ease;
+
+  .upload-area {
+    position: relative;
+    border: 2px dashed $neutral-gray;
+    border-radius: $btn-border-radius;
+    padding: 2rem 4em;
+    text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &.drag-active {
+      border-color: $primary-color;
+      background-color: #f5f8fd;
+    }
+
+    .input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 70px;
+      color: #79bbf9;
+      margin-bottom: 10px;
+      fill: $primary-color;
+      transition: fill 0.3s ease;
+    }
+
+    p {
+      margin: 1rem 0;
+      color: $neutral-dark-gray;
+    }
+
+    .upload-link {
+      color: $primary-color;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: color.scale($primary-color, $lightness: -20%);
+      }
+    }
+  }
+
+  .error-list {
+    margin-top: 2rem;
+
+    .error-message {
+      color: $danger;
+      margin: 0.5rem 0;
+      padding: 1rem;
+      background-color: color.scale($danger, $lightness: 80%);
+      border-radius: $btn-border-radius;
+      animation: fadeIn 0.3s ease;
+    }
+  }
+
+  .file-list {
+    margin-top: 2rem;
+
+    h4 {
+      margin-bottom: 1.5rem;
+      font-size: $font-size-h4;
+      color: $text-color;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid $neutral-light-gray;
+      border-radius: $btn-border-radius;
+      background-color: $background-color;
+      transition: box-shadow 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .file-info {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+
+        .file-preview {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          margin-right: 1rem;
+          border-radius: $btn-border-radius;
+        }
+
+        .file-details {
+          .file-name {
+            font-weight: $font-weight-bold;
+            color: $text-color;
+          }
+
+          .file-size {
+            color: $neutral-gray;
+            font-size: $font-size-small;
+          }
+        }
+      }
+
+      .progress-container {
+        flex-grow: 1;
+        margin: 0 2rem;
+
+        .progress-bar {
+          height: 8px;
+          background-color: $neutral-light-gray;
+          border-radius: $btn-border-radius;
+          overflow: hidden;
+
+          .progress-fill {
+            height: 100%;
+            background-color: $primary-color;
+            transition: width 0.3s ease;
+          }
+        }
+
+        .progress-text {
+          margin-left: 1rem;
+          font-size: $font-size-small;
+          color: $neutral-dark-gray;
+        }
+      }
+
+      .file-actions {
+        display: flex;
+        align-items: center;
+
+        .status {
+          margin-right: 1.5rem;
+          padding: 0.4rem 0.8rem;
+          border-radius: $btn-border-radius;
+          font-size: $font-size-small;
+          transition: background-color 0.3s ease;
+
+          &.pending {
+            background-color: color.scale($warning, $lightness: 80%);
+            color: $warning;
+          }
+
+          &.uploading {
+            background-color: color.scale($primary-color, $lightness: 90%);
+            color: $primary-color;
+          }
+
+          &.success {
+            background-color: color.scale($success, $lightness: 80%);
+            color: $success;
+          }
+
+          &.error {
+            background-color: color.scale($danger, $lightness: 80%);
+            color: $danger;
+          }
+        }
+      }
+    }
+
+    .upload-btn {
+      margin-top: 2rem;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

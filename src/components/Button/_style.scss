@@ -34,7 +34,7 @@
 }
 @mixin btn-hover($btn-hover-bg, $btn-hover-border) {
   &:hover {
-    color: $body-color;
+
     background-color: $btn-hover-bg;
     border-color: $btn-hover-border;
   }
@@ -47,7 +47,7 @@
 }
 @mixin btn-disabled($btn-disabled-bg, $btn-disabled-opacity) {
   &:disabled {
-    background-color: $btn-disabled-bg;
+    background-color: $btn-bg;
     opacity: $btn-disabled-opacity;
   }
 }
@@ -65,7 +65,7 @@
 
 .btn-primary {
   @include btn-base(
-    $primary-color,
+    $btn-bg,
     $light,
     $btn-border-width,
     $btn-padding-y,

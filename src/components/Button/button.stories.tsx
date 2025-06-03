@@ -46,22 +46,22 @@ export const Small: Story = {
 // 不同类型的按钮 Stories
 export const Primary: Story = {
   args: {
-    btnType: ButtonType.Primary,
+    type: ButtonType.Primary,
     children: 'Primary Button',
   },
 }
 
 export const Danger: Story = {
   args: {
-    btnType: ButtonType.Danger,
+    type: ButtonType.Danger,
     children: 'Danger Button',
   },
 }
 
 export const Link: Story = {
   args: {
-    btnType: ButtonType.Link,
+    type: ButtonType.Link,
     children: 'Link Button',
-    href: 'https://www.baidu.com', // Link 类型的按钮通常需要 href
+    href: 'https://www.baidu.com',
   },
 }

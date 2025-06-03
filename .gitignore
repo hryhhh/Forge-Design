@@ -3,8 +3,7 @@ node_modules/
 
 # Build outputs (基于你的构建脚本)
 /build/
-/dist/
-/lib/
+
 
 # Test coverage (基于 jest.config.ts)
 /coverage/

@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react'
 
 import '@testing-library/jest-dom'
 import Button from './Button'
-import { ButtonProps, ButtonType, ButtonSize } from './types'
+import { ButtonType, ButtonSize, ButtonProps } from './index'
 
 const defaultProps = {
   onClick: jest.fn(),
@@ -14,7 +14,7 @@ const disabledProps = {
 }
 
 const testProps: ButtonProps = {
-  btnType: ButtonType.Primary,
+  type: ButtonType.Primary,
   size: ButtonSize.Large,
   className: 'test',
 }
@@ -40,7 +40,7 @@ describe('test Button component', () => {
 
   it('should render a link when href is provided', () => {
     const wrapper = render(
-      <Button btnType={ButtonType.Link} href="http://example.com">
+      <Button type={ButtonType.Link} href="http://example.com">
         Link
       </Button>
     )

@@ -33,9 +33,10 @@ export const validateFiles = (selectedFiles: FileList | null) => {
   return { validFiles, newErrors }
 }
 
-export const getFilePreview = (file: File): string | null => {
+export const getFilePreview = (file: File): string | undefined => {
   if (file.type.startsWith('image/')) {
     return URL.createObjectURL(file)
   }
-  return null
+  return undefined
 }
+export default { validateFiles, getFilePreview }

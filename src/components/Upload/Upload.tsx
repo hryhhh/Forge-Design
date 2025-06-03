@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
-
 import Button from '@components/Button'
-
 import { useUpload } from './useUpload'
+import { CloudUploadOutlined } from '@ant-design/icons'
+import type { UploadProps } from './type'
 
-export const Upload: React.FC = () => {
+export const Upload: React.FC<UploadProps> = ({ action, cancelToken }) => {
   const {
     files,
     dragActive,
@@ -18,7 +18,8 @@ export const Upload: React.FC = () => {
     handleUpload,
     getFilePreview,
     removeFile,
-  } = useUpload()
+    handleCancel,
+  } = useUpload({ action, cancelToken })
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,48 +39,55 @@ export const Upload: React.FC = () => {
           onDrop={handleDrop}
         >
           <input
+            id="file-input"
             className="input"
             type="file"
             multiple
             accept="image/*,.pdf,.doc,.docx"
             onChange={handleChange}
+            data-testid="file-input"
           />
-          <p>拖拽文件到此处或点击选择文件</p>
+          <CloudUploadOutlined className="upload-icon" />
+          <p>
+            拖拽文件到此处或
+            <label htmlFor="file-input" className="upload-link">
+              点击上传
+            </label>
+          </p>
           <p>支持图片、PDF、Word文档，单个文件最大10MB</p>
         </div>
 
-        {errors.length > 0 && (
-          <div className="error-list">
-            {errors.map((error, index) => (
-              <div key={index} className="error-message">
-                {error}
-              </div>
-            ))}
-          </div>
-        )}
-
         {files.length > 0 && (
-          <div className="file-list">
+          <div className="file-list" data-testid="file-list">
             <h4>已选择的文件 ({files.length})</h4>
             {files.map((file, index) => (
-              <div className="file-item" key={index}>
+              <div
+                className="file-item"
+                key={index}
+                data-testid={`file-item-${file.name}`}
+              >
                 <div className="file-info">
                   {getFilePreview(file) && (
                     <img
-                      src={getFilePreview(file)!}
+                      src={getFilePreview(file)}
                       alt={file.name}
                       className="file-preview"
                     />
                   )}
                   <div className="file-details">
-                    <div className="file-name">{file.name}</div>
+                    <div
+                      className="file-name"
+                      data-testid={`filename-${file.name}`}
+                    >
+                      {file.name}
+                    </div>
                     <div className="file-size">
                       ({(file.size / 1024 / 1024).toFixed(2)} MB)
                     </div>
                   </div>
                 </div>
 
-                {uploadStatus[file.name] === '上传中...' && (
+                {uploadStatus[file.name] === 'uploading' && (
                   <div className="progress-container">
                     <div className="progress-bar">
                       <div
@@ -96,9 +104,21 @@ export const Upload: React.FC = () => {
                 <div className="file-actions">
                   <span
                     className={`status ${uploadStatus[file.name] || 'pending'}`}
+                    data-testid={`upload-status-${file.name}`}
                   >
                     {uploadStatus[file.name] || '待上传'}
                   </span>
+                  {uploadStatus[file.name] === 'uploading' && cancelToken && (
+                    <Button
+                      className="cancel-btn"
+                      onClick={() => handleCancel(file.name)}
+                      size="medium"
+                      type="primary"
+                      aria-label="取消上传"
+                    >
+                      取消上传
+                    </Button>
+                  )}
                   <Button
                     className="remove-btn"
                     onClick={() => removeFile(file.name)}
@@ -110,15 +130,29 @@ export const Upload: React.FC = () => {
                   </Button>
                 </div>
               </div>
-            ))}
+            ))}{' '}
             <Button
               className="upload-btn"
               onClick={handleUpload}
-              disabled={files.length === 0 || isUploading}
+              disabled={files.length === 0}
               type="primary"
             >
-              {isUploading ? '上传中...' : '开始上传'}
+              开始上传
             </Button>
+          </div>
+        )}
+
+        {errors.length > 0 && (
+          <div className="error-list">
+            {errors.map((error, index) => (
+              <div
+                key={index}
+                className="error-message"
+                data-testid="error-message"
+              >
+                {error}
+              </div>
+            ))}
           </div>
         )}
       </div>

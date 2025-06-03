@@ -69,7 +69,7 @@ $body-font-size: $font-size-base !default; // 主体字体大小
 $body-line-height: $line-height-base !default; // 主体行高
 
 // 按钮样式
-$btn-bg: $primary-color !default; // 按钮背景色
+$btn-bg: #4190ff !default; // 按钮背景色
 $btn-padding-x: 0.75rem !default; // 按钮水平内边距
 $btn-padding-y: 0.375rem !default; // 按钮垂直内边距
 $btn-font-size: $font-size-base !default; // 按钮字体大小
@@ -107,11 +107,11 @@ $btn-danger-hover-border: color.scale(
 
 $btn-hover-bg: color.scale(
   $btn-bg,
-  $lightness: -10%
+  $lightness: 15%
 ) !default; // 按钮悬停背景色
 $btn-hover-border: color.scale(
   $btn-bg,
-  $lightness: -10%
+  $lightness: 15%
 ) !default; // 按钮悬停边框色
 $btn-hover-color: $neutral-black !default; // 按钮悬停文字颜色
 
