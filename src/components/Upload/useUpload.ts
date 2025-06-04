@@ -111,7 +111,8 @@ export const useUpload = ({ action, onProgress }: UploadProps) => {
               },
               source
             )
-            console.log(`文件 ${file.name} 上传成功, `, res)
+            return res
+            // console.log(`文件 ${file.name} 上传成功, `, res)
           } catch (err) {
             if (axios.isCancel(err) || err instanceof CanceledError) {
               // 取消上传时只跳过当前文件，继续后续

@@ -43,12 +43,20 @@ describe('Upload Component Tests', () => {
     jest.clearAllMocks()
     jest.restoreAllMocks()
 
-    mockActionFunction.mockClear()
-    mockActionFunction.mockImplementation(file =>
-      Promise.resolve('https://jsonplaceholder.typicode.com/posts/' + file.name)
-    )
     window.URL.createObjectURL = jest.fn(() => 'blob:mock-preview-url')
     window.URL.revokeObjectURL = jest.fn()
+
+    mockActionFunction.mockClear()
+    mockActionFunction.mockImplementation(async (file: File) => {
+      // 🔧 使用 act 包装异步状态更新
+      await act(async () => {
+        // 模拟上传进度
+        await new Promise(resolve => setTimeout(resolve, 50))
+        // 触发进度回调时确保在 act 中
+      })
+
+      return `https://jsonplaceholder.typicode.com/posts/${file.name}`
+    })
   })
 
   afterEach(() => {
