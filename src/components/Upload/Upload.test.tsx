@@ -311,11 +311,9 @@ describe('Upload Component Tests', () => {
     await act(async () => {
       // 触发取消
       if (rejectFunction) {
-        try {
-          rejectFunction(new Error('Operation canceled'))
-        } catch {
-          // swallow error to avoid unhandled rejection
-        }
+        await Promise.resolve()
+          .then(() => rejectFunction(new Error('Operation canceled')))
+          .catch(() => {})
       }
       // 等待状态更新
       await new Promise(resolve => setTimeout(resolve, 150))
