@@ -22,7 +22,11 @@
     margin-bottom: 1rem;
     color: $primary-color;
     font-weight: $font-weight-bold;
-    background: linear-gradient(135deg, $primary-color, darken($primary-color, 15%));
+    background: linear-gradient(
+      135deg,
+      $primary-color,
+      darken($primary-color, 15%)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

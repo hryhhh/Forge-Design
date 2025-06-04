@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import { Upload } from './Upload'
 import userEvent from '@testing-library/user-event'
 import * as utils from './utils'
@@ -261,16 +261,17 @@ describe('Upload Component Tests', () => {
     )
   })
 
-  // 修复取消上传测试
   test('should cancel upload correctly', async () => {
     const axiosIsCancelSpy = jest.spyOn(axios, 'isCancel').mockReturnValue(true)
 
-    let rejectUpload
-    const controllablePromise = new Promise<string>((_, reject) => {
-      rejectUpload = reject
+    // 🔧 创建一个可控的 Promise，并正确处理拒绝
+    let rejectFunction: (reason?: unknown) => void // 显式声明类型，避免 any
+    // @ts-expect-error: resolve 未使用，仅为类型完整性
+    const mockPromise = new Promise<string>((resolve, reject) => {
+      rejectFunction = reject
     })
 
-    mockActionFunction.mockReturnValueOnce(controllablePromise)
+    mockActionFunction.mockReturnValueOnce(mockPromise)
 
     render(<Upload action={mockActionFunction} />)
     const file = createFile()
@@ -281,7 +282,7 @@ describe('Upload Component Tests', () => {
     const uploadBtn = screen.getByRole('button', { name: /开始上传/ })
     await userEvent.click(uploadBtn)
 
-    // 验证上传状态 - 等待异步状态更新
+    // 验证上传状态
     await waitFor(
       () => {
         const statusElement = screen.getByTestId(`upload-status-${file.name}`)
@@ -294,8 +295,15 @@ describe('Upload Component Tests', () => {
     const cancelBtn = screen.getByRole('button', { name: /取消所有上传/ })
     await userEvent.click(cancelBtn)
 
-    // 触发 Promise 拒绝，模拟取消
-    rejectUpload!(new Error('Operation canceled'))
+    // 🔧 使用 act 包装异步操作，确保状态更新完成
+    await act(async () => {
+      // 触发取消
+      if (rejectFunction) {
+        rejectFunction(new Error('Operation canceled'))
+      }
+      // 等待状态更新
+      await new Promise(resolve => setTimeout(resolve, 150))
+    })
 
     // 验证取消状态
     await waitFor(
