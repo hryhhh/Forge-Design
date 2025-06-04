@@ -5,6 +5,10 @@ import * as utils from './utils'
 import '@testing-library/jest-dom'
 import axios, { AxiosError, CanceledError } from 'axios'
 
+beforeAll(() => {
+  jest.spyOn(console, 'log').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => {})
+})
 interface UploadResponse {
   data: { url: string }
 }
@@ -295,11 +299,15 @@ describe('Upload Component Tests', () => {
     const cancelBtn = screen.getByRole('button', { name: /取消所有上传/ })
     await userEvent.click(cancelBtn)
 
-    // 🔧 使用 act 包装异步操作，确保状态更新完成
+    // 使用 act 包装异步操作，确保状态更新完成
     await act(async () => {
       // 触发取消
       if (rejectFunction) {
-        rejectFunction(new Error('Operation canceled'))
+        try {
+          rejectFunction(new Error('Operation canceled'))
+        } catch {
+          // swallow error to avoid unhandled rejection
+        }
       }
       // 等待状态更新
       await new Promise(resolve => setTimeout(resolve, 150))
@@ -335,7 +343,7 @@ describe('Upload Component Tests', () => {
     const previewButton = screen.getByRole('button', { name: /预览/ })
     await userEvent.click(previewButton)
 
-    // ✅ 使用更具体的选择器查找模态框中的图片
+    // 使用更具体的选择器查找模态框中的图片
     await waitFor(() => {
       // 方法1：通过容器查找
       const modal = screen.getByTestId('preview-modal-overlay')

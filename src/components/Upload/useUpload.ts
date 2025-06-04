@@ -115,13 +115,13 @@ export const useUpload = ({ action, onProgress }: UploadProps) => {
           } catch (err) {
             if (axios.isCancel(err) || err instanceof CanceledError) {
               // 取消上传时只跳过当前文件，继续后续
-              console.log(`文件 ${file.name} 上传已取消`)
+              // console.log(`文件 ${file.name} 上传已取消`)
               setUploadStatus(prev => ({ ...prev, [file.name]: 'cancelled' }))
               continue
             } else {
               const errorMessage =
                 err instanceof Error ? err.message : '上传失败'
-              console.error(`文件 ${file.name} 上传失败:`, err)
+              // console.error(`文件 ${file.name} 上传失败:`, err)
               setErrors(prev => [...prev, `文件 ${file.name} ${errorMessage}`])
               setUploadStatus(prev => ({ ...prev, [file.name]: 'error' }))
             }
