@@ -17,12 +17,13 @@ export interface UPLOAD_CONFIG {
 
 export interface UploadProps {
   action: string | ((file: File) => Promise<string>)
-  cancelToken?: CancelTokenSource // 添加这个属性
+  cancelToken?: CancelTokenSource
+  onProgress?: (fileName: string, progress: number) => void
 }
 
 export interface UploadResponse {
   url: string
-  status: 'success' | 'error'
+  status: 'success' | 'error' | 'cancelled'
   fileName?: string
   size?: number
   timestamp?: number

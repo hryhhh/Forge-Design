@@ -34,7 +34,6 @@
 }
 @mixin btn-hover($btn-hover-bg, $btn-hover-border) {
   &:hover {
-
     background-color: $btn-hover-bg;
     border-color: $btn-hover-border;
   }

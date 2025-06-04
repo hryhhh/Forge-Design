@@ -1,8 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
-
 import '@testing-library/jest-dom'
-import Button from './Button'
-import { ButtonType, ButtonSize, ButtonProps } from './index'
+import Button, { ButtonType, ButtonSize, ButtonProps } from './index'
 
 const defaultProps = {
   onClick: jest.fn(),
@@ -26,7 +24,7 @@ describe('test Button component', () => {
     expect(element.disabled).toBeFalsy()
     expect(element).toBeInTheDocument()
     expect(element.tagName).toEqual('BUTTON')
-    expect(element).toHaveClass('btn btn-default')
+    expect(element).toHaveClass('btn btn-primary btn-medium')
     fireEvent.click(element)
     expect(defaultProps.onClick).toHaveBeenCalled()
   })
@@ -54,7 +52,7 @@ describe('test Button component', () => {
     const element = wrapper.getByText('Disabled Button') as HTMLButtonElement
     expect(element.disabled).toBeTruthy()
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('btn btn-default disabled') // 调整为实际的类名
+    expect(element).toHaveClass('btn btn-primary btn-medium disabled')
     fireEvent.click(element)
     expect(disabledProps.onClick).not.toHaveBeenCalled()
   })
