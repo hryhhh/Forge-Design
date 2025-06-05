@@ -1,8 +1,9 @@
-// 🧱 组件导出
+// 组件导出
 export { default as Button } from './components/Button'
 export { Menu } from './components/Menu'
+export { Upload } from './components/Upload'
 
-// 🧩 按钮相关类型
+// 按钮相关类型
 export type { ButtonProps } from './components/Button'
 
 export { ButtonSize, ButtonType } from './components/Button'
