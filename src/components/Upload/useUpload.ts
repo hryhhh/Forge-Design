@@ -16,12 +16,15 @@ export const useUpload = ({ action, onProgress }: UploadProps) => {
   const [previewVisible, setPreviewVisible] = useState(false)
   const [previewImage, setPreviewImage] = useState<string>('')
   const [previewTitle, setPreviewTitle] = useState<string>('')
-
   //处理文件选择事件，验证文件大小和类型，更新状态和错误信息
   const handleSelect = useCallback((selectedFiles: FileList | null) => {
     const { validFiles, newErrors } = validateFiles(selectedFiles)
     setFiles(prev => [...prev, ...validFiles])
-    setErrors(newErrors)
+
+    // 立即设置错误信息
+    if (newErrors.length > 0) {
+      setErrors(newErrors)
+    }
 
     const newStatus: Record<string, string> = {}
     validFiles.forEach(file => {

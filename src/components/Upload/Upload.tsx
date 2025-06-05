@@ -172,6 +172,7 @@ export const Upload: React.FC<UploadProps> = ({
                       onClick={() => handleCancel(file.name)}
                       size="medium"
                       type="primary"
+                      data-testid={`cancel-button-${file.name}`}
                     >
                       取消上传
                     </Button>
@@ -209,14 +210,13 @@ export const Upload: React.FC<UploadProps> = ({
             </div>
           </div>
         )}
-
         {errors.length > 0 && (
-          <div className="error-list">
+          <div className="error-list" data-testid="error-message">
             {errors.map((error, index) => (
               <div
                 key={index}
                 className="error-message"
-                data-testid="error-message"
+                data-testid="error-item"
               >
                 {error}
               </div>

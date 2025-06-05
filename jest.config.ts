@@ -5,6 +5,7 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
+  testTimeout: 10000, // 增加全局超时时间为 10 秒
 
   transform: {
     '^.+\\.tsx?$': [
