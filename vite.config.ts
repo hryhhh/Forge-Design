@@ -20,7 +20,7 @@ export default defineConfig({
           // 将工具库分离
           utils: ['classnames', '@fortawesome/fontawesome-svg-core'],
           // 将 Storybook 相关分离
-          storybook: ['@storybook/react', '@storybook/blocks'],
+          storybook: ['@storybook/react-vite', '@storybook/addon-docs/blocks'],
         },
       },
     },

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { action } from 'storybook/actions'
 import Menu from './menu'
 import MenuItem from './menuItem'
 import SubMenu from './subMenu'

@@ -1,5 +1,6 @@
 // 引入项目变量
-@import './styles/variables';
+@use './styles/variables' as *;
+@use 'sass:color';
 
 .welcome-container {
   max-width: 1200px;
@@ -25,7 +26,7 @@
     background: linear-gradient(
       135deg,
       $primary-color,
-      darken($primary-color, 15%)
+      color.scale($primary-color, $lightness: -20%)
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

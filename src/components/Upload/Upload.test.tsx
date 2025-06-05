@@ -43,16 +43,12 @@ const mockActionFunction = jest.fn(file =>
   Promise.resolve('https://jsonplaceholder.typicode.com/posts/' + file.name)
 )
 
-// Mock axios 取消令牌
-// const mockCancelToken = axios.CancelToken.source()
-
 describe('Upload Component Tests', () => {
   let consoleErrorSpy: jest.SpyInstance
   let consoleWarnSpy: jest.SpyInstance
   let mockAxiosPost: jest.SpyInstance
 
   beforeEach(() => {
-    // Mock console methods
     consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
     consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
 
@@ -273,7 +269,7 @@ describe('Upload Component Tests', () => {
   test('should handle upload service error', async () => {
     const error = new Error('Upload service error')
 
-    // 重要：确保 mockActionFunction 被正确 mock
+    //确保 mockActionFunction 被正确 mock
     mockActionFunction.mockRejectedValueOnce(error)
 
     render(<Upload action={mockActionFunction} />)
@@ -302,8 +298,8 @@ describe('Upload Component Tests', () => {
   test('should cancel upload correctly', async () => {
     const axiosIsCancelSpy = jest.spyOn(axios, 'isCancel').mockReturnValue(true)
 
-    // 🔧 创建一个可控的 Promise，并正确处理拒绝
-    let rejectFunction: (reason?: unknown) => void // 显式声明类型，避免 any
+    // 创建一个可控的 Promise，并正确处理拒绝
+    let rejectFunction: (reason?: unknown) => void
     // @ts-expect-error: resolve 未使用，仅为类型完整性
     const mockPromise = new Promise<string>((resolve, reject) => {
       rejectFunction = reject
@@ -377,14 +373,9 @@ describe('Upload Component Tests', () => {
 
     // 使用更具体的选择器查找模态框中的图片
     await waitFor(() => {
-      // 方法1：通过容器查找
       const modal = screen.getByTestId('preview-modal-overlay')
       const modalImage = modal.querySelector('img')
       expect(modalImage).toBeInTheDocument()
-
-      // 方法2：通过 testid 查找（需要在组件中添加）
-      // const modalImage = screen.getByTestId(`preview-thumbnail-${file.name}`)
-      // expect(modalImage).toBeInTheDocument()
     })
 
     // 关闭预览
