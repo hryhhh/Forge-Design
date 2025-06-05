@@ -5,10 +5,21 @@ import * as utils from './utils'
 import '@testing-library/jest-dom'
 import axios, { AxiosError, CanceledError } from 'axios'
 
+// 全局处理未捕获的 Promise rejection
+process.on('unhandledRejection', reason => {
+  console.warn(
+    '发现未捕获的 Promise rejection，在 CI 环境中这可能导致测试失败：',
+    reason
+  )
+})
+
+// Mock console 方法，避免干扰测试输出
 beforeAll(() => {
   jest.spyOn(console, 'log').mockImplementation(() => {})
   jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'warn').mockImplementation(() => {})
 })
+
 interface UploadResponse {
   data: { url: string }
 }
@@ -37,30 +48,45 @@ const mockActionFunction = jest.fn(file =>
 
 describe('Upload Component Tests', () => {
   let consoleErrorSpy: jest.SpyInstance
+  let consoleWarnSpy: jest.SpyInstance
+  let mockAxiosPost: jest.SpyInstance
 
   beforeEach(() => {
+    // Mock console methods
     consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
-    jest.clearAllMocks()
-    jest.restoreAllMocks()
+    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
 
+    // 清理所有 mock
+    jest.clearAllMocks()
+
+    // Mock URL API
     window.URL.createObjectURL = jest.fn(() => 'blob:mock-preview-url')
     window.URL.revokeObjectURL = jest.fn()
 
+    // Mock axios
+    mockAxiosPost = jest.spyOn(axios, 'post')
+
+    // Mock action function
     mockActionFunction.mockClear()
     mockActionFunction.mockImplementation(async (file: File) => {
-      // 🔧 使用 act 包装异步状态更新
       await act(async () => {
-        // 模拟上传进度
         await new Promise(resolve => setTimeout(resolve, 50))
-        // 触发进度回调时确保在 act 中
       })
-
       return `https://jsonplaceholder.typicode.com/posts/${file.name}`
     })
   })
 
   afterEach(() => {
+    // 清理所有 spy 和 mock
     consoleErrorSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    mockAxiosPost.mockRestore()
+
+    // 清理可能残留的 DOM 元素
+    document.body.innerHTML = ''
+
+    // 恢复所有 mock
+    jest.restoreAllMocks()
   })
 
   test('should render upload area and input', () => {
