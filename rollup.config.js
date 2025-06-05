@@ -4,6 +4,7 @@ import typescript from '@rollup/plugin-typescript'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import terser from '@rollup/plugin-terser'
 import pkg from './package.json' with { type: 'json' }
+import json from '@rollup/plugin-json'
 
 export default {
   input: 'src/index.tsx',
@@ -25,6 +26,7 @@ export default {
     commonjs(),
     typescript({ tsconfig: './tsconfig.build.json' }),
     terser(),
+    json(),
   ],
   external: [...Object.keys(pkg.peerDependencies || {})],
 }
