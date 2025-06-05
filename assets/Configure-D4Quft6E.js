@@ -1,2 +1,0 @@
-import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as r}from"./index-3lSaTjIr.js";import"./index-CgfFrydU.js";import"./_commonjsHelpers-CqkleIqs.js";function e(n){const o={h1:"h1",p:"p",...r(),...n.components};return t.jsxs(t.Fragment,{children:[t.jsx(o.h1,{id:"配置文档",children:"配置文档"}),`
-`,t.jsx(o.p,{children:"此处为 Storybook 配置说明。"})]})}function p(n={}){const{wrapper:o}={...r(),...n.components};return o?t.jsx(o,{...n,children:t.jsx(e,{...n})}):e(n)}export{p as default};
