@@ -75,7 +75,8 @@ export const Upload: React.FC<UploadProps> = ({
 
   return (
     <>
-      <div className="upload-container">
+      {' '}
+      <div className="upload-container" data-testid="upload-container">
         <div
           className={`upload-area ${dragActive ? 'drag-active' : ''}`}
           onDragEnter={handleDrag}
@@ -92,8 +93,8 @@ export const Upload: React.FC<UploadProps> = ({
             onChange={handleChange}
             data-testid="file-input"
           />
-          <CloudUploadOutlined className="upload-icon" />
-          <p>
+          <CloudUploadOutlined className="upload-icon" />{' '}
+          <p data-testid="upload-prompt">
             拖拽文件到此处或
             <label htmlFor="file-input" className="upload-link">
               点击上传

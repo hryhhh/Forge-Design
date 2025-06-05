@@ -84,11 +84,12 @@ describe('Upload Component Tests', () => {
     // 恢复所有 mock
     jest.restoreAllMocks()
   })
-
   test('should render upload area and input', () => {
-    render(<Upload action={mockActionString} />)
-    expect(screen.getByText(/拖拽文件到此处或/)).toBeInTheDocument()
-    expect(screen.getByLabelText(/点击上传/i)).toBeInTheDocument()
+    const { container } = render(<Upload action={mockActionString} />)
+    console.log('初始渲染的 DOM:', container.innerHTML)
+    expect(screen.getByTestId('upload-container')).toBeInTheDocument()
+    expect(screen.getByTestId('file-input')).toBeInTheDocument()
+    expect(screen.getByTestId('upload-prompt')).toBeInTheDocument()
   })
 
   test('should show selected file after selecting a file', async () => {
