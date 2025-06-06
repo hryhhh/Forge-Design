@@ -191,22 +191,6 @@ describe('Upload Component', () => {
     )
   })
 
-  // test('应该限制文件类型', async () => {
-  //     const invalidFile = createFile('test.exe', 1024, 'application/x-msdownload');
-  //     render(<Upload action={mockActionFunction} />);
-
-  //     const input = screen.getByTestId('file-input') as HTMLInputElement;
-  //     await act(async () => {
-  //         await userEvent.upload(input, invalidFile);
-  //     });
-
-  //     // 等待错误列表出现
-  //     await waitFor(() => {
-  //         const errorMessages = screen.getAllByTestId('error-message');
-  //         expect(errorMessages[0]).toHaveTextContent(/类型不支持/);
-  //     }, { timeout: 5000 });
-  // });
-
   test('应该支持多文件上传', async () => {
     render(<Upload action={mockActionFunction} />)
     const files = [createFile('test1.png'), createFile('test2.png')]

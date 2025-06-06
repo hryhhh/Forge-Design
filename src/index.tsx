@@ -1,19 +1,21 @@
-// 组件导出
+// Button
 export { default as Button } from './components/Button'
+export type { ButtonProps, ButtonSize, ButtonType } from './components/Button'
+
+// Menu
 export { Menu } from './components/Menu'
-export { Upload } from './components/Upload'
-
-// 按钮相关类型
-export type { ButtonProps } from './components/Button'
-
-export { ButtonSize, ButtonType } from './components/Button'
-
 export type {
   MenuProps,
   MenuItemProps,
   SubMenuProps,
-  IMenuComponent,
   MenuMode,
   SelectCallback,
-  IMenuContext,
-} from './components/Menu/index'
+} from './components/Menu'
+
+// Upload
+export { Upload } from './components/Upload'
+export type {
+  UploadFile,
+  UploadStatus,
+  UploadProgress,
+} from './components/Upload'
