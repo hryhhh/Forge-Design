@@ -72,7 +72,8 @@
     "classnames": "^2.5.1",
     "glob": "^9.3.5",
     "lru-cache": "^11.1.0",
-    "rollup-plugin-postcss": "^4.0.2"
+    "rollup-plugin-postcss": "^4.0.2",
+    "typedoc-plugin-markdown": "^4.6.4"
   },
   "peerDependencies": {
     "react": "^19.1.0",

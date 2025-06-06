@@ -1,5 +1,4 @@
 import { FC } from 'react'
-
 import Menu from './menu'
 import { MenuContext } from './context'
 import type { MenuProps } from './context'

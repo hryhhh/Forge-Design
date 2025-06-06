@@ -1,9 +1,27 @@
 {
   "entryPoints": ["src/index.tsx"],
   "out": "docs",
-  "exclude": ["**/*.test.tsx", "**/*.stories.tsx"],
+  "name": "Forge Design",
+  "exclude": [
+    "**/*.test.tsx",
+    "**/*.stories.tsx",
+    "**/setupTests.ts",
+    "**/main.tsx",
+    "**/*.stories.mdx"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "hideGenerator": true,
   "includeVersion": true,
-  "tsconfig": "tsconfig.build.json",
-  "name": "Forge Design Library",
-  "readme": "README.md"
+  "readme": "README.md",
+  "tsconfig": "tsconfig.json",
+  "treatWarningsAsErrors": false,
+  "validation": {
+    "notExported": false,
+    "invalidLink": false,
+    "notDocumented": false
+  },
+
+  "plugin": ["typedoc-plugin-markdown"],
+  "entryPointStrategy": "expand"
 }
