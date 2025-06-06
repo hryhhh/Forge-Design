@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{B as n,a as l,b as a}from"./Button-CHbuTynL.js";import"./index-CWgW7LXG.js";import"./iframe-pwB49sEP.js";const{action:t}=__STORYBOOK_MODULE_ACTIONS__,z={title:"Forge Design/Button",component:n,tags:["autodocs"],parameters:{layout:"centered",docs:{description:{component:`
+import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{B as n,a as l,b as a}from"./Button-D_mQYllo.js";import"./index-BzeLE8t_.js";import"./iframe-BW5MfdzI.js";const{action:t}=__STORYBOOK_MODULE_ACTIONS__,z={title:"Forge Design/Button",component:n,tags:["autodocs"],parameters:{layout:"centered",docs:{description:{component:`
 # 按钮组件
 
 一个功能完整的按钮组件，支持多种类型、尺寸和状态的按钮交互。
