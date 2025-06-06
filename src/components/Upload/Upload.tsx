@@ -3,6 +3,7 @@ import Button from '../Button/Button'
 import { useUpload } from './useUpload'
 import { CloudUploadOutlined } from '@ant-design/icons'
 import type { UploadProps } from './type'
+import './_style.scss'
 
 export const Upload: React.FC<UploadProps> = ({
   action,

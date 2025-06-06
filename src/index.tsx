@@ -19,3 +19,4 @@ export type {
   UploadStatus,
   UploadProgress,
 } from './components/Upload'
+import './styles/index.scss'

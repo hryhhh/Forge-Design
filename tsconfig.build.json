@@ -4,14 +4,22 @@
     "module": "ESNext",
     "target": "ES5",
     "declaration": true,
+    "declarationMap": true,
     "jsx": "react-jsx",
     "noEmit": false,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "types": ["react", "react-dom"],
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"]
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.tsx", "src/**/*.stories.tsx"]
+  "include": ["src/components/**/*", "src/index.tsx"],
+  "exclude": [
+    "**/*.test.tsx",
+    "**/*.test.ts",
+    "**/*.stories.tsx",
+    "src/main.tsx",
+    "src/App.tsx",
+    "src/stories/**/*"
+  ]
 }

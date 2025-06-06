@@ -5,7 +5,7 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
-  testTimeout: 10000, // 增加全局超时时间为 10 秒
+  testTimeout: 10000,
 
   transform: {
     '^.+\\.tsx?$': [
@@ -13,19 +13,31 @@ const config: Config = {
       {
         presets: [
           ['@babel/preset-env', { targets: { node: 'current' } }],
-          ['@babel/preset-react', { runtime: 'automatic' }], // 新增
+          ['@babel/preset-react', { runtime: 'automatic' }],
           '@babel/preset-typescript',
         ],
       },
     ],
   },
 
-  // 如果你需要处理 CSS 文件等，可以使用 moduleNameMapper
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/src/$1',
     '@components/(.*)': '<rootDir>/src/components/$1',
   },
+
+  // 推荐添加的配置
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/*.stories.tsx',
+    '!src/main.tsx',
+  ],
+  testMatch: [
+    '<rootDir>/src/components/**/*.test.{ts,tsx}',
+    '<rootDir>/src/components/**/*.spec.{ts,tsx}',
+  ],
 }
 
 export default config

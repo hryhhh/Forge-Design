@@ -50,10 +50,6 @@ jobs:
           echo "Type definitions not found"
           exit 1
         fi
-        if [ ! -f "build/index.css" ]; then
-          echo "CSS build not found"
-          exit 1
-        fi
         echo "All build files verified successfully"
     
     - name: Build Storybook

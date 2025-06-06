@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-
+import './_style.scss'
 import { ButtonSize, ButtonType, ButtonProps } from './types'
 
 const Button: React.FC<ButtonProps> = props => {

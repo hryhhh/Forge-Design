@@ -43,7 +43,6 @@ jobs:
         test -d build && echo "Build directory exists" || exit 1
         test -f build/index.js && echo "Main build file exists" || exit 1
         test -f build/index.d.ts && echo "Type definitions exist" || exit 1
-        test -f build/index.css && echo "CSS build exists" || exit 1
     
     - name: Build Storybook
       run: npm run build-storybook
