@@ -2,6 +2,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import terser from '@rollup/plugin-terser'
+import pkg from './package.json' with { type: 'json' }
 import json from '@rollup/plugin-json'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import nodePolyfills from 'rollup-plugin-polyfill-node'
