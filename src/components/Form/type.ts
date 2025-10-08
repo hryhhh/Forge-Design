@@ -9,7 +9,16 @@ export interface FormRule {
   max?: number
   validate?: (value: any) => boolean | Promise<boolean>
 }
-//
+
+//表单字段配置
+export interface FormFiled {
+  name: string
+  label?: string
+  rules?: FormRule[]
+  initialValue?: any
+}
+
+//Form组件的props类型
 export interface FormProps {
   name?: string
   initialValues?: FormValues
@@ -18,4 +27,13 @@ export interface FormProps {
   layout?: 'horizontal' | 'vertical' | 'inline'
   labelCol?: number | object //label宽度
   wrapperCol?: number | object //表单项宽度
+  children?: React.ReactNode
+  classNames?: string
+  rule?: FormRule[]
+}
+
+//FormItem组件的props类型
+export interface FormItemProps extends FormProps {
+  defaultValue?: any
+  required: boolean
 }
