@@ -1,0 +1,2 @@
+import{j as n}from"./jsx-runtime-D_zvdyIk.js";import{useMDXComponents as r}from"./index-CiwlJ7hn.js";import"./blocks-B3IMfF0U.js";import"./index-Bq0mOuYt.js";/* empty css               */import"./iframe-C4TzDdle.js";import"./index-DJrGimJJ.js";function e(t){const o={h1:"h1",p:"p",...r(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(o.h1,{id:"button-按钮预览",children:"Button 按钮预览"}),`
+`,n.jsx(o.p,{children:"按钮用于开始一个即时操作。"})]})}function a(t={}){const{wrapper:o}={...r(),...t.components};return o?n.jsx(o,{...t,children:n.jsx(e,{...t})}):e(t)}export{a as default};
