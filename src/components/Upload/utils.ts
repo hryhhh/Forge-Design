@@ -13,11 +13,22 @@ export const uploadConfig: UPLOAD_CONFIG = {
   ],
   concurrencyLimit: 3,
 }
-export const validateFiles = (selectedFiles: FileList | null) => {
+export const validateFiles = (
+  selectedFiles: FileList | null,
+  currentFiles: File[] = []
+) => {
   if (!selectedFiles) return { validFiles: [], newErrors: [] }
 
   const validFiles: File[] = []
   const newErrors: string[] = []
+
+  if (
+    currentFiles.length + selectedFiles.length >
+    uploadConfig.concurrencyLimit
+  ) {
+    newErrors.push('最多只能选择 3 个文件')
+    return { validFiles, newErrors }
+  }
 
   Array.from(selectedFiles).forEach(file => {
     if (file.size > uploadConfig.maxFileSize) {
