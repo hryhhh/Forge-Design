@@ -6,6 +6,7 @@ const config: Config = {
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
   testTimeout: 10000,
+  cacheDirectory: '.jest-cache',
 
   transform: {
     '^.+\\.tsx?$': [
@@ -26,7 +27,6 @@ const config: Config = {
     '@components/(.*)': '<rootDir>/src/components/$1',
   },
 
-  // 推荐添加的配置
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',

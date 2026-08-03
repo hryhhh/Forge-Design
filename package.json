@@ -128,6 +128,7 @@
     "playwright": "^1.52.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
+    "rollup": "^4.41.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "sass": "^1.86.1",
@@ -139,9 +140,13 @@
     "vite": "^6.2.4",
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-sass": "^0.1.0",
-    "vitest": "^3.1.2"
+    "vitest": "^3.1.2",
+    "@rollup/rollup-linux-x64-gnu": "^4.41.1"
   },
   "overrides": {
     "storybook": "$storybook"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
