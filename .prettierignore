@@ -14,3 +14,6 @@ pnpm-lock.yaml
 
 # 特定文件
 README.md
+
+# 文档输出
+docs/
