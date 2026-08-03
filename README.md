@@ -2,39 +2,39 @@
 
 <div align="center">
 
-
-![Version](https://img.shields.io/badge/version-1.0.7-blue)
+![Version](https://img.shields.io/badge/version-1.0.14-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![React](https://img.shields.io/badge/react-^19.1.0-61dafb)
 ![TypeScript](https://img.shields.io/badge/typescript-~5.7.2-3178c6)
 
-**专为现代 React 应用打造的企业级 UI 组件库**
+**A modern React component library for building enterprise-grade applications**
 
-[📖 文档](https://hryhhh.github.io/Forge-Design) | [🎨 Storybook](https://hryhhh.github.io/Forge-Design) | [🐛 问题反馈](https://github.com/hryhhh/Forge-Design/issues)
+[📖 Documentation](https://hryhhh.github.io/Forge-Design) ·
+[🎨 Storybook](https://hryhhh.github.io/Forge-Design) ·
+[📦 npm](https://www.npmjs.com/package/forge-design) ·
+[🐛 Issues](https://github.com/hryhhh/Forge-Design/issues)
 
 </div>
 
-## ✨ 特性
+---
 
-- 🎯 **现代化设计** - 采用 SCSS 模块化样式，支持主题定制
-- 📦 **TypeScript 支持** - 完整的类型定义，提供优秀的开发体验
-- 🧪 **测试覆盖** - 使用 Jest + Testing Library 确保组件质量
-- 📱 **响应式设计** - 适配各种屏幕尺寸，支持移动端和桌面端
-- ♿ **无障碍访问** - 遵循 WCAG 标准，确保所有用户都能正常使用
-- 🔧 **开箱即用** - 完善的构建工具链和 CI/CD 流程
+## ✨ Features
 
-## 🚀 快速开始
+- 🎨 **TypeScript First** — Full type coverage with strict mode
+- 🧩 **Composable Components** — Flexible and extensible component architecture
+- 🧪 **Well Tested** — Jest + Testing Library for unit tests
+- 📖 **Storybook Docs** — Interactive documentation and examples
+- 📦 **Tree-shakeable** — Optimized bundle with Rollup
+- 🌙 **SCSS Styles** — Modular CSS with customizable themes
+- ⚡ **Vite Powered** — Fast development with HMR
 
-### 📺 在线预览
+---
 
-🌟 **[在线体验 Forge Design](https://hryhhh.github.io/Forge-Design/)** - 访问部署在 GitHub Pages 上的 Storybook 文档
-
-
-### 安装
+## 📦 Installation
 
 ```bash
 # npm
-npm install forge-design --save
+npm install forge-design
 
 # yarn
 yarn add forge-design
@@ -43,104 +43,205 @@ yarn add forge-design
 pnpm add forge-design
 ```
 
-### 基础使用
+**Peer Dependencies:**
 
-```jsx
-import { Button, Menu, Upload } from 'forge-design'
+```json
+{
+  "react": "^19.1.0",
+  "react-dom": "^19.1.0"
+}
+```
+
+---
+
+## 🚀 Quick Start
+
+```tsx
+import { Button, Menu, Upload } from 'forge-design';
+import 'forge-design/style.css';
 
 function App() {
   return (
     <div>
-      <Button type="primary">开始使用</Button>
+      <Button type="primary">Primary Button</Button>
+      <Button size="small">Small Button</Button>
+      
+      <Menu mode="horizontal">
+        <Menu.Item index="0">Home</Menu.Item>
+        <Menu.Item index="1">About</Menu.Item>
+      </Menu>
+
+      <Upload action="/api/upload" />
     </div>
-  )
+  );
 }
 ```
 
-## 🛠️ 开发指南
+---
 
-### 环境要求
+## 📚 Components
 
-- Node.js >= 20
-- React >= 19.1.0
-- TypeScript >= 5.7.2
+### Button
 
-### 本地开发
+A versatile button component supporting multiple styles and sizes.
+
+| Prop       | Type                                    | Default    | Description          |
+| ---------- | --------------------------------------- | ---------- | -------------------- |
+| `type`     | `'primary' \| 'secondary' \| 'danger' \| 'link'` | `'primary'` | Button type          |
+| `size`     | `'large' \| 'medium' \| 'small'`        | `'medium'` | Button size          |
+| `disabled` | `boolean`                               | `false`    | Disabled state       |
+| `href`     | `string`                                | `-`        | Link URL (for link type) |
+| `className`| `string`                                | `-`        | Custom CSS class     |
+
+```tsx
+import { Button } from 'forge-design';
+
+<>
+  <Button type="primary">Primary</Button>
+  <Button type="secondary">Secondary</Button>
+  <Button type="danger">Danger</Button>
+  <Button type="link" href="https://example.com">Link</Button>
+  <Button size="large">Large</Button>
+  <Button size="small">Small</Button>
+  <Button disabled>Disabled</Button>
+</>
+```
+
+### Menu
+
+Navigation menu supporting horizontal and vertical layouts with nested submenus.
+
+| Prop               | Type                                      | Default         | Description              |
+| ------------------ | ----------------------------------------- | --------------- | ------------------------ |
+| `mode`             | `'horizontal' \| 'vertical'`              | `'horizontal'`  | Menu layout mode         |
+| `defaultIndex`     | `string`                                  | `'0'`           | Default active item      |
+| `defaultOpenSubMenus` | `string[]`                             | `[]`            | Default open submenus    |
+| `onSelect`         | `(index: string) => void`                 | `-`             | Callback on item select  |
+
+```tsx
+import { Menu } from 'forge-design';
+
+<Menu mode="horizontal" defaultIndex="0">
+  <Menu.Item index="0">Home</Menu.Item>
+  <Menu.SubMenu title="Products">
+    <Menu.Item index="1">Product 1</Menu.Item>
+    <Menu.Item index="2">Product 2</Menu.Item>
+  </Menu.SubMenu>
+</Menu>
+```
+
+### Upload
+
+File upload component with drag & drop support, progress tracking, and preview.
+
+| Prop         | Type                              | Default | Description                    |
+| ------------ | --------------------------------- | ------- | ------------------------------ |
+| `action`     | `string \| () => string`          | `-`     | Upload endpoint URL            |
+| `cancelToken`| `AbortController`                 | `-`     | Token for canceling upload     |
+| `onProgress` | `(percent: number) => void`       | `-`     | Progress callback              |
+
+```tsx
+import { Upload } from 'forge-design';
+
+<Upload 
+  action="https://api.example.com/upload"
+  onProgress={(percent) => console.log(percent)}
+/>
+```
+
+### Form
+
+Form component supporting controlled and uncontrolled modes with validation.
+
+| Prop               | Type                    | Default | Description                  |
+| ------------------ | ----------------------- | ------- | ---------------------------- |
+| `initialValues`    | `Record<string, any>`   | `{}`    | Initial form values          |
+| `formValues`       | `Record<string, any>`   | `-`     | Controlled form values       |
+| `onFinish`         | `(values: any) => void` | `-`     | Submit callback              |
+| `rules`            | `FormRule[]`            | `-`     | Validation rules             |
+
+```tsx
+import { Form } from 'forge-design';
+
+<Form
+  initialValues={{ name: '', email: '' }}
+  onFinish={(values) => console.log(values)}
+  rules={[
+    { name: 'name', rules: [{ required: true, message: 'Name is required' }] },
+    { name: 'email', rules: [{ required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }] }
+  ]}
+>
+  {/* Form fields */}
+</Form>
+```
+
+---
+
+## 🛠️ Development
+
+### Prerequisites
+
+- Node.js >= 20.0.0
+- npm >= 9.0.0
+
+### Setup
 
 ```bash
-# 克隆项目
+# Clone repository
 git clone https://github.com/hryhhh/Forge-Design.git
+cd Forge-Design
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 启动开发服务器
+# Start Storybook
 npm run storybook
 
-# 运行测试
+# Run tests
 npm test
 
-# 构建项目
+# Build library
 npm run build
 ```
 
-### 可用脚本
+### Available Scripts
 
-| 命令                | 描述                 |
-| ------------------- | -------------------- |
-| `npm run dev`       | 启动 Vite 开发服务器 |
-| `npm run build`     | 构建生产版本         |
-| `npm run test`      | 运行测试套件         |
-| `npm run storybook` | 启动 Storybook 文档  |
-| `npm run lint`      | 代码检查和格式化     |
-| `npm run docs`      | 生成 TypeDoc 文档    |
+| Script              | Description                           |
+| ------------------- | ------------------------------------- |
+| `npm run dev`       | Start Vite dev server                 |
+| `npm run build`     | Build library and Storybook           |
+| `npm run build-rollup` | Build library only (ES + CJS)      |
+| `npm run build-storybook` | Build Storybook static site     |
+| `npm run test`      | Run Jest test suite                   |
+| `npm run storybook` | Start Storybook dev server            |
+| `npm run lint`      | Run ESLint with auto-fix              |
+| `npm run format`    | Format code with Prettier             |
+| `npm run docs`      | Generate TypeDoc documentation        |
 
-## 🏗️ 技术栈
+---
 
-- **框架**: React 19 + TypeScript 5.7
-- **构建工具**: Vite + Rollup
-- **样式**: SCSS + CSS Modules
-- **测试**: Jest + Testing Library
-- **文档**: Storybook + TypeDoc
-- **代码质量**: ESLint + Prettier + Husky
-- **CI/CD**: GitHub Actions
+## 🏗️ Tech Stack
 
-## 🤝 贡献指南
+| Category     | Technology                           |
+| ------------ | ------------------------------------ |
+| Framework    | React 19 + TypeScript 5.7            |
+| Build        | Rollup (library) + Vite (Storybook)  |
+| Styling      | SCSS + CSS Modules                   |
+| Testing      | Jest + Testing Library               |
+| Docs         | Storybook 9 + TypeDoc                |
+| Quality      | ESLint + Prettier + Husky            |
+| CI/CD        | GitHub Actions                       |
 
-欢迎所有形式的贡献！请阅读我的贡献指南：
+---
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
+## 📄 License
 
-### 开发规范
-
-- 遵循 TypeScript 严格模式
-- 所有组件必须有完整的测试覆盖
-- 提交信息遵循 [Conventional Commits](https://conventionalcommits.org/)
-- 代码必须通过 ESLint 和 Prettier 检查
-
-## 📊 项目状态
-
-![CI](https://github.com/hryhhh/Forge-Design/workflows/CI/badge.svg)
-![CD](https://github.com/hryhhh/Forge-Design/workflows/CD/badge.svg)
-![NPM Downloads](https://img.shields.io/npm/dm/forge-design)
-
-
-## 📧 联系我们
-
-- **作者**: hhhhry
-- **联系**: [通过 GitHub Issues 联系](https://github.com/hryhhh/Forge-Design/issues)
-- **GitHub**: [@hryhhh](https://github.com/hryhhh)
+[MIT](LICENSE) © [hryhhh](https://github.com/hryhhh)
 
 ---
 
 <div align="center">
 
-
-**由  hryhhh 用 ❤️ 制作 | 采用 MIT 许可证**
+**Made with ❤️ by hryhhh**
 
 </div>
-
