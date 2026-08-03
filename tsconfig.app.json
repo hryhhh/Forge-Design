@@ -19,7 +19,7 @@
     "emitDeclarationOnly": true,
     "outDir": "./build",
     "jsx": "react-jsx",
-    "types": ["react", "react-dom"],
+    "types": ["react", "react-dom", "vite/client"],
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -30,7 +30,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "forceConsistentCasingInFileNames": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

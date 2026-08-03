@@ -3,14 +3,19 @@ import Button from './components/Button'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ?? 'https://jsonplaceholder.typicode.com'
+
 function App() {
   const [data, setData] = useState<any[]>([])
+  const uploadAction =
+    import.meta.env.VITE_UPLOAD_ACTION ?? `${API_BASE}/photos`
 
   useEffect(() => {
     const request = async () => {
       try {
         const res = await axios({
-          url: 'https://jsonplaceholder.typicode.com/photos',
+          url: `${API_BASE}/photos`,
           method: 'GET',
         })
         setData(res.data.slice(0, 5))
@@ -33,7 +38,7 @@ function App() {
         link
       </Button>
       <header className="App-header">
-        <Upload action="https://jsonplaceholder.typicode.com/photos" />
+        <Upload action={uploadAction} />
       </header>
       <div>
         <h1>Image List</h1>

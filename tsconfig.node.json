@@ -7,14 +7,14 @@
     "types": ["node"],
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
 
     /* Bundler mode */
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "noEmit": true,
 
     /* Linting */
@@ -23,6 +23,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
@@ -30,7 +31,7 @@
     }
   },
   "include": [
-    "vite.config.ts",
+    "global.d.ts",
     "rollup.config.js",
     "*.config.ts",
     ".storybook/**/*"
