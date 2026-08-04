@@ -54,9 +54,9 @@
     color: white;
     padding: 0.5rem 1rem;
     border-radius: $btn-border-radius;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
     font-weight: $font-weight-bold;
-    box-shadow: $btn-box-shadow;
+    box-shadow: $shadow-md;
     transition: $btn-transition;
 
     &:hover {
@@ -104,7 +104,7 @@
   padding: 1.5rem;
   overflow-x: auto;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: $font-size-small;
+  font-size: $font-size-sm;
   margin: 1rem 0;
   box-shadow: $menu-box-shadow;
   position: relative;
@@ -197,7 +197,7 @@
 
   &:hover {
     border-color: $primary-color;
-    box-shadow: $btn-box-shadow;
+    box-shadow: $shadow-md;
   }
 
   h4 {
@@ -210,7 +210,7 @@
   p {
     color: $neutral-dark-gray;
     margin-bottom: 1rem;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
     line-height: $line-height-base;
   }
 
@@ -255,7 +255,7 @@
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: $btn-box-shadow;
+    box-shadow: $shadow-md;
     border-color: $secondary-color;
   }
 
@@ -270,7 +270,7 @@
     color: $neutral-dark-gray;
     line-height: $line-height-base;
     margin: 0;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
   }
 }
 
@@ -302,7 +302,7 @@
 
   p {
     color: $neutral-dark-gray;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
     margin: 0;
   }
 }
@@ -314,7 +314,7 @@
 
   p {
     color: $neutral-dark-gray;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
     margin: 0;
 
     strong {

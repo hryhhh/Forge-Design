@@ -1,6 +1,7 @@
-import { FormProps, FormValues, FormRule } from './type'
+import { FormProps, FormValues } from './type'
 import React, { useState, useEffect, useCallback, ReactElement } from 'react'
 import { FormContext } from './FormContext'
+import './_style.scss'
 
 const Form: React.FC<FormProps> = props => {
   const {
@@ -10,15 +11,15 @@ const Form: React.FC<FormProps> = props => {
     onFormValueChange,
     onFinish,
     onFinishFailed,
-    rules,
     children,
+    className,
+    layout = 'vertical',
   } = props
 
   const [formValues, setFormValues] = useState<FormValues>(initialValues)
   const [errors, setErrors] = useState<FormValues>({})
   const [touched, setTouched] = useState<FormValues>({})
 
-  //监控受控组件变化
   useEffect(() => {
     if (controlledFormValues) {
       setFormValues(controlledFormValues)
@@ -26,55 +27,38 @@ const Form: React.FC<FormProps> = props => {
   }, [controlledFormValues])
 
   const validateField = useCallback(
-    (name: string, value: any, rules?: FormRule[]): string | null => {
-      if (!rules || rules.length === 0) return null
+    (fieldName: string, value: any, fieldRules?: any[]): string | null => {
+      if (!fieldRules || fieldRules.length === 0) return null
 
-      for (const rule of rules) {
-        //必填验证
-        if (rule.required && (value === undefined || value === '')) {
-          return rule.message || `${name} 是必填的`
+      for (const rule of fieldRules) {
+        if (
+          rule.required &&
+          (value === undefined || value === null || value === '')
+        ) {
+          return rule.message || `${fieldName} 是必填的`
         }
-        // 如果值为空且非必填，跳过其他验证
-        if (value === undefined || value === '') {
+        if (value === undefined || value === null || value === '') {
           continue
         }
-        //正则验证
-        if (
-          rule.pattern &&
-          value !== undefined &&
-          value !== '' &&
-          !rule.pattern.test(value)
-        ) {
-          return rule.message || `${name} 格式不正确`
+        if (rule.pattern && !rule.pattern.test(String(value))) {
+          return rule.message || `${fieldName} 格式不正确`
         }
-        //最短长度验证
-        if (
-          rule.min !== undefined &&
-          value !== undefined &&
-          value.length < rule.min
-        ) {
-          return rule.message || `${name} 长度至少为 ${rule.min}`
+        if (rule.min !== undefined && String(value).length < rule.min) {
+          return rule.message || `${fieldName} 长度至少为 ${rule.min}`
         }
-        //最长长度验证
-        if (
-          rule.max !== undefined &&
-          value !== undefined &&
-          value.length > rule.max
-        ) {
-          return rule.message || `${name} 长度最多为 ${rule.max}`
+        if (rule.max !== undefined && String(value).length > rule.max) {
+          return rule.message || `${fieldName} 长度最多为 ${rule.max}`
         }
-        //自定义验证
         if (rule.validate) {
           const validateResult = rule.validate(value)
           if (validateResult instanceof Promise) {
-            //异步验证
-            validateResult.then(isValid => {
+            validateResult.then((isValid: boolean) => {
               if (!isValid) {
-                return rule.message || `${name} 验证失败`
+                // 错误处理
               }
             })
           } else if (!validateResult) {
-            return rule.message || `${name} 验证失败`
+            return rule.message || `${fieldName} 验证失败`
           }
         }
       }
@@ -83,47 +67,37 @@ const Form: React.FC<FormProps> = props => {
     []
   )
 
-  //表单验证
   const validateForm = useCallback((): boolean => {
     const newErrors: FormValues = {}
     let isValid = true
 
-    //验证子组件
     React.Children.forEach(children, child => {
       if (
         React.isValidElement(child) &&
         (child as ReactElement<any>).props.name
       ) {
         const childProps = (child as ReactElement<any>).props
-        const { name, rules } = childProps
-        const value = formValues[name]
-        const error = validateField(name, value, rules)
+        const { name: fieldName, rules: fieldRules } = childProps
+        const value = formValues[fieldName]
+        const error = validateField(fieldName, value, fieldRules)
         if (error) {
-          newErrors[name] = error
+          newErrors[fieldName] = error
           isValid = false
         }
       }
     })
-    if (rules) {
-      const formError = validateField('form', formValues, rules)
-      if (formError) {
-        newErrors.form = formError
-        isValid = false
-      }
-    }
+
     setErrors(newErrors)
     return isValid
-  }, [children, formValues, rules, validateField])
+  }, [children, formValues, validateField])
 
-  // 更新表单值
   const handleValueChange = useCallback(
     (name: string, value: any) => {
       const newValues = { ...formValues, [name]: value }
-      setFormValues(newValues) //更新表单值
+      setFormValues(newValues)
       setTouched({ ...touched, [name]: true })
-      onFormValueChange?.(newValues) //受控表单通知父组件
+      onFormValueChange?.(newValues)
 
-      // 实时验证
       const fieldErrors = { ...errors }
       const childElement = React.Children.toArray(children).find(
         child =>
@@ -141,9 +115,8 @@ const Form: React.FC<FormProps> = props => {
     [formValues, children, errors, touched, onFormValueChange, validateField]
   )
 
-  // 提交表单
   const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
+    (e: React.FormEvent) => {
       e.preventDefault()
 
       if (validateForm()) {
@@ -165,22 +138,16 @@ const Form: React.FC<FormProps> = props => {
     touched,
     onValueChange: handleValueChange,
     onSubmit: handleSubmit,
+    layout,
   }
 
   return (
     <FormContext.Provider value={formContext}>
-      <form onSubmit={handleSubmit} name={name}>
-        {React.Children.map(children, child => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child, {
-              ...(child.props as any),
-              formContext,
-            })
-          }
-          return child
-        })}
+      <form onSubmit={handleSubmit} name={name} className={className}>
+        {children}
       </form>
     </FormContext.Provider>
   )
 }
+
 export default Form

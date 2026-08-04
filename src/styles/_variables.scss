@@ -1,138 +1,174 @@
 @use 'sass:color';
 
 // 颜色变量
-$primary-color: #8fc3fb !default; // 亮蓝色
-$secondary-color: #aebed0 !default; // 柔和绿色
-$accent-color: #fd7e14 !default; // 暖橙色
-$background-color: #ffffff !default; // 浅灰色
-$text-color: #343a40 !default; // 深灰色
+$primary-color: #0969da !default;
+$secondary-color: #6a737d !default;
+$accent-color: #bf3989 !default;
 
-$neutral-light: #f5f5f5 !default; // 非常浅灰色
-$neutral-light-gray: #e0e0e0 !default; // 浅灰色
-$neutral-gray: #b0b0b0 !default; // 灰色
-$neutral-dark-gray: #808080 !default; // 深灰色
-$neutral-dark: #404040 !default; // 几乎黑色
-$neutral-black: #000000 !default; // 黑色
+$background-color: #ffffff !default;
+$background-subtle: #fafbfc !default;
+$text-color: #24292e !default;
+$text-secondary: #6a737d !default;
+$text-tertiary: #9ca3af !default;
+
+$border-color: #eaeaea !default;
+$border-color-hover: #0969da !default;
+
+$neutral-light: #f6f8fa !default;
+$neutral-light-gray: #eaeaea !default;
+$neutral-gray: #d0d7de !default;
+$neutral-dark-gray: #9ca3af !default;
+$neutral-dark: #404040 !default;
+$neutral-black: #000000 !default;
 
 // 系统颜色
-$success: #28a745 !default; // 绿色
-$warning: #ffc107 !default; // 黄色
-$danger: #dc3545 !default; // 红色
-$info: #17a2b8 !default; // 青色
-$light: #f8f9fa !default; // 浅灰色
-$dark: #343a40 !default; // 深灰色
+$success: #1a7f37 !default;
+$success-bg: #dcffe4 !default;
+$warning: #9a6700 !default;
+$warning-bg: #fff8c5 !default;
+$danger: #cf222e !default;
+$danger-bg: #fff0ee !default;
+$info: #0969da !default;
+$info-bg: #ddf4ff !default;
+
+$light: #f6f8fa !default;
+$dark: #24292e !default;
 
 // 字体变量
-$font-family-base: 'Helvetica Neue', Arial, sans-serif !default; // 基础字体
-$font-family-heading: 'Georgia', serif !default; // 标题字体
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-heading: $font-family-base !default;
 
 // 字体大小
-$font-size-base: 16px !default; // 基础字体大小
-$font-size-large: 24px !default; // 大字体大小
-$font-size-medium: 18px !default; // 中等字体大小
-$font-size-small: 14px !default; // 小字体大小
+$font-size-xs: 12px !default;
+$font-size-sm: 13px !default;
+$font-size-base: 14px !default;
+$font-size-lg: 16px !default;
+$font-size-xl: 20px !default;
+$font-size-2xl: 28px !default;
 
 // 标题字体大小
-$font-size-h1: 2.5rem !default; // H1 字体大小
-$font-size-h2: 2rem !default; // H2 字体大小
-$font-size-h3: 1.75rem !default; // H3 字体大小
-$font-size-h4: 1.5rem !default; // H4 字体大小
-$font-size-h5: 1.25rem !default; // H5 字体大小
-$font-size-h6: 1rem !default; // H6 字体大小
+$font-size-h1: $font-size-2xl !default;
+$font-size-h2: $font-size-xl !default;
+$font-size-h3: $font-size-lg !default;
+$font-size-h4: 15px !default;
+$font-size-h5: $font-size-base !default;
+$font-size-h6: $font-size-sm !default;
 
 // 字体粗细
-$font-weight-normal: 400 !default; // 正常粗细
-$font-weight-bold: 700 !default; // 粗体
-$font-weight-bolder: 800 !default; // 更粗体
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
 
 // 行高
-$line-height-base: 1.5 !default; // 基础行高
-$line-height-heading: 1.2 !default; // 标题行高
+$line-height-base: 1.5 !default;
+$line-height-heading: 1.25 !default;
 
 // 链接样式
-$link-color: $primary-color !default; // 链接颜色
-$link-hover-color: color.scale(
-  $link-color,
-  $lightness: -15%
-) !default; // 链接悬停颜色
-$link-focus-color: color.scale(
-  $link-color,
-  $lightness: -15%
-) !default; // 链接聚焦颜色
-$link-focus-thickness: 2px !default; // 链接聚焦厚度
+$link-color: $primary-color !default;
+$link-hover-color: color.scale($link-color, $lightness: -10%) !default;
+$link-focus-color: $link-hover-color !default;
+$link-focus-thickness: 2px !default;
 
 // 主体样式
-$body-background-color: $background-color !default; // 主体背景颜色
-$body-color: $text-color !default; // 主体文本颜色
-$body-font-family: $font-family-base !default; // 主体字体
-$body-font-size: $font-size-base !default; // 主体字体大小
-$body-line-height: $line-height-base !default; // 主体行高
+$body-background-color: $background-color !default;
+$body-color: $text-color !default;
+$body-font-family: $font-family-base !default;
+$body-font-size: $font-size-base !default;
+$body-line-height: $line-height-base !default;
 
 // 按钮样式
-$btn-bg: #4190ff !default; // 按钮背景色
-$btn-padding-x: 0.75rem !default; // 按钮水平内边距
-$btn-padding-y: 0.375rem !default; // 按钮垂直内边距
-$btn-font-size: $font-size-base !default; // 按钮字体大小
-
-// 大按钮样式变量
-$btn-large-padding-x: 1rem !default; // 大按钮水平内边距
-$btn-large-padding-y: 0.5rem !default; // 大按钮垂直内边距
-$btn-large-font-size: $font-size-large !default; // 大按钮字体大小
-
-// 小按钮样式变量
-$btn-small-padding-x: 0.5rem !default; // 小按钮水平内边距
-$btn-small-padding-y: 0.25rem !default; // 小按钮垂直内边距
-$btn-small-font-size: $font-size-small !default; // 小按钮字体大小
-
-$btn-font-weight: $font-weight-normal !default; // 按钮字体粗细
-$btn-line-height: $line-height-base !default; // 按钮行高
-$btn-border-radius: 0.25rem !default; // 按钮圆角
-$btn-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 按钮阴影
-$btn-border-width: 1px !default; // 按钮边框宽度
-
-$btn-disabled-bg: $secondary-color !default; // 禁用按钮背景色
-$btn-disabled-opacity: 0.65 !default; // 禁用按钮透明度
-
-$btn-danger-bg: $danger !default; // 危险按钮背景色
-$btn-danger-border: $danger !default; // 危险按钮边框色
-$btn-danger-color: $neutral-black !default; // 危险按钮文字颜色
-$btn-danger-hover-bg: color.scale(
-  $btn-danger-bg,
-  $lightness: -10%
-) !default; // 危险按钮悬停背景色
-$btn-danger-hover-border: color.scale(
-  $btn-danger-border,
-  $lightness: -10%
-) !default; // 危险按钮悬停边框色
-
-$btn-hover-bg: color.scale($btn-bg, $lightness: 15%) !default; // 按钮悬停背景色
-$btn-hover-border: color.scale(
-  $btn-bg,
-  $lightness: 15%
-) !default; // 按钮悬停边框色
-$btn-hover-color: $neutral-black !default; // 按钮悬停文字颜色
-
-$btn-link-color: $neutral-dark !default; // 链接按钮文字颜色
+$btn-bg: $primary-color !default;
+$btn-text-color: #ffffff !default;
+$btn-padding-x: 12px !default;
+$btn-padding-y: 5px !default;
+$btn-font-size: $font-size-base !default;
+$btn-font-weight: $font-weight-medium !default;
+$btn-line-height: $line-height-base !default;
+$btn-border-radius: 6px !default;
+$btn-border-width: 1px !default;
 $btn-transition: all 0.15s ease-in-out !default;
 
-//Menu样式变量
-$menu-bg: $primary-color !default; // 菜单背景色
-$menu-font-size: $font-size-base !default; // 菜单字体大小
-$menu-border-color: $neutral-light-gray !default; // 菜单边框颜色
-$menu-border-width: 3px !default; // 菜单边框宽度
-$menu-box-shadow: 0 0.125rem 0.25rem rgba($neutral-black, 0.1) !default; // 菜单阴影
-$menu-hover-border: color.scale(
-  $menu-bg,
-  $lightness: -10%
-) !default; // 菜单悬停边框色
-$menu-transition: all 0.15s ease-in-out !default; // 菜单过渡效果
-$menu-border-radius: 0.25rem !default; // 菜单项圆角
+// 大按钮样式变量
+$btn-large-padding-x: 16px !default;
+$btn-large-padding-y: 8px !default;
+$btn-large-font-size: $font-size-lg !default;
 
-//Menu-item样式变量
-$menu-item-padding-x: 1rem !default; // 菜单项水平内边距
-$menu-item-padding-y: 0.5rem !default; // 菜单项垂直内边距
-$menu-item-color: $primary-color !default; // 菜单项颜色
-$menu-item-active-color: $primary-color !default; // 菜单项激活颜色
-$menu-item-disabled-color: $neutral-gray !default; // 菜单项禁用颜色
-$menu-item-hover-color: $primary-color !default; // 菜单项悬停颜色
-$menu-item-hover-bg: #e6f4ff; // 菜单项悬停背景色
+// 小按钮样式变量
+$btn-small-padding-x: 8px !default;
+$btn-small-padding-y: 4px !default;
+$btn-small-font-size: $font-size-sm !default;
+
+// 按钮变体
+$btn-secondary-bg: transparent !default;
+$btn-secondary-border: $neutral-gray !default;
+$btn-secondary-text: $text-color !default;
+$btn-secondary-hover-bg: $neutral-light !default;
+
+$btn-danger-bg: $danger !default;
+$btn-danger-border: $danger !default;
+$btn-danger-text: #ffffff !default;
+$btn-danger-hover-bg: color.scale($btn-danger-bg, $lightness: -8%) !default;
+$btn-danger-hover-border: $btn-danger-hover-bg !default;
+
+$btn-hover-bg: color.scale($btn-bg, $lightness: -8%) !default;
+$btn-hover-border: $btn-hover-bg !default;
+$btn-hover-text: $btn-text-color !default;
+
+$btn-disabled-bg: $neutral-light !default;
+$btn-disabled-border: $neutral-gray !default;
+$btn-disabled-text: $text-tertiary !default;
+$btn-disabled-opacity: 0.6 !default;
+
+// 输入框样式
+$input-bg: $background-color !default;
+$input-border: $neutral-gray !default;
+$input-border-hover: $border-color-hover !default;
+$input-border-focus: $primary-color !default;
+$input-text-color: $text-color !default;
+$input-placeholder-color: $text-tertiary !default;
+$input-radius: 6px !default;
+$input-padding-x: 8px !default;
+$input-padding-y: 6px !default;
+$input-height: 32px !default;
+
+// 卡片样式
+$card-bg: $background-subtle !default;
+$card-border: $border-color !default;
+$card-radius: 6px !default;
+$card-padding: 16px !default;
+
+// 菜单样式
+$menu-bg: $background-color !default;
+$menu-border-color: $border-color !default;
+$menu-font-size: $font-size-base !default;
+$menu-hover-bg: $neutral-light !default;
+$menu-active-bg: $info-bg !default;
+$menu-active-color: $primary-color !default;
+$menu-item-padding-x: 12px !default;
+$menu-item-padding-y: 8px !default;
+$menu-transition: all 0.15s ease-in-out !default;
+$menu-item-color: $text-color !default;
+$menu-item-disabled-color: $text-tertiary !default;
+$menu-item-hover-bg: $neutral-light !default;
+
+// 间距
+$space-xs: 4px !default;
+$space-sm: 8px !default;
+$space-md: 16px !default;
+$space-lg: 24px !default;
+$space-xl: 32px !default;
+$space-2xl: 48px !default;
+
+// 圆角
+$radius-sm: 4px !default;
+$radius-md: 6px !default;
+$radius-lg: 8px !default;
+
+// 阴影（仅用于悬浮状态）
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08) !default;
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1) !default;
+
+// Menu 组件扩展变量
+$menu-border-radius: $radius-md !default;
+$menu-box-shadow: $shadow-sm !default;

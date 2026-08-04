@@ -28,6 +28,10 @@ export interface ButtonProps {
   disabled?: boolean
   /** Custom CSS class name */
   className?: string
+  /** Inline styles */
+  style?: React.CSSProperties
+  /** HTML type attribute */
+  htmlType?: 'button' | 'submit' | 'reset'
 
   href?: string
 

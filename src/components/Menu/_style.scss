@@ -1,11 +1,11 @@
-@use '../../styles/variables' as *;
+@use '../../styles/_variables.scss' as *;
 @use 'sass:color';
 
 // 原始菜单
 .forge-menu {
   list-style: none;
   padding-left: 0;
-  margin-bottom: 30px;
+  margin-bottom: 0;
   font-size: $menu-font-size;
   color: $menu-item-color;
   box-shadow: $menu-box-shadow;
@@ -22,7 +22,7 @@
     }
 
     &.is-active {
-      color: $menu-item-active-color;
+      color: $menu-active-color;
     }
   }
 
@@ -73,7 +73,7 @@
       }
 
       &.is-active {
-        color: $menu-item-active-color;
+        color: $menu-active-color;
       }
       &.is-disabled {
         color: $menu-item-disabled-color;
@@ -89,11 +89,12 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
 
   > .menu-item {
     &:hover,
     &:focus {
-      border-bottom: 2px solid $menu-item-active-color;
+      border-bottom: 2px solid $menu-active-color;
       margin-bottom: -2px;
     }
   }
@@ -121,7 +122,7 @@
   > .menu-item {
     &:hover,
     &:focus {
-      border-left: 2px solid $menu-item-active-color;
+      border-left: 2px solid $menu-active-color;
       margin-left: -2px;
     }
   }

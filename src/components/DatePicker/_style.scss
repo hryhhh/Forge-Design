@@ -1,0 +1,247 @@
+@use '../../styles/_variables.scss' as *;
+@use 'sass:color';
+
+// DatePicker 容器
+.forge-datepicker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  max-width: 240px;
+
+  &--disabled {
+    .forge-datepicker-input {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--open {
+    .forge-datepicker-wrapper {
+      border-color: #8fc3fb;
+      box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
+    }
+  }
+
+  // 尺寸
+  &--large {
+    .forge-datepicker-input {
+      height: 40px;
+      padding: 9px 11px;
+      font-size: 16px;
+    }
+  }
+
+  &--small {
+    .forge-datepicker-input {
+      height: 24px;
+      padding: 1px 7px;
+      font-size: 12px;
+    }
+  }
+}
+
+// 附加元素
+.forge-datepicker-addon {
+  display: flex;
+  align-items: center;
+  padding: 0 11px;
+  background-color: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  border-right: 0;
+  border-radius: 6px 0 0 6px;
+  color: #9ca3af;
+}
+
+// 包装器
+.forge-datepicker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #8fc3fb;
+  }
+
+  &:focus-within {
+    border-color: #8fc3fb;
+    box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
+  }
+}
+
+// 输入框
+.forge-datepicker-input {
+  flex: 1;
+  height: 32px;
+  padding: 5px 11px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  width: 100%;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+
+  &:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
+}
+
+// 前缀
+.forge-datepicker-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-right: 1px solid #d9d9d9;
+  color: #9ca3af;
+}
+
+// 后缀
+.forge-datepicker-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: #9ca3af;
+}
+
+// 清除按钮
+.forge-datepicker-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 16px;
+  line-height: 1;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+// 图标
+.forge-datepicker-icon {
+  fill: currentColor;
+}
+
+// 下拉面板
+.forge-datepicker-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  min-width: 280px;
+}
+
+// 日历面板
+.forge-datepicker-panel {
+  width: 100%;
+}
+
+// 头部
+.forge-datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.forge-datepicker-prev,
+.forge-datepicker-next {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: #666;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #f5f5f5;
+    color: #8fc3fb;
+  }
+}
+
+.forge-datepicker-month {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+// 星期
+.forge-datepicker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.forge-datepicker-weekday {
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 8px 0;
+}
+
+// 日期网格
+.forge-datepicker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.forge-datepicker-day {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #f0f7ff;
+    color: #8fc3fb;
+  }
+
+  &-disabled {
+    color: #d9d9d9;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      color: #d9d9d9;
+    }
+  }
+
+  &-selected {
+    background-color: #8fc3fb;
+    color: #fff;
+
+    &:hover {
+      background-color: #8fc3fb;
+      color: #fff;
+    }
+  }
+
+  &-today {
+    &.forge-datepicker-day:not(.forge-datepicker-day-selected) {
+      color: #8fc3fb;
+      font-weight: 600;
+    }
+  }
+}

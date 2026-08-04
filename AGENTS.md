@@ -295,3 +295,119 @@ peerDependencies（react/react-dom）在 Rollup 中被 external，产物不内�
 - [ ] Form 组件补全（FormItem 子组件、样式）
 - [ ] NestJS 后端搭建（server/）
 - [ ] 后端 API 对接前端组件
+
+---
+
+## 设计指南（Design Guidelines）
+
+> 基于 Apple Human Interface Guidelines，参考 Linear、GitHub、Vercel 的设计语言。
+
+### 核心原则
+
+1. **可用性** — 功能优先，交互直观，减少认知负担
+2. **信息层级** — 通过字号、字重、颜色区分内容重要性
+3. **一致性** — 统一的间距、圆角、阴影、色彩系统
+4. **视觉品质** — 精致但不张扬，专业但不冰冷
+
+### 设计准则
+
+#### ✅ 应该做的
+
+- **干净的排版** — 使用系统字体栈，合理的字号层级，足够的行高
+- **充足的留白** — 元素之间保持呼吸感，不要堆砌内容
+- **中性色彩** — 以灰度为主，用色彩仅标识状态和重要操作
+- **微妙的边框** — 用 1px 边框区分层级，而非阴影
+- **克制的动画** — 仅用于状态转换，时长 150-200ms，使用 ease-out
+- **简洁的布局** — 单列优先，避免过度分块
+
+#### ❌ 禁止的
+
+- **渐变** — 不使用 background: linear-gradient()
+- **毛玻璃** — 不使用 backdrop-filter: blur()
+- **霓虹色** — 不使用高饱和度、高亮度的颜色
+- **过度卡片化** — 不要每个区域都套卡片边框
+- **AI 装饰** — 不使用星点、光晕、抽象图形等"AI 感"装饰
+- **营销大字** — Hero 标题不要超过 2 行，避免夸张文案
+
+### 色彩系统
+
+```
+// 中性色（Primary）
+--color-bg: #ffffff
+--color-bg-subtle: #fafbfc
+--color-border: #eaeaea
+--color-border-hover: #0969da
+--color-text: #24292e
+--color-text-secondary: #6a737d
+--color-text-tertiary: #9ca3af
+
+// 品牌色（仅用于主要操作）
+--color-primary: #0969da
+--color-primary-hover: #0550ae
+
+// 状态色
+--color-success: #1a7f37
+--color-success-bg: #dcffe4
+--color-warning: #9a6700
+--color-warning-bg: #fff8c5
+--color-danger: #cf222e
+--color-danger-bg: #fff0ee
+```
+
+### 间距系统
+
+```
+// 基于 4px 网格
+--space-xs: 4px
+--space-sm: 8px
+--space-md: 16px
+--space-lg: 24px
+--space-xl: 32px
+--space-2xl: 48px
+```
+
+### 圆角与阴影
+
+```
+// 圆角
+--radius-sm: 4px
+--radius-md: 6px
+--radius-lg: 8px
+
+// 阴影（仅用于悬浮状态，不使用在静态元素上）
+--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08)
+--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1)
+```
+
+### 字体系统
+
+```
+// 字体栈
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+// 字号层级
+--text-xs: 12px   // 辅助文字
+--text-sm: 13px   // 次要文字
+--text-base: 14px // 正文
+--text-lg: 16px   // 标题
+--text-xl: 20px   // 页面标题
+--text-2xl: 28px  // Hero 标题（不超过 2 行）
+
+// 字重
+--font-weight-normal: 400
+--font-weight-medium: 500
+--font-weight-semibold: 600
+--font-weight-bold: 700
+```
+
+### 组件设计原则
+
+| 组件 | 设计要点 |
+|------|----------|
+| Button | 扁平设计，边框 1px，圆角 6px，无阴影 |
+| Input | 边框 1px，focus 时边框变色，无内阴影 |
+| Card | 可选边框或背景色，避免同时使用两者 |
+| Table | 行间分隔线，悬浮行高亮 |
+| Modal | 居中弹出，背景遮罩，圆角 8px |
+
+---

@@ -11,6 +11,8 @@ const Button: React.FC<ButtonProps> = props => {
     disabled = false,
     href,
     className,
+    style,
+    htmlType = 'button',
     ...restProps
   } = props
 
@@ -27,22 +29,19 @@ const Button: React.FC<ButtonProps> = props => {
     const anchorRestProps =
       restProps as React.AnchorHTMLAttributes<HTMLAnchorElement>
     return (
-      <a className={classes} href={href} {...anchorRestProps}>
+      <a className={classes} href={href} style={style} {...anchorRestProps}>
         {children}
       </a>
     )
   } else {
     const buttonRestProps =
       restProps as React.ButtonHTMLAttributes<HTMLButtonElement>
-    let buttonType: 'submit' | 'reset' | 'button' = 'button'
-    if (type === 'primary') {
-      buttonType = 'button'
-    }
     return (
       <button
         className={classes}
-        type={buttonType}
+        type={htmlType as 'submit' | 'reset' | 'button'}
         disabled={disabled}
+        style={style}
         {...buttonRestProps}
       >
         {children}

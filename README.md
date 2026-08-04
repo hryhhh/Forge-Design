@@ -7,30 +7,30 @@
 ![React](https://img.shields.io/badge/react-^19.1.0-61dafb)
 ![TypeScript](https://img.shields.io/badge/typescript-~5.7.2-3178c6)
 
-**A modern React component library for building enterprise-grade applications**
+**面向现代 React 应用的企业级 UI 组件库**
 
-[📖 Documentation](https://hryhhh.github.io/Forge-Design) ·
+[📖 文档](https://hryhhh.github.io/Forge-Design) ·
 [🎨 Storybook](https://hryhhh.github.io/Forge-Design) ·
 [📦 npm](https://www.npmjs.com/package/forge-design) ·
-[🐛 Issues](https://github.com/hryhhh/Forge-Design/issues)
+[🐛 问题反馈](https://github.com/hryhhh/Forge-Design/issues)
 
 </div>
 
 ---
 
-## ✨ Features
+## ✨ 特性
 
-- 🎨 **TypeScript First** — Full type coverage with strict mode
-- 🧩 **Composable Components** — Flexible and extensible component architecture
-- 🧪 **Well Tested** — Jest + Testing Library for unit tests
-- 📖 **Storybook Docs** — Interactive documentation and examples
-- 📦 **Tree-shakeable** — Optimized bundle with Rollup
-- 🌙 **SCSS Styles** — Modular CSS with customizable themes
-- ⚡ **Vite Powered** — Fast development with HMR
+- 🎨 **TypeScript 优先** — 完整的类型定义，严格的编译检查
+- 🧩 **可组合组件** — 灵活可扩展的组件架构设计
+- 🧪 **测试覆盖** — Jest + Testing Library 单元测试保障质量
+- 📖 **Storybook 文档** — 交互式文档与示例
+- 📦 **Tree-shakeable** — Rollup 优化打包，按需引入
+- 🌙 **SCSS 样式** — 模块化 CSS，支持主题定制
+- ⚡ **Vite 驱动** — 快速开发体验，支持 HMR
 
 ---
 
-## 📦 Installation
+## 📦 安装
 
 ```bash
 # npm
@@ -43,7 +43,7 @@ yarn add forge-design
 pnpm add forge-design
 ```
 
-**Peer Dependencies:**
+**Peer Dependencies（需自行安装）：**
 
 ```json
 {
@@ -54,7 +54,7 @@ pnpm add forge-design
 
 ---
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
 ```tsx
 import { Button, Menu, Upload } from 'forge-design';
@@ -63,12 +63,12 @@ import 'forge-design/style.css';
 function App() {
   return (
     <div>
-      <Button type="primary">Primary Button</Button>
-      <Button size="small">Small Button</Button>
+      <Button type="primary">主要按钮</Button>
+      <Button size="small">小按钮</Button>
       
       <Menu mode="horizontal">
-        <Menu.Item index="0">Home</Menu.Item>
-        <Menu.Item index="1">About</Menu.Item>
+        <Menu.Item index="0">首页</Menu.Item>
+        <Menu.Item index="1">关于</Menu.Item>
       </Menu>
 
       <Upload action="/api/upload" />
@@ -79,66 +79,66 @@ function App() {
 
 ---
 
-## 📚 Components
+## 📚 组件
 
 ### Button
 
-A versatile button component supporting multiple styles and sizes.
+多功能按钮组件，支持多种样式和尺寸。
 
-| Prop       | Type                                    | Default    | Description          |
-| ---------- | --------------------------------------- | ---------- | -------------------- |
-| `type`     | `'primary' \| 'secondary' \| 'danger' \| 'link'` | `'primary'` | Button type          |
-| `size`     | `'large' \| 'medium' \| 'small'`        | `'medium'` | Button size          |
-| `disabled` | `boolean`                               | `false`    | Disabled state       |
-| `href`     | `string`                                | `-`        | Link URL (for link type) |
-| `className`| `string`                                | `-`        | Custom CSS class     |
+| 属性       | 类型                                          | 默认值      | 说明                |
+| ---------- | --------------------------------------------- | ----------- | ------------------- |
+| `type`     | `'primary' \| 'secondary' \| 'danger' \| 'link'` | `'primary'` | 按钮类型            |
+| `size`     | `'large' \| 'medium' \| 'small'`              | `'medium'`  | 按钮尺寸            |
+| `disabled` | `boolean`                                     | `false`     | 是否禁用            |
+| `href`     | `string`                                      | `-`         | 链接地址（link 类型） |
+| `className`| `string`                                      | `-`         | 自定义样式类名      |
 
 ```tsx
 import { Button } from 'forge-design';
 
 <>
-  <Button type="primary">Primary</Button>
-  <Button type="secondary">Secondary</Button>
-  <Button type="danger">Danger</Button>
-  <Button type="link" href="https://example.com">Link</Button>
-  <Button size="large">Large</Button>
-  <Button size="small">Small</Button>
-  <Button disabled>Disabled</Button>
+  <Button type="primary">主要</Button>
+  <Button type="secondary">次要</Button>
+  <Button type="danger">危险</Button>
+  <Button type="link" href="https://example.com">链接</Button>
+  <Button size="large">大型</Button>
+  <Button size="small">小型</Button>
+  <Button disabled>禁用</Button>
 </>
 ```
 
 ### Menu
 
-Navigation menu supporting horizontal and vertical layouts with nested submenus.
+导航菜单组件，支持水平和垂直布局，支持嵌套子菜单。
 
-| Prop               | Type                                      | Default         | Description              |
-| ------------------ | ----------------------------------------- | --------------- | ------------------------ |
-| `mode`             | `'horizontal' \| 'vertical'`              | `'horizontal'`  | Menu layout mode         |
-| `defaultIndex`     | `string`                                  | `'0'`           | Default active item      |
-| `defaultOpenSubMenus` | `string[]`                             | `[]`            | Default open submenus    |
-| `onSelect`         | `(index: string) => void`                 | `-`             | Callback on item select  |
+| 属性                    | 类型                     | 默认值         | 说明              |
+| ----------------------- | ------------------------ | -------------- | ----------------- |
+| `mode`                  | `'horizontal' \| 'vertical'` | `'horizontal'` | 菜单布局模式      |
+| `defaultIndex`          | `string`                 | `'0'`          | 默认激活项        |
+| `defaultOpenSubMenus`   | `string[]`               | `[]`           | 默认展开的子菜单  |
+| `onSelect`              | `(index: string) => void`| `-`            | 选中项回调        |
 
 ```tsx
 import { Menu } from 'forge-design';
 
 <Menu mode="horizontal" defaultIndex="0">
-  <Menu.Item index="0">Home</Menu.Item>
-  <Menu.SubMenu title="Products">
-    <Menu.Item index="1">Product 1</Menu.Item>
-    <Menu.Item index="2">Product 2</Menu.Item>
+  <Menu.Item index="0">首页</Menu.Item>
+  <Menu.SubMenu title="产品">
+    <Menu.Item index="1">产品一</Menu.Item>
+    <Menu.Item index="2">产品二</Menu.Item>
   </Menu.SubMenu>
 </Menu>
 ```
 
 ### Upload
 
-File upload component with drag & drop support, progress tracking, and preview.
+文件上传组件，支持拖拽上传、进度显示和预览功能。
 
-| Prop         | Type                              | Default | Description                    |
-| ------------ | --------------------------------- | ------- | ------------------------------ |
-| `action`     | `string \| () => string`          | `-`     | Upload endpoint URL            |
-| `cancelToken`| `AbortController`                 | `-`     | Token for canceling upload     |
-| `onProgress` | `(percent: number) => void`       | `-`     | Progress callback              |
+| 属性         | 类型                          | 默认值 | 说明                |
+| ------------ | ----------------------------- | ------ | ------------------- |
+| `action`     | `string \| () => string`      | `-`    | 上传接口地址        |
+| `cancelToken`| `AbortController`             | `-`    | 用于取消上传的令牌  |
+| `onProgress` | `(percent: number) => void`   | `-`    | 上传进度回调        |
 
 ```tsx
 import { Upload } from 'forge-design';
@@ -151,14 +151,14 @@ import { Upload } from 'forge-design';
 
 ### Form
 
-Form component supporting controlled and uncontrolled modes with validation.
+表单组件，支持受控和非受控模式，内置表单校验。
 
-| Prop               | Type                    | Default | Description                  |
-| ------------------ | ----------------------- | ------- | ---------------------------- |
-| `initialValues`    | `Record<string, any>`   | `{}`    | Initial form values          |
-| `formValues`       | `Record<string, any>`   | `-`     | Controlled form values       |
-| `onFinish`         | `(values: any) => void` | `-`     | Submit callback              |
-| `rules`            | `FormRule[]`            | `-`     | Validation rules             |
+| 属性              | 类型                    | 默认值 | 说明              |
+| ----------------- | ----------------------- | ------ | ----------------- |
+| `initialValues`   | `Record<string, any>`   | `{}`   | 初始表单值        |
+| `formValues`      | `Record<string, any>`   | `-`    | 受控表单值        |
+| `onFinish`        | `(values: any) => void` | `-`    | 提交成功回调      |
+| `rules`           | `FormRule[]`            | `-`    | 校验规则          |
 
 ```tsx
 import { Form } from 'forge-design';
@@ -167,74 +167,93 @@ import { Form } from 'forge-design';
   initialValues={{ name: '', email: '' }}
   onFinish={(values) => console.log(values)}
   rules={[
-    { name: 'name', rules: [{ required: true, message: 'Name is required' }] },
+    { name: 'name', rules: [{ required: true, message: '请输入姓名' }] },
     { name: 'email', rules: [{ required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }] }
   ]}
 >
-  {/* Form fields */}
+  {/* 表单项 */}
 </Form>
 ```
 
 ---
 
-## 🛠️ Development
+## 🛠️ 开发指南
 
-### Prerequisites
+### 环境要求
 
 - Node.js >= 20.0.0
 - npm >= 9.0.0
 
-### Setup
+### 本地开发
 
 ```bash
-# Clone repository
+# 克隆项目
 git clone https://github.com/hryhhh/Forge-Design.git
 cd Forge-Design
 
-# Install dependencies
+# 安装依赖
 npm install
 
-# Start Storybook
+# 启动 Storybook
 npm run storybook
 
-# Run tests
+# 运行测试
 npm test
 
-# Build library
+# 构建项目
 npm run build
 ```
 
-### Available Scripts
+### 可用脚本
 
-| Script              | Description                           |
-| ------------------- | ------------------------------------- |
-| `npm run dev`       | Start Vite dev server                 |
-| `npm run build`     | Build library and Storybook           |
-| `npm run build-rollup` | Build library only (ES + CJS)      |
-| `npm run build-storybook` | Build Storybook static site     |
-| `npm run test`      | Run Jest test suite                   |
-| `npm run storybook` | Start Storybook dev server            |
-| `npm run lint`      | Run ESLint with auto-fix              |
-| `npm run format`    | Format code with Prettier             |
-| `npm run docs`      | Generate TypeDoc documentation        |
-
----
-
-## 🏗️ Tech Stack
-
-| Category     | Technology                           |
-| ------------ | ------------------------------------ |
-| Framework    | React 19 + TypeScript 5.7            |
-| Build        | Rollup (library) + Vite (Storybook)  |
-| Styling      | SCSS + CSS Modules                   |
-| Testing      | Jest + Testing Library               |
-| Docs         | Storybook 9 + TypeDoc                |
-| Quality      | ESLint + Prettier + Husky            |
-| CI/CD        | GitHub Actions                       |
+| 命令                       | 说明                       |
+| -------------------------- | -------------------------- |
+| `npm run dev`              | 启动 Vite 开发服务器       |
+| `npm run build`            | 构建生产版本               |
+| `npm run build-rollup`     | 仅构建组件库（ES + CJS）   |
+| `npm run build-storybook`  | 构建 Storybook 静态站点    |
+| `npm run test`             | 运行 Jest 测试套件         |
+| `npm run storybook`        | 启动 Storybook 开发服务器  |
+| `npm run lint`             | ESLint 检查并自动修复      |
+| `npm run format`           | Prettier 格式化代码        |
+| `npm run docs`             | 生成 TypeDoc 文档          |
 
 ---
 
-## 📄 License
+## 🏗️ 技术栈
+
+| 类别       | 技术                               |
+| ---------- | ---------------------------------- |
+| 框架       | React 19 + TypeScript 5.7          |
+| 构建       | Rollup（组件库）+ Vite（Storybook）|
+| 样式       | SCSS + CSS Modules                 |
+| 测试       | Jest + Testing Library             |
+| 文档       | Storybook 9 + TypeDoc              |
+| 代码质量   | ESLint + Prettier + Husky          |
+| CI/CD      | GitHub Actions                     |
+
+---
+
+## 🤝 贡献指南
+
+欢迎各种形式的贡献！请遵循以下步骤：
+
+1. Fork 本仓库
+2. 创建特性分支（`git checkout -b feature/AmazingFeature`）
+3. 提交更改（`git commit -m 'feat: Add some AmazingFeature'`）
+4. 推送到分支（`git push origin feature/AmazingFeature`）
+5. 打开 Pull Request
+
+### 开发规范
+
+- 遵循 TypeScript 严格模式
+- 所有组件必须有完整的测试覆盖
+- 提交信息遵循 [Conventional Commits](https://conventionalcommits.org/) 规范
+- 代码必须通过 ESLint 和 Prettier 检查
+
+---
+
+## 📄 开源协议
 
 [MIT](LICENSE) © [hryhhh](https://github.com/hryhhh)
 
@@ -242,6 +261,6 @@ npm run build
 
 <div align="center">
 
-**Made with ❤️ by hryhhh**
+**由 hryhhh 用 ❤️ 制作**
 
 </div>

@@ -1,0 +1,312 @@
+@use '../../styles/_variables.scss' as *;
+@use 'sass:color';
+
+// Select 容器
+.forge-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  &--open {
+    .forge-select-selection {
+      border-color: #8fc3fb;
+      box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
+    }
+  }
+
+  &--focused {
+    .forge-select-selection {
+      border-color: #8fc3fb;
+      box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
+    }
+  }
+
+  // 尺寸
+  &--large {
+    .forge-select-selection {
+      height: 40px;
+      padding: 5px 11px;
+    }
+  }
+
+  &--small {
+    .forge-select-selection {
+      height: 24px;
+      padding: 1px 7px;
+    }
+  }
+}
+
+// 选择区域
+.forge-select-selection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 32px;
+  padding: 4px 11px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  min-height: 32px;
+
+  &:hover {
+    border-color: color.scale(#8fc3fb, $lightness: 10%);
+  }
+
+  &:focus {
+    border-color: #8fc3fb;
+    box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
+  }
+
+  &--disabled {
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+    cursor: not-allowed;
+  }
+}
+
+// Tags 展示区
+.forge-select-selection-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  gap: 4px;
+}
+
+// Tag 样式
+.forge-select-selection-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  height: 22px;
+  font-size: 12px;
+  line-height: 20px;
+  background-color: #f0f5ff;
+  border: 1px solid #adc6ff;
+  border-radius: 4px;
+  white-space: nowrap;
+  user-select: none;
+
+  &--disabled {
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+    color: #bfbfbf;
+  }
+
+  &--more {
+    padding: 1px 7px;
+    background-color: #f5f5f5;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    color: #666;
+  }
+
+  &-content {
+    color: #333;
+  }
+
+  &-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    color: #bfbfbf;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #666;
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+// 占位符
+.forge-select-selection-placeholder {
+  flex: 1;
+  color: #bfbfbf;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 搜索框
+.forge-select-selection-search {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+
+  &::placeholder {
+    color: #bfbfbf;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+
+  &--hidden {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+// Clear 按钮
+.forge-select-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #bfbfbf;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #666;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+// 箭头
+.forge-select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bfbfbf;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+
+  &--open {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}
+
+// Suffix
+.forge-select-suffix {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+
+// 下拉菜单
+.forge-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  min-width: 100%;
+  max-height: 256px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+// 选项
+.forge-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 11px;
+  height: 28px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &--active {
+    background-color: #e6f4ff;
+  }
+
+  &--selected {
+    color: #8fc3fb;
+    font-weight: 500;
+  }
+
+  &--disabled {
+    color: #bfbfbf;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &--loading,
+  &--empty {
+    color: #bfbfbf;
+    text-align: center;
+    cursor: default;
+  }
+
+  &-content {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-checked {
+    color: #8fc3fb;
+    display: flex;
+    align-items: center;
+  }
+}
+
+// 分组
+.forge-select-group {
+  &-title {
+    padding: 6px 11px;
+    font-size: 12px;
+    color: #999;
+    background-color: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &-options {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}

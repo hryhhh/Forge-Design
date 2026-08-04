@@ -6,3 +6,13 @@
 @use '../components/Menu/style.scss' as *;
 
 @use '../components/Upload/style.scss' as *;
+
+@use '../components/Input/_style.scss' as *;
+
+@use '../components/Select/_style.scss' as *;
+
+@use '../components/Radio/_style.scss' as *;
+@use '../components/Checkbox/_style.scss' as *;
+@use '../components/Switch/_style.scss' as *;
+@use '../components/TimePicker/_style.scss' as *;
+@use '../components/DatePicker/_style.scss' as *;

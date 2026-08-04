@@ -7,6 +7,7 @@ export const FormContext = createContext<{
   touched: FormValues
   onValueChange: (name: string, value: any) => void
   onSubmit: (e: React.FormEvent) => void
+  layout?: 'horizontal' | 'vertical' | 'inline'
 }>({
   values: {},
   errors: {},

@@ -1,0 +1,274 @@
+@use '../../styles/_variables.scss' as *;
+@use 'sass:color';
+
+// Radio 容器
+.forge-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: #333;
+  user-select: none;
+  margin-right: 8px;
+  white-space: nowrap;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &--large {
+    font-size: 16px;
+    padding: 4px 0;
+  }
+
+  &--small {
+    font-size: 12px;
+    padding: 2px 0;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  &--checked {
+    .forge-radio-dot {
+      border-color: #8fc3fb;
+      background-color: #8fc3fb;
+    }
+  }
+
+  // 按钮模式
+  &-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+    line-height: 1;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-left: 0;
+    transition: all 0.2s;
+
+    &:first-child {
+      border-left: 1px solid #d9d9d9;
+      border-radius: 6px 0 0 6px;
+    }
+
+    &:last-child {
+      border-radius: 0 6px 6px 0;
+    }
+
+    &:hover {
+      color: #8fc3fb;
+    }
+
+    &.forge-radio--checked {
+      color: #fff;
+      background-color: #8fc3fb;
+      border-color: #8fc3fb;
+      z-index: 1;
+    }
+
+    &.forge-radio--disabled {
+      cursor: not-allowed;
+      color: #bfbfbf;
+      background-color: #f5f5f5;
+      border-color: #d9d9d9;
+    }
+
+    // 尺寸
+    .forge-radio--large & {
+      height: 40px;
+      padding: 0 20px;
+      font-size: 16px;
+    }
+
+    .forge-radio--small & {
+      height: 24px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+// Radio 输入框（隐藏）
+.forge-radio-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+
+  &:focus + .forge-radio-dot {
+    border-color: #8fc3fb;
+    box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
+  }
+}
+
+// Radio 圆点
+.forge-radio-dot {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: all 0.2s;
+  flex-shrink: 0;
+
+  // 尺寸
+  .forge-radio--large & {
+    width: 18px;
+    height: 18px;
+  }
+
+  .forge-radio--small & {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// 选中状态圆点
+.forge-radio--checked .forge-radio-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.forge-radio--large.forge-radio--checked .forge-radio-dot::after {
+  width: 10px;
+  height: 10px;
+}
+
+.forge-radio--small.forge-radio--checked .forge-radio-dot::after {
+  width: 6px;
+  height: 6px;
+}
+
+// 禁用状态
+.forge-radio--disabled .forge-radio-dot {
+  border-color: #d9d9d9;
+  background-color: #f5f5f5;
+}
+
+.forge-radio--disabled.forge-radio--checked .forge-radio-dot::after {
+  background-color: #bfbfbf;
+}
+
+// 标签
+.forge-radio-label {
+  margin-left: 6px;
+  line-height: 1;
+}
+
+// Radio Group 容器
+.forge-radio-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  &--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  &--button {
+    display: inline-flex;
+    border-radius: 6px;
+    overflow: hidden;
+
+    .forge-radio {
+      margin-right: 0;
+      border-radius: 0;
+    }
+
+    .forge-radio-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      height: 32px;
+      padding: 0 15px;
+      font-size: 14px;
+      line-height: 1;
+      color: #333;
+      background-color: #fff;
+      border: 1px solid #d9d9d9;
+      border-left: 0;
+      transition: all 0.2s;
+
+      &:first-child {
+        border-left: 1px solid #d9d9d9;
+        border-radius: 6px 0 0 6px;
+      }
+
+      &:last-child {
+        border-radius: 0 6px 6px 0;
+      }
+
+      &:hover {
+        color: #8fc3fb;
+      }
+
+      &.forge-radio--checked {
+        color: #fff;
+        background-color: #8fc3fb;
+        border-color: #8fc3fb;
+        z-index: 1;
+      }
+
+      &.forge-radio--disabled {
+        cursor: not-allowed;
+        color: #bfbfbf;
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+      }
+    }
+  }
+
+  &--large {
+    .forge-radio-button {
+      height: 40px;
+      padding: 0 20px;
+      font-size: 16px;
+    }
+  }
+
+  &--small {
+    .forge-radio-button {
+      height: 24px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+// 禁用状态
+.forge-radio-group--disabled {
+  .forge-radio {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}
