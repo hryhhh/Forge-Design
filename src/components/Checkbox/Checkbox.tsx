@@ -33,12 +33,18 @@ const CheckboxGroupInner: React.FC<CheckboxGroupProps> = props => {
   const currentValue = isControlled ? value : internalValue
 
   const handleChange = useCallback(
-    (newValue: string | number, checked: boolean, e: React.ChangeEvent<HTMLInputElement>) => {
+    (
+      newValue: string | number,
+      checked: boolean,
+      e: React.ChangeEvent<HTMLInputElement>
+    ) => {
       let newValueArray: (string | number)[]
       if (checked) {
         newValueArray = [...currentValue, newValue]
       } else {
-        newValueArray = currentValue.filter((v: string | number) => v !== newValue)
+        newValueArray = currentValue.filter(
+          (v: string | number) => v !== newValue
+        )
       }
       if (!isControlled) {
         setInternalValue(newValueArray)
@@ -61,21 +67,31 @@ const CheckboxGroupInner: React.FC<CheckboxGroupProps> = props => {
     if (options) return options
     const items: CheckboxOption[] = []
     if (children) {
-      React.Children.forEach(children, (child) => {
+      React.Children.forEach(children, (child: React.ReactNode) => {
         if (React.isValidElement(child)) {
-          items.push({
-            value: child.props.value,
-            label: child.props.label ?? child.props.value,
-            disabled: child.props.disabled,
-          })
+          const childProps = child.props as {
+            value?: string | number
+            label?: React.ReactNode
+            disabled?: boolean
+          }
+          const value = childProps.value
+          if (value !== undefined) {
+            items.push({
+              value,
+              label: childProps.label ?? value,
+              disabled: childProps.disabled,
+            })
+          }
         }
       })
     }
     return items
   }, [options, children])
 
-  const directionClass = direction === 'vertical' ? 'forge-checkbox-group--vertical' : ''
-  const typeClass = optionType === 'button' ? 'forge-checkbox-group--button' : ''
+  const directionClass =
+    direction === 'vertical' ? 'forge-checkbox-group--vertical' : ''
+  const typeClass =
+    optionType === 'button' ? 'forge-checkbox-group--button' : ''
 
   return (
     <div
@@ -93,49 +109,51 @@ const CheckboxGroupInner: React.FC<CheckboxGroupProps> = props => {
       role="group"
       aria-disabled={disabled}
     >
-      {optionItems.length > 0 ? (
-        optionItems.map((item: CheckboxOption, index: number) => {
-          const isChecked = currentValue.includes(item.value)
-          const isDisabled = item.disabled || disabled
-          return (
-            <label
-              key={item.value}
-              className={classNames(
-                'forge-checkbox',
-                { 'forge-checkbox--large': size === 'large' },
-                { 'forge-checkbox--small': size === 'small' },
-                optionType === 'button' ? 'forge-checkbox-button' : '',
-                { 'forge-checkbox--disabled': isDisabled },
-                { 'forge-checkbox--checked': isChecked }
-              )}
-            >
-              <input
-                type="checkbox"
-                className="forge-checkbox-input"
-                checked={isChecked}
-                disabled={isDisabled}
-                readOnly={readOnly}
-                autoFocus={autoFocus && index === 0}
-                name={name}
-                data-testid={String(item.value)}
-                onChange={(e) => handleChange(item.value, e.target.checked, e)}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-              />
-              <span className="forge-checkbox-box" />
-              <span className="forge-checkbox-label">{item.label ?? item.value}</span>
-            </label>
-          )
-        })
-      ) : (
-        children
-      )}
+      {optionItems.length > 0
+        ? optionItems.map((item: CheckboxOption, index: number) => {
+            const isChecked = currentValue.includes(item.value)
+            const isDisabled = item.disabled || disabled
+            return (
+              <label
+                key={item.value}
+                className={classNames(
+                  'forge-checkbox',
+                  { 'forge-checkbox--large': size === 'large' },
+                  { 'forge-checkbox--small': size === 'small' },
+                  optionType === 'button' ? 'forge-checkbox-button' : '',
+                  { 'forge-checkbox--disabled': isDisabled },
+                  { 'forge-checkbox--checked': isChecked }
+                )}
+              >
+                <input
+                  type="checkbox"
+                  className="forge-checkbox-input"
+                  checked={isChecked}
+                  disabled={isDisabled}
+                  readOnly={readOnly}
+                  autoFocus={autoFocus && index === 0}
+                  name={name}
+                  data-testid={String(item.value)}
+                  onChange={e => handleChange(item.value, e.target.checked, e)}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                />
+                <span className="forge-checkbox-box" />
+                <span className="forge-checkbox-label">
+                  {item.label ?? item.value}
+                </span>
+              </label>
+            )
+          })
+        : children}
     </div>
   )
 }
 
 // 主 Checkbox 组件
-const Checkbox: React.FC<CheckboxProps> & { Group: React.FC<CheckboxGroupProps> } = props => {
+const Checkbox: React.FC<CheckboxProps> & {
+  Group: React.FC<CheckboxGroupProps>
+} = props => {
   const {
     checked,
     defaultChecked = false,
@@ -153,7 +171,8 @@ const Checkbox: React.FC<CheckboxProps> & { Group: React.FC<CheckboxGroupProps> 
     onBlur,
   } = props
 
-  const [internalChecked, setInternalChecked] = useState<boolean>(defaultChecked)
+  const [internalChecked, setInternalChecked] =
+    useState<boolean>(defaultChecked)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const isControlled = checked !== undefined
@@ -170,7 +189,12 @@ const Checkbox: React.FC<CheckboxProps> & { Group: React.FC<CheckboxGroupProps> 
     [isControlled, onChange]
   )
 
-  const sizeClass = size === 'large' ? 'forge-checkbox--large' : size === 'small' ? 'forge-checkbox--small' : ''
+  const sizeClass =
+    size === 'large'
+      ? 'forge-checkbox--large'
+      : size === 'small'
+        ? 'forge-checkbox--small'
+        : ''
 
   return (
     <label
@@ -194,8 +218,8 @@ const Checkbox: React.FC<CheckboxProps> & { Group: React.FC<CheckboxGroupProps> 
         autoFocus={autoFocus}
         name={name}
         onChange={handleChange}
-        onFocus={(e) => onFocus?.(e)}
-        onBlur={(e) => onBlur?.(e)}
+        onFocus={e => onFocus?.(e)}
+        onBlur={e => onBlur?.(e)}
       />
       <span className="forge-checkbox-box" />
       <span className="forge-checkbox-label">{children}</span>

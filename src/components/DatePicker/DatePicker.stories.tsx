@@ -42,7 +42,7 @@ export const Controlled: Story = {
     const [value, setValue] = React.useState<Date | null>(null)
     return (
       <>
-        <DatePicker value={value} onChange={(v) => setValue(v)} />
+        <DatePicker value={value} onChange={v => setValue(v)} />
         <span style={{ marginLeft: 8 }}>{value?.toLocaleDateString()}</span>
       </>
     )
@@ -79,7 +79,7 @@ export const AllowClear: Story = {
 export const DisabledDate: Story = {
   render: () => (
     <DatePicker
-      disabledDate={(current) => current > new Date()}
+      disabledDate={current => current > new Date()}
       placeholder="只能选今天及之前的日期"
     />
   ),
@@ -88,17 +88,19 @@ export const DisabledDate: Story = {
 // 完整示例
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div
+      style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <h3>日期选择</h3>
       <DatePicker placeholder="开始日期" />
       <DatePicker placeholder="结束日期" />
-      
+
       <h3>带格式的日期</h3>
       <DatePicker format="YYYY/MM/DD" placeholder="YYYY/MM/DD" />
-      
+
       <h3>禁用未来的日期</h3>
       <DatePicker
-        disabledDate={(current) => current > new Date()}
+        disabledDate={current => current > new Date()}
         placeholder="只能选今天及之前的日期"
       />
     </div>

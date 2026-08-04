@@ -12,12 +12,12 @@ const Menu: React.FC<MenuProps> = ({
   defaultOpenSubMenus = [],
 }) => {
   const [currentActive, setActive] = useState(defaultIndex)
-  
+
   // 当 defaultIndex 变化时同步 active 状态
   useEffect(() => {
     setActive(defaultIndex)
   }, [defaultIndex])
-  
+
   const classes = classNames('forge-menu', className, {
     'menu-vertical': mode !== 'horizontal',
     'menu-horizontal': mode === 'horizontal',
@@ -32,15 +32,19 @@ const Menu: React.FC<MenuProps> = ({
     mode,
     defaultOpenSubMenus,
   }
-  
+
   // 递归展开 Fragment
   const flattenChildren = (children: React.ReactNode): React.ReactElement[] => {
     const result: React.ReactElement[] = []
-    React.Children.forEach(children, (child) => {
+    React.Children.forEach(children, child => {
       if (React.isValidElement(child)) {
         // 如果是 Fragment，递归展开
         if (child.type === React.Fragment) {
-          result.push(...flattenChildren((child as React.ReactElement<any>).props.children))
+          result.push(
+            ...flattenChildren(
+              (child as React.ReactElement<any>).props.children
+            )
+          )
         } else {
           result.push(child)
         }
@@ -48,18 +52,16 @@ const Menu: React.FC<MenuProps> = ({
     })
     return result
   }
-  
+
   const renderChildren = () => {
     const flattened = flattenChildren(children)
-    return flattened.filter(
-      (child) => {
-        const type = child.type
-        const typeName = (type as any).name || (type as any).displayName
-        return typeName === 'MenuItem' || typeName === 'SubMenu'
-      }
-    )
+    return flattened.filter(child => {
+      const type = child.type
+      const typeName = (type as any).name || (type as any).displayName
+      return typeName === 'MenuItem' || typeName === 'SubMenu'
+    })
   }
-  
+
   return (
     <ul className={classes} data-testid="test-menu">
       <MenuContext.Provider value={passedContext}>

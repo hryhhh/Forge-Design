@@ -47,7 +47,7 @@ export const Controlled: Story = {
   render: () => {
     const [value, setValue] = React.useState('a')
     return (
-      <Radio.Group value={value} onChange={(v) => setValue(v as string)}>
+      <Radio.Group value={value} onChange={v => setValue(v as string)}>
         <Radio value="a">选项A</Radio>
         <Radio value="b">选项B</Radio>
         <Radio value="c">选项C</Radio>
@@ -114,7 +114,9 @@ export const WithDisabled: Story = {
   render: () => (
     <Radio.Group defaultValue="a">
       <Radio value="a">选项A</Radio>
-      <Radio value="b" disabled>选项B（禁用）</Radio>
+      <Radio value="b" disabled>
+        选项B（禁用）
+      </Radio>
       <Radio value="c">选项C</Radio>
     </Radio.Group>
   ),
@@ -138,7 +140,9 @@ export const WithOptions: Story = {
 // 完整示例
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div
+      style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <h3>用户信息</h3>
       <div>
         <span style={{ marginRight: 8 }}>性别：</span>

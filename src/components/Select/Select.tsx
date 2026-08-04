@@ -1,6 +1,19 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo, createContext, useContext } from 'react'
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+  createContext,
+  useContext,
+} from 'react'
 import classNames from 'classnames'
-import { SelectProps, SelectOption, SelectOptionProps, SelectGroupProps } from './types'
+import {
+  SelectProps,
+  SelectOption,
+  SelectOptionProps,
+  SelectGroupProps,
+} from './types'
 import './_style.scss'
 
 // 用于收集 Option 的 Context
@@ -15,15 +28,15 @@ const SelectContext = createContext<{
 // Option 子组件
 const SelectOptionInner: React.FC<SelectOptionProps> = props => {
   const { addOption } = useContext(SelectContext)
-  
+
   useEffect(() => {
-    addOption({ 
-      value: props.value, 
+    addOption({
+      value: props.value,
       label: props.label ?? String(props.value),
-      disabled: props.disabled 
+      disabled: props.disabled,
     })
   }, [props.value, props.label, props.disabled, addOption])
-  
+
   return null
 }
 
@@ -111,7 +124,9 @@ const Select: React.FC<SelectProps> & {
       if (typeof filterOption === 'function') {
         return filterOption(searchValue, option)
       }
-      const propValue = String(option[optionFilterProp] ?? option.label ?? option.value).toLowerCase()
+      const propValue = String(
+        option[optionFilterProp] ?? option.label ?? option.value
+      ).toLowerCase()
       return propValue.includes(searchValue.toLowerCase())
     })
   }, [allOptions, searchValue, showSearch, filterOption, optionFilterProp])
@@ -136,7 +151,10 @@ const Select: React.FC<SelectProps> & {
   const handleBlur = useCallback(() => {
     setFocused(false)
     setTimeout(() => {
-      if (dropdownRef.current && !dropdownRef.current.contains(document.activeElement)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(document.activeElement)
+      ) {
         setOpen(false)
         setSearchValue('')
       }
@@ -154,69 +172,102 @@ const Select: React.FC<SelectProps> & {
   }, [disabled, open])
 
   // 选择选项
-  const handleSelect = useCallback((option: SelectOption) => {
-    if (option.disabled) return
+  const handleSelect = useCallback(
+    (option: SelectOption) => {
+      if (option.disabled) return
 
-    const { value: optValue } = option
+      const { value: optValue } = option
 
-    // 多选或标签模式
-    if (mode === 'multiple' || mode === 'tags') {
-      const currentVals = (isArrayValue ? currentValue : []) as (string | number)[]
-      const newVals = currentVals.includes(optValue)
-        ? currentVals.filter((v: any) => v !== optValue)
-        : [...currentVals, optValue]
+      // 多选或标签模式
+      if (mode === 'multiple' || mode === 'tags') {
+        const currentVals = (isArrayValue ? currentValue : []) as (
+          | string
+          | number
+        )[]
+        const newVals = currentVals.includes(optValue)
+          ? currentVals.filter((v: any) => v !== optValue)
+          : [...currentVals, optValue]
 
-      const newValue = labelInValue
-        ? newVals.map((v: any) => ({ value: v, label: allOptions.find((o: SelectOption) => o.value === v)?.label }))
-        : newVals
+        const newValue = labelInValue
+          ? newVals.map((v: any) => ({
+              value: v,
+              label: allOptions.find((o: SelectOption) => o.value === v)?.label,
+            }))
+          : newVals
 
-      if (!isControlled) setInternalValue(newValue)
-      onChange?.(newValue, option)
-      if (!currentVals.includes(optValue)) {
-        onSelect?.(optValue, option)
+        if (!isControlled) setInternalValue(newValue)
+        onChange?.(newValue, option)
+        if (!currentVals.includes(optValue)) {
+          onSelect?.(optValue, option)
+        } else {
+          onDeselect?.(optValue, option)
+        }
       } else {
-        onDeselect?.(optValue, option)
+        // 单选模式
+        const newValue = labelInValue
+          ? { value: optValue, label: option.label }
+          : optValue
+        if (!isControlled) setInternalValue(newValue)
+        setOpen(false)
+        setSearchValue('')
+        onChange?.(newValue, option)
+        onSelect?.(optValue, option)
       }
-    } else {
-      // 单选模式
-      const newValue = labelInValue ? { value: optValue, label: option.label } : optValue
-      if (!isControlled) setInternalValue(newValue)
-      setOpen(false)
-      setSearchValue('')
-      onChange?.(newValue, option)
-      onSelect?.(optValue, option)
-    }
-  }, [mode, isArrayValue, currentValue, isControlled, labelInValue, allOptions, onChange, onSelect, onDeselect])
+    },
+    [
+      mode,
+      isArrayValue,
+      currentValue,
+      isControlled,
+      labelInValue,
+      allOptions,
+      onChange,
+      onSelect,
+      onDeselect,
+    ]
+  )
 
   // 清除
-  const handleClear = useCallback((e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    const emptyValue = mode === 'multiple' || mode === 'tags' ? [] : undefined
-    if (!isControlled) setInternalValue(emptyValue)
-    onChange?.(emptyValue, [])
-    onClear?.()
-  }, [mode, isControlled, onChange, onClear])
+  const handleClear = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      const emptyValue = mode === 'multiple' || mode === 'tags' ? [] : undefined
+      if (!isControlled) setInternalValue(emptyValue)
+      onChange?.(emptyValue, [])
+      onClear?.()
+    },
+    [mode, isControlled, onChange, onClear]
+  )
 
   // 删除 tag
-  const handleRemoveTag = useCallback((e: React.MouseEvent, option: SelectOption) => {
-    e.preventDefault()
-    e.stopPropagation()
-    handleSelect(option)
-  }, [handleSelect])
+  const handleRemoveTag = useCallback(
+    (e: React.MouseEvent, option: SelectOption) => {
+      e.preventDefault()
+      e.stopPropagation()
+      handleSelect(option)
+    },
+    [handleSelect]
+  )
 
   // 搜索
-  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value
-    setSearchValue(val)
-    onSearch?.(val)
-    if (!open) setOpen(true)
-  }, [onSearch, open])
+  const handleSearch = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const val = e.target.value
+      setSearchValue(val)
+      onSearch?.(val)
+      if (!open) setOpen(true)
+    },
+    [onSearch, open]
+  )
 
   // 点击外部关闭
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setOpen(false)
         setSearchValue('')
       }
@@ -242,14 +293,19 @@ const Select: React.FC<SelectProps> & {
           'forge-select-selection-item--disabled': optDisabled,
         })}
       >
-        <span className="forge-select-selection-item-content">{label ?? optValue}</span>
+        <span className="forge-select-selection-item-content">
+          {label ?? optValue}
+        </span>
         {!optDisabled && (mode === 'multiple' || mode === 'tags') && (
           <span
             className="forge-select-selection-item-remove"
-            onClick={(e) => handleRemoveTag(e, option)}
+            onClick={e => handleRemoveTag(e, option)}
           >
             <svg viewBox="0 0 1024 1024" width="10" height="10">
-              <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m121.8 358.8L535.6 512l98.2 98.2c4.7 4.7 4.7 12.3 0 17l-17 17c-4.7 4.7-12.3 4.7-17 0L501.8 546l-98.2 98.2c-4.7 4.7-12.3 4.7-17 0l-17-17c-4.7-4.7-4.7-12.3 0-17l98.2-98.2-98.2-98.2c-4.7-4.7-4.7-12.3 0-17l17-17c4.7-4.7 12.3-4.7 17 0l98.2 98.2 98.2-98.2c4.7-4.7 12.3-4.7 17 0l17 17c4.7 4.7 4.7 12.3 0 17z" fill="currentColor"/>
+              <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m121.8 358.8L535.6 512l98.2 98.2c4.7 4.7 4.7 12.3 0 17l-17 17c-4.7 4.7-12.3 4.7-17 0L501.8 546l-98.2 98.2c-4.7 4.7-12.3 4.7-17 0l-17-17c-4.7-4.7-4.7-12.3 0-17l98.2-98.2-98.2-98.2c-4.7-4.7-4.7-12.3 0-17l17-17c4.7-4.7 12.3-4.7 17 0l98.2 98.2 98.2-98.2c4.7-4.7 12.3-4.7 17 0l17 17c4.7 4.7 4.7 12.3 0 17z"
+                fill="currentColor"
+              />
             </svg>
           </span>
         )}
@@ -277,7 +333,10 @@ const Select: React.FC<SelectProps> & {
         {selected && (
           <span className="forge-select-item-checked">
             <svg viewBox="0 0 1024 1024" width="12" height="12">
-              <path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z" fill="currentColor"/>
+              <path
+                d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                fill="currentColor"
+              />
             </svg>
           </span>
         )}
@@ -288,19 +347,39 @@ const Select: React.FC<SelectProps> & {
   // 渲染下拉内容
   const renderDropdownContent = () => {
     if (loading) {
-      return <div className="forge-select-item forge-select-item--loading">加载中...</div>
+      return (
+        <div className="forge-select-item forge-select-item--loading">
+          加载中...
+        </div>
+      )
     }
     if (filteredOptions.length === 0 && showEmpty) {
-      return <div className="forge-select-item forge-select-item--empty">{notFoundContent}</div>
+      return (
+        <div className="forge-select-item forge-select-item--empty">
+          {notFoundContent}
+        </div>
+      )
     }
-    return filteredOptions.map((option: SelectOption, index: number) => renderOption(option, index))
+    return filteredOptions.map((option: SelectOption, index: number) =>
+      renderOption(option, index)
+    )
   }
 
-  const sizeClass = size === 'large' ? 'forge-select--large' : size === 'small' ? 'forge-select--small' : ''
-  const itemHeight = size === 'large' ? '32px' : size === 'small' ? '24px' : '28px'
+  const sizeClass =
+    size === 'large'
+      ? 'forge-select--large'
+      : size === 'small'
+        ? 'forge-select--small'
+        : ''
+  const itemHeight =
+    size === 'large' ? '32px' : size === 'small' ? '24px' : '28px'
 
   // 判断是否需要显示清除按钮
-  const showClearBtn = allowClear && !disabled && ((isArrayValue && (currentValue as any[]).length > 0) || (!isArrayValue && currentValue))
+  const showClearBtn =
+    allowClear &&
+    !disabled &&
+    ((isArrayValue && (currentValue as any[]).length > 0) ||
+      (!isArrayValue && currentValue))
 
   return (
     <SelectContext.Provider value={{ addOption, options: allOptions }}>
@@ -325,33 +404,43 @@ const Select: React.FC<SelectProps> & {
         {/* 选择区域 */}
         <div
           className="forge-select-selection"
-          style={{ height: size === 'large' ? '40px' : size === 'small' ? '24px' : '32px' }}
+          style={{
+            height:
+              size === 'large' ? '40px' : size === 'small' ? '24px' : '32px',
+          }}
         >
           {/* Tags / 多选展示 */}
-          {(mode === 'multiple' || mode === 'tags') && isArrayValue && currentValue && (
-            <div className="forge-select-selection-wrap">
-              {(maxTagCount !== undefined && maxTagCount !== 'responsive' && typeof maxTagCount === 'number'
-                ? selectedLabels.slice(0, maxTagCount)
-                : selectedLabels
-              ).map((label: any, i: number) => {
-                const val = isArrayValue ? currentValue[i] : currentValue
-                return renderTag({ value: val, label, disabled: false })
-              })}
-              {maxTagCount !== undefined && typeof maxTagCount === 'number' && selectedLabels.length > maxTagCount && (
-                <span className="forge-select-selection-item forge-select-selection-item--more">
-                  + {selectedLabels.length - maxTagCount}
-                </span>
-              )}
-            </div>
-          )}
+          {(mode === 'multiple' || mode === 'tags') &&
+            isArrayValue &&
+            currentValue && (
+              <div className="forge-select-selection-wrap">
+                {(maxTagCount !== undefined &&
+                maxTagCount !== 'responsive' &&
+                typeof maxTagCount === 'number'
+                  ? selectedLabels.slice(0, maxTagCount)
+                  : selectedLabels
+                ).map((label: any, i: number) => {
+                  const val = isArrayValue ? currentValue[i] : currentValue
+                  return renderTag({ value: val, label, disabled: false })
+                })}
+                {maxTagCount !== undefined &&
+                  typeof maxTagCount === 'number' &&
+                  selectedLabels.length > maxTagCount && (
+                    <span className="forge-select-selection-item forge-select-selection-item--more">
+                      + {selectedLabels.length - maxTagCount}
+                    </span>
+                  )}
+              </div>
+            )}
 
           {/* 单选展示 */}
           {mode === 'default' && (
             <span className="forge-select-selection-placeholder">
               {selectedLabels.length > 0
-                ? selectedLabels.map((l: any, i: number) => <span key={i}>{l}</span>)
-                : placeholder
-              }
+                ? selectedLabels.map((l: any, i: number) => (
+                    <span key={i}>{l}</span>
+                  ))
+                : placeholder}
             </span>
           )}
 
@@ -362,7 +451,9 @@ const Select: React.FC<SelectProps> & {
               type="text"
               className="forge-select-selection-search"
               value={searchValue}
-              placeholder={selectedLabels.length === 0 ? placeholder : searchPlaceholder}
+              placeholder={
+                selectedLabels.length === 0 ? placeholder : searchPlaceholder
+              }
               onChange={handleSearch}
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -381,9 +472,17 @@ const Select: React.FC<SelectProps> & {
 
           {/* Clear 按钮 */}
           {showClearBtn && (
-            <span className="forge-select-clear" onClick={(e) => handleClear(e)} role="button" aria-label="clear">
+            <span
+              className="forge-select-clear"
+              onClick={e => handleClear(e)}
+              role="button"
+              aria-label="clear"
+            >
               <svg viewBox="0 0 1024 1024" width="12" height="12">
-                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m121.8 358.8L535.6 512l98.2 98.2c4.7 4.7 4.7 12.3 0 17l-17 17c-4.7 4.7-12.3 4.7-17 0L501.8 546l-98.2 98.2c-4.7 4.7-12.3 4.7-17 0l-17-17c-4.7-4.7-4.7-12.3 0-17l98.2-98.2-98.2-98.2c-4.7-4.7-4.7-12.3 0-17l17-17c4.7-4.7 12.3-4.7 17 0l98.2 98.2 98.2-98.2c4.7-4.7 12.3-4.7 17 0l17 17c4.7 4.7 4.7 12.3 0 17z" fill="currentColor"/>
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m121.8 358.8L535.6 512l98.2 98.2c4.7 4.7 4.7 12.3 0 17l-17 17c-4.7 4.7-12.3 4.7-17 0L501.8 546l-98.2 98.2c-4.7 4.7-12.3 4.7-17 0l-17-17c-4.7-4.7-4.7-12.3 0-17l98.2-98.2-98.2-98.2c-4.7-4.7-4.7-12.3 0-17l17-17c4.7-4.7 12.3-4.7 17 0l98.2 98.2 98.2-98.2c4.7-4.7 12.3-4.7 17 0l17 17c4.7 4.7 4.7 12.3 0 17z"
+                  fill="currentColor"
+                />
               </svg>
             </span>
           )}
@@ -391,12 +490,21 @@ const Select: React.FC<SelectProps> & {
           {/* Suffix / Arrow */}
           {suffixIcon ? (
             <span className="forge-select-suffix">{suffixIcon}</span>
-          ) : showArrow && (
-            <span className={classNames('forge-select-arrow', { 'forge-select-arrow--open': open })}>
-              <svg viewBox="0 0 1024 1024" width="12" height="12">
-                <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.4 486.1c12.8 17.6 39 17.6 51.7 0l352.4-486.1c3.9-5.3.1-12.7-6.4-12.7z" fill="currentColor"/>
-              </svg>
-            </span>
+          ) : (
+            showArrow && (
+              <span
+                className={classNames('forge-select-arrow', {
+                  'forge-select-arrow--open': open,
+                })}
+              >
+                <svg viewBox="0 0 1024 1024" width="12" height="12">
+                  <path
+                    d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.4 486.1c12.8 17.6 39 17.6 51.7 0l352.4-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+            )
           )}
         </div>
 
@@ -408,7 +516,9 @@ const Select: React.FC<SelectProps> & {
             style={{ ...popupStyle, '--item-height': itemHeight } as any}
             role="listbox"
           >
-            {dropdownRender ? dropdownRender(renderDropdownContent(), { options: allOptions }) : renderDropdownContent()}
+            {dropdownRender
+              ? dropdownRender(renderDropdownContent(), { options: allOptions })
+              : renderDropdownContent()}
           </div>
         )}
       </div>

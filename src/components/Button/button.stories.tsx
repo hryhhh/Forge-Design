@@ -146,7 +146,7 @@ type Story = StoryObj<typeof Button>
 // 完整功能演示
 export const CompleteDemo: Story = {
   args: {
-    children: 'Button',
+    children: '按钮',
     onClick: action('button-clicked'),
   },
   parameters: {
@@ -170,17 +170,17 @@ export const TypeVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
       <Button type={ButtonType.Primary} onClick={action('primary-clicked')}>
-        Primary Button
+        主要按钮
       </Button>
       <Button type={ButtonType.Danger} onClick={action('danger-clicked')}>
-        Danger Button
+        危险按钮
       </Button>
       <Button
         type={ButtonType.Link}
         href="https://www.baidu.com"
         onClick={action('link-clicked')}
       >
-        Link Button
+        链接按钮
       </Button>
     </div>
   ),
@@ -213,13 +213,13 @@ export const SizeVariants: Story = {
       }}
     >
       <Button size={ButtonSize.Large} onClick={action('large-clicked')}>
-        Large Button
+        大按钮
       </Button>
       <Button size={ButtonSize.Medium} onClick={action('medium-clicked')}>
-        Medium Button
+        中按钮
       </Button>
       <Button size={ButtonSize.Small} onClick={action('small-clicked')}>
-        Small Button
+        小按钮
       </Button>
     </div>
   ),
@@ -244,16 +244,16 @@ export const SizeVariants: Story = {
 export const StateVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-      <Button onClick={action('normal-clicked')}>Normal State</Button>
+      <Button onClick={action('normal-clicked')}>正常状态</Button>
       <Button disabled onClick={action('disabled-clicked')}>
-        Disabled State
+        禁用状态
       </Button>
       <Button
         type={ButtonType.Danger}
         disabled
         onClick={action('danger-disabled-clicked')}
       >
-        Danger Disabled
+        危险禁用
       </Button>
     </div>
   ),

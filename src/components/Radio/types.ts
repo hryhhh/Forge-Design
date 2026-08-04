@@ -1,4 +1,9 @@
-import { type ReactNode, type CSSProperties } from 'react'
+import {
+  type ReactNode,
+  type CSSProperties,
+  type ChangeEvent,
+  type FocusEvent,
+} from 'react'
 
 export type RadioSize = 'large' | 'middle' | 'small'
 
@@ -41,9 +46,9 @@ export interface RadioProps {
   autoFocus?: boolean
 
   // Events
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>, value: string | number) => void
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+  onChange?: (e: ChangeEvent<HTMLInputElement>, value: string | number) => void
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
 }
 
 export interface RadioGroupProps {
@@ -77,7 +82,7 @@ export interface RadioGroupProps {
   autoFocus?: boolean
 
   // Events
-  onChange?: (value: string | number, e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (value: string | number, e: ChangeEvent<HTMLInputElement>) => void
   onFocus?: () => void
   onBlur?: () => void
 }
@@ -97,5 +102,3 @@ export interface RadioOptionProps {
   style?: CSSProperties
   [key: string]: any
 }
-
-export default RadioProps

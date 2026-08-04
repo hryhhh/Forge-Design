@@ -42,7 +42,7 @@ export const Controlled: Story = {
     const [checked, setChecked] = React.useState(false)
     return (
       <>
-        <Switch checked={checked} onChange={(v) => setChecked(v)} />
+        <Switch checked={checked} onChange={v => setChecked(v)} />
         <span style={{ marginLeft: 8 }}>{checked ? '开' : '关'}</span>
       </>
     )
@@ -51,9 +51,7 @@ export const Controlled: Story = {
 
 // 禁用
 export const Disabled: Story = {
-  render: () => (
-    <Switch defaultChecked disabled />
-  ),
+  render: () => <Switch defaultChecked disabled />,
 }
 
 // 尺寸
@@ -69,7 +67,7 @@ export const Sizes: Story = {
 
 // 加载状态
 export const Loading: Story = {
-  render: () => <Switch loading />
+  render: () => <Switch loading />,
 }
 
 // 自定义文本
@@ -81,18 +79,12 @@ export const WithText: Story = {
 
 // 带颜色
 export const WithColor: Story = {
-  render: () => <Switch defaultChecked checkedColor="#52c41a" />
+  render: () => <Switch defaultChecked checkedColor="#52c41a" />,
 }
 
 // 自定义图标
 export const WithIcon: Story = {
-  render: () => (
-    <Switch
-      defaultChecked
-      checkedIcon="✓"
-      unCheckedIcon="✗"
-    />
-  ),
+  render: () => <Switch defaultChecked checkedIcon="✓" unCheckedIcon="✗" />,
 }
 
 // 阻止切换
@@ -103,7 +95,7 @@ export const BeforeChange: Story = {
       <Switch
         checked={checked}
         beforeChange={() => window.confirm('确定要切换吗？')}
-        onChange={(v) => setChecked(v)}
+        onChange={v => setChecked(v)}
       />
     )
   },
@@ -112,7 +104,9 @@ export const BeforeChange: Story = {
 // 完整示例
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div
+      style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <h3>通知设置</h3>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <span>邮件通知</span>

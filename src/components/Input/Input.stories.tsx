@@ -35,7 +35,9 @@ type Story = StoryObj<typeof Input>
 // 基础用法
 export const Basic: Story = {
   render: () => (
-    <div style={{ width: 300, display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div
+      style={{ width: 300, display: 'flex', flexDirection: 'column', gap: 12 }}
+    >
       <Input placeholder="请输入内容" />
       <Input defaultValue="默认值" />
     </div>
@@ -49,7 +51,11 @@ export const Controlled: Story = {
       const [value, setValue] = React.useState('')
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <Input value={value} onChange={(val) => setValue(val)} placeholder="受控输入" />
+          <Input
+            value={value}
+            onChange={val => setValue(val)}
+            placeholder="受控输入"
+          />
           <Input defaultValue="非受控输入" placeholder="非受控输入" />
         </div>
       )
@@ -60,9 +66,7 @@ export const Controlled: Story = {
 
 // 密码输入
 export const Password: Story = {
-  render: () => (
-    <Input type="password" placeholder="请输入密码" allowClear />
-  ),
+  render: () => <Input type="password" placeholder="请输入密码" allowClear />,
 }
 
 // 清除按钮
@@ -73,7 +77,9 @@ export const WithClear: Story = {
 // 前缀和后缀
 export const WithPrefixSuffix: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 300 }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 300 }}
+    >
       <Input prefix="🔍" placeholder="搜索" />
       <Input suffix="📧" placeholder="邮箱" />
       <Input prefix="¥" suffix=".00" placeholder="金额" />
@@ -84,10 +90,12 @@ export const WithPrefixSuffix: Story = {
 // 尺寸规格
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 300 }}>
-      <Input size="large" placeholder="Large" />
-      <Input placeholder="Middle (默认)" />
-      <Input size="small" placeholder="Small" />
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 300 }}
+    >
+      <Input size="large" placeholder="大尺寸" />
+      <Input placeholder="中尺寸 (默认)" />
+      <Input size="small" placeholder="小尺寸" />
     </div>
   ),
 }
@@ -95,7 +103,9 @@ export const Sizes: Story = {
 // 禁用和只读
 export const DisabledReadOnly: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 300 }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 300 }}
+    >
       <Input placeholder="禁用状态" disabled />
       <Input value="只读状态" readOnly />
     </div>
@@ -105,7 +115,9 @@ export const DisabledReadOnly: Story = {
 // 输入框组合
 export const Group: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 400 }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 400 }}
+    >
       <Input.Group>
         <Input placeholder="前缀" />
         <Input placeholder="后缀" />
@@ -123,9 +135,14 @@ export const Group: Story = {
 // 文本域
 export const TextArea: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 400 }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 400 }}
+    >
       <Input.TextArea rows={3} placeholder="多行输入" />
-      <Input.TextArea autoSize={{ minRows: 2, maxRows: 5 }} placeholder="自动调整高度" />
+      <Input.TextArea
+        autoSize={{ minRows: 2, maxRows: 5 }}
+        placeholder="自动调整高度"
+      />
     </div>
   ),
 }
@@ -133,7 +150,9 @@ export const TextArea: Story = {
 // 完整示例
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div
+      style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <h3>用户注册</h3>
       <Input placeholder="用户名" prefix="👤" />
       <Input type="password" placeholder="密码" allowClear />
@@ -141,10 +160,23 @@ export const CompleteExample: Story = {
       <Input.Group addonBefore="http://" addonAfter=".com">
         <Input placeholder="请输入网址" />
       </Input.Group>
-      <Input.TextArea rows={3} placeholder="个人简介" autoSize={{ minRows: 2, maxRows: 5 }} />
+      <Input.TextArea
+        rows={3}
+        placeholder="个人简介"
+        autoSize={{ minRows: 2, maxRows: 5 }}
+      />
       <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
         <Input style={{ width: 100 }} placeholder="验证码" />
-        <button style={{ padding: '4px 16px', background: '#8fc3fb', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer' }}>
+        <button
+          style={{
+            padding: '4px 16px',
+            background: '#8fc3fb',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 6,
+            cursor: 'pointer',
+          }}
+        >
           获取验证码
         </button>
       </div>

@@ -41,7 +41,9 @@ const options = [
 
 // 基础用法
 export const Basic: Story = {
-  render: () => <Select placeholder="请选择水果" options={options} style={{ width: 200 }} />,
+  render: () => (
+    <Select placeholder="请选择水果" options={options} style={{ width: 200 }} />
+  ),
 }
 
 // 受控模式
@@ -51,7 +53,7 @@ export const Controlled: Story = {
     return (
       <Select
         value={value}
-        onChange={(v) => setValue(v as string)}
+        onChange={v => setValue(v as string)}
         placeholder="受控选择"
         options={options}
         style={{ width: 200 }}
@@ -116,7 +118,12 @@ export const Group: Story = {
 export const Disabled: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 12 }}>
-      <Select placeholder="禁用" options={options} disabled style={{ width: 150 }} />
+      <Select
+        placeholder="禁用"
+        options={options}
+        disabled
+        style={{ width: 150 }}
+      />
       <Select placeholder="正常" options={options} style={{ width: 150 }} />
     </div>
   ),
@@ -125,10 +132,12 @@ export const Disabled: Story = {
 // 尺寸
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 200 }}>
-      <Select size="large" placeholder="Large" options={options} />
-      <Select placeholder="Middle" options={options} />
-      <Select size="small" placeholder="Small" options={options} />
+    <div
+      style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 200 }}
+    >
+      <Select size="large" placeholder="大尺寸" options={options} />
+      <Select placeholder="中尺寸" options={options} />
+      <Select size="small" placeholder="小尺寸" options={options} />
     </div>
   ),
 }
@@ -153,12 +162,46 @@ export const Loading: Story = {
 // 完整示例
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div
+      style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <h3>用户信息</h3>
-      <Select placeholder="姓名" options={[{value:'a',label:'张三'},{value:'b',label:'李四'}]} style={{width:'100%'}} />
-      <Select placeholder="性别" options={[{value:'m',label:'男'},{value:'f',label:'女'}]} style={{width:'100%'}} />
-      <Select showSearch placeholder="城市" options={[{value:'bj',label:'北京'},{value:'sh',label:'上海'},{value:'gz',label:'广州'}]} style={{width:'100%'}} />
-      <Select mode="multiple" placeholder="兴趣爱好" options={[{value:'read',label:'阅读'},{value:'sport',label:'运动'},{value:'music',label:'音乐'}]} style={{width:'100%'}} />
+      <Select
+        placeholder="姓名"
+        options={[
+          { value: 'a', label: '张三' },
+          { value: 'b', label: '李四' },
+        ]}
+        style={{ width: '100%' }}
+      />
+      <Select
+        placeholder="性别"
+        options={[
+          { value: 'm', label: '男' },
+          { value: 'f', label: '女' },
+        ]}
+        style={{ width: '100%' }}
+      />
+      <Select
+        showSearch
+        placeholder="城市"
+        options={[
+          { value: 'bj', label: '北京' },
+          { value: 'sh', label: '上海' },
+          { value: 'gz', label: '广州' },
+        ]}
+        style={{ width: '100%' }}
+      />
+      <Select
+        mode="multiple"
+        placeholder="兴趣爱好"
+        options={[
+          { value: 'read', label: '阅读' },
+          { value: 'sport', label: '运动' },
+          { value: 'music', label: '音乐' },
+        ]}
+        style={{ width: '100%' }}
+      />
     </div>
   ),
 }

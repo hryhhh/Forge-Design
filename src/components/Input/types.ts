@@ -45,10 +45,19 @@ export interface InputProps {
   prefixWidth?: number
 
   // Events
-  onChange?: (value: string, event?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  onBlur?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  onFocus?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  onPressEnter?: (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  onChange?: (
+    value: string,
+    event?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+  onBlur?: (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+  onFocus?: (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+  onPressEnter?: (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
   onClear?: () => void
 }
 

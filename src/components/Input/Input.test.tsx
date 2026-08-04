@@ -4,17 +4,13 @@ import Input from './index'
 
 describe('Input Component', () => {
   it('should render basic input', () => {
-    const { getByPlaceholderText } = render(
-      <Input placeholder="请输入内容" />
-    )
+    const { getByPlaceholderText } = render(<Input placeholder="请输入内容" />)
     expect(getByPlaceholderText('请输入内容')).toBeInTheDocument()
   })
 
   it('should render controlled input', async () => {
     const handleChange = jest.fn()
-    const { getByRole } = render(
-      <Input value="test" onChange={handleChange} />
-    )
+    const { getByRole } = render(<Input value="test" onChange={handleChange} />)
     const input = getByRole('textbox') as HTMLInputElement
     expect(input.value).toBe('test')
 
@@ -157,7 +153,9 @@ describe('Input Component', () => {
         <Input placeholder="请输入网址" />
       </Input.Group>
     )
-    expect(container.querySelector('.forge-input-group-addon-before')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-input-group-addon-before')
+    ).toBeInTheDocument()
   })
 
   it('should render Input.Group with addonAfter', () => {
@@ -166,7 +164,9 @@ describe('Input Component', () => {
         <Input placeholder="请输入域名" />
       </Input.Group>
     )
-    expect(container.querySelector('.forge-input-group-addon-after')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-input-group-addon-after')
+    ).toBeInTheDocument()
   })
 
   it('should render Input.AddOn', () => {

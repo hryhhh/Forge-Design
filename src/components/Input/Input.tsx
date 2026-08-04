@@ -36,8 +36,7 @@ const TextAreaInner: React.FC<{
       const { minRows = 1, maxRows = Infinity } =
         (props.autoSize as { minRows?: number; maxRows?: number }) || {}
       const style = window.getComputedStyle(textarea)
-      const padding =
-        parseInt(style.paddingTop) + parseInt(style.paddingBottom)
+      const padding = parseInt(style.paddingTop) + parseInt(style.paddingBottom)
       const border =
         parseInt(style.borderTopWidth) + parseInt(style.borderBottomWidth)
       const effectiveRows = props.rows || minRows
@@ -119,12 +118,14 @@ const InputGroupInner: React.FC<InputGroupProps> = props => {
           const isLast = index === childArray.length - 1
           return React.cloneElement(child as React.ReactElement<any>, {
             ...(child.props as object),
-            className: classNames(((child as React.ReactElement<any>).props.className || ''), {
-              'forge-input-group-first': !hasAddon && index === 0,
-              'forge-input-group-last': !hasAddon && isLast,
-              'forge-input-group-middle':
-                !hasAddon && index > 0 && !isLast,
-            }),
+            className: classNames(
+              (child as React.ReactElement<any>).props.className || '',
+              {
+                'forge-input-group-first': !hasAddon && index === 0,
+                'forge-input-group-last': !hasAddon && isLast,
+                'forge-input-group-middle': !hasAddon && index > 0 && !isLast,
+              }
+            ),
           })
         })}
       </div>

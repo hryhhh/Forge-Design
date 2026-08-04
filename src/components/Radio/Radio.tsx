@@ -25,18 +25,23 @@ const RadioGroupInner: React.FC<RadioGroupProps> = props => {
     onBlur,
   } = props
 
-  const [internalValue, setInternalValue] = useState<string | number>(defaultValue)
+  const [internalValue, setInternalValue] = useState<string | number>(
+    defaultValue ?? ''
+  )
   const containerRef = useRef<HTMLDivElement>(null)
 
   const isControlled = value !== undefined
   const currentValue = isControlled ? value : internalValue
 
-  const handleChange = useCallback((newValue: string | number, e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isControlled) {
-      setInternalValue(newValue)
-    }
-    onChange?.(newValue, e)
-  }, [isControlled, onChange])
+  const handleChange = useCallback(
+    (newValue: string | number, e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) {
+        setInternalValue(newValue)
+      }
+      onChange?.(newValue, e)
+    },
+    [isControlled, onChange]
+  )
 
   const handleFocus = useCallback(() => {
     onFocus?.()
@@ -51,21 +56,31 @@ const RadioGroupInner: React.FC<RadioGroupProps> = props => {
     if (options) return options
     const items: RadioOption[] = []
     if (children) {
-      React.Children.forEach(children, child => {
+      React.Children.forEach(children, (child: React.ReactNode) => {
         if (React.isValidElement(child)) {
-          items.push({
-            value: child.props.value,
-            label: child.props.label ?? child.props.value,
-            disabled: child.props.disabled,
-            autoFocus: child.props.autoFocus,
-          })
+          const childProps = child.props as {
+            value?: string | number
+            label?: React.ReactNode
+            disabled?: boolean
+            autoFocus?: boolean
+          }
+          const value = childProps.value
+          if (value !== undefined) {
+            items.push({
+              value,
+              label: childProps.label ?? value,
+              disabled: childProps.disabled,
+              autoFocus: childProps.autoFocus,
+            })
+          }
         }
       })
     }
     return items
   }, [options, children])
 
-  const directionClass = direction === 'vertical' ? 'forge-radio-group--vertical' : ''
+  const directionClass =
+    direction === 'vertical' ? 'forge-radio-group--vertical' : ''
   const typeClass = optionType === 'button' ? 'forge-radio-group--button' : ''
 
   return (
@@ -84,53 +99,55 @@ const RadioGroupInner: React.FC<RadioGroupProps> = props => {
       role="radiogroup"
       aria-disabled={disabled}
     >
-      {optionItems.length > 0 ? (
-        optionItems.map((item, index) => {
-          const isChecked = currentValue === item.value
-          const isDisabled = item.disabled || disabled
-          return (
-            <label
-              key={index}
-              className={classNames(
-                'forge-radio',
-                { 'forge-radio--large': size === 'large' },
-                { 'forge-radio--small': size === 'small' },
-                optionType === 'button' ? 'forge-radio-button' : '',
-                { 'forge-radio--disabled': isDisabled },
-                { 'forge-radio--checked': isChecked },
-                { 'forge-radio--bordered': bordered !== false }
-              )}
-            >
-              <input
-                type="radio"
-                className="forge-radio-input"
-                value={String(item.value)}
-                checked={isChecked}
-                disabled={isDisabled}
-                readOnly={readOnly}
-                autoFocus={autoFocus && index === 0}
-                name={name}
-                onChange={(e) => handleChange(item.value, e)}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-              />
-              <span className="forge-radio-dot" />
-              <span className="forge-radio-label">{item.label ?? item.value}</span>
-            </label>
-          )
-        })
-      ) : (
-        children
-      )}
+      {optionItems.length > 0
+        ? optionItems.map((item, index) => {
+            const isChecked = currentValue === item.value
+            const isDisabled = item.disabled || disabled
+            return (
+              <label
+                key={index}
+                className={classNames(
+                  'forge-radio',
+                  { 'forge-radio--large': size === 'large' },
+                  { 'forge-radio--small': size === 'small' },
+                  optionType === 'button' ? 'forge-radio-button' : '',
+                  { 'forge-radio--disabled': isDisabled },
+                  { 'forge-radio--checked': isChecked },
+                  { 'forge-radio--bordered': bordered !== false }
+                )}
+              >
+                <input
+                  type="radio"
+                  className="forge-radio-input"
+                  value={String(item.value)}
+                  checked={isChecked}
+                  disabled={isDisabled}
+                  readOnly={readOnly}
+                  autoFocus={autoFocus && index === 0}
+                  name={name}
+                  onChange={e => handleChange(item.value, e)}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                />
+                <span className="forge-radio-dot" />
+                <span className="forge-radio-label">
+                  {item.label ?? item.value}
+                </span>
+              </label>
+            )
+          })
+        : children}
     </div>
   )
 }
 
 // 主 Radio 组件
-const Radio: React.FC<RadioProps> = props => {
+const Radio: React.FC<RadioProps> & {
+  Group: React.FC<RadioGroupProps>
+} = props => {
   const {
     value,
-    defaultValue,
+    defaultValue = '',
     className,
     style,
     disabled = false,
@@ -142,21 +159,31 @@ const Radio: React.FC<RadioProps> = props => {
     onBlur,
   } = props
 
-  const [internalValue, setInternalValue] = useState<string | number>(defaultValue)
+  const [internalValue, setInternalValue] = useState<string | number>(
+    defaultValue
+  )
   const inputRef = useRef<HTMLInputElement>(null)
 
   const isControlled = value !== undefined
   const currentValue = isControlled ? value : internalValue
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value
-    if (!isControlled) {
-      setInternalValue(newValue)
-    }
-    onChange?.(e, newValue)
-  }, [isControlled, onChange])
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value
+      if (!isControlled) {
+        setInternalValue(newValue)
+      }
+      onChange?.(e, newValue)
+    },
+    [isControlled, onChange]
+  )
 
-  const sizeClass = size === 'large' ? 'forge-radio--large' : size === 'small' ? 'forge-radio--small' : ''
+  const sizeClass =
+    size === 'large'
+      ? 'forge-radio--large'
+      : size === 'small'
+        ? 'forge-radio--small'
+        : ''
 
   return (
     <label
@@ -165,7 +192,10 @@ const Radio: React.FC<RadioProps> = props => {
         className,
         sizeClass,
         { 'forge-radio--disabled': disabled },
-        { 'forge-radio--checked': currentValue !== undefined && currentValue !== '' }
+        {
+          'forge-radio--checked':
+            currentValue !== undefined && currentValue !== '',
+        }
       )}
       style={style}
     >
@@ -177,8 +207,8 @@ const Radio: React.FC<RadioProps> = props => {
         checked={!!currentValue}
         disabled={disabled}
         onChange={handleChange}
-        onFocus={() => onFocus?.()}
-        onBlur={() => onBlur?.()}
+        onFocus={e => onFocus?.(e)}
+        onBlur={e => onBlur?.(e)}
         name={name}
       />
       <span className="forge-radio-dot" />

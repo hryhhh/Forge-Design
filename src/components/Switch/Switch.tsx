@@ -26,7 +26,8 @@ const Switch: React.FC<SwitchProps> = props => {
     onBlur,
   } = props
 
-  const [internalChecked, setInternalChecked] = useState<boolean>(defaultChecked)
+  const [internalChecked, setInternalChecked] =
+    useState<boolean>(defaultChecked)
   const inputRef = useRef<HTMLInputElement>(null)
   const [loadingState, setLoadingState] = useState(false)
 
@@ -64,11 +65,24 @@ const Switch: React.FC<SwitchProps> = props => {
       }
       onChange?.(nextChecked, e as any)
     },
-    [disabled, readOnly, loadingState, isControlled, isChecked, internalChecked, beforeChange, onChange]
+    [
+      disabled,
+      readOnly,
+      loadingState,
+      isControlled,
+      isChecked,
+      internalChecked,
+      beforeChange,
+      onChange,
+    ]
   )
 
   const sizeClass =
-    size === 'large' ? 'forge-switch--large' : size === 'small' ? 'forge-switch--small' : ''
+    size === 'large'
+      ? 'forge-switch--large'
+      : size === 'small'
+        ? 'forge-switch--small'
+        : ''
 
   return (
     <span
@@ -80,7 +94,12 @@ const Switch: React.FC<SwitchProps> = props => {
         { 'forge-switch--checked': isChecked },
         { 'forge-switch--loading': loading || loadingState }
       )}
-      style={{ ...style, '--forge-switch-checked-color': checkedColor } as React.CSSProperties}
+      style={
+        {
+          ...style,
+          '--forge-switch-checked-color': checkedColor,
+        } as React.CSSProperties
+      }
       onClick={handleToggle}
     >
       <input
@@ -93,15 +112,19 @@ const Switch: React.FC<SwitchProps> = props => {
         autoFocus={autoFocus}
         name={name}
         onChange={() => {}}
-        onFocus={(e) => onFocus?.(e)}
-        onBlur={(e) => onBlur?.(e)}
+        onFocus={e => onFocus?.(e)}
+        onBlur={e => onBlur?.(e)}
       />
       <span className="forge-switch-inner">
         {checkedChildren && isChecked ? (
-          <span className="forge-switch-checked-content">{checkedChildren}</span>
+          <span className="forge-switch-checked-content">
+            {checkedChildren}
+          </span>
         ) : null}
         {unCheckedChildren && !isChecked ? (
-          <span className="forge-switch-unchecked-content">{unCheckedChildren}</span>
+          <span className="forge-switch-unchecked-content">
+            {unCheckedChildren}
+          </span>
         ) : null}
         {checkedIcon && isChecked ? (
           <span className="forge-switch-icon">{checkedIcon}</span>

@@ -402,12 +402,12 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica N
 
 ### 组件设计原则
 
-| 组件 | 设计要点 |
-|------|----------|
+| 组件   | 设计要点                             |
+| ------ | ------------------------------------ |
 | Button | 扁平设计，边框 1px，圆角 6px，无阴影 |
-| Input | 边框 1px，focus 时边框变色，无内阴影 |
-| Card | 可选边框或背景色，避免同时使用两者 |
-| Table | 行间分隔线，悬浮行高亮 |
-| Modal | 居中弹出，背景遮罩，圆角 8px |
+| Input  | 边框 1px，focus 时边框变色，无内阴影 |
+| Card   | 可选边框或背景色，避免同时使用两者   |
+| Table  | 行间分隔线，悬浮行高亮               |
+| Modal  | 居中弹出，背景遮罩，圆角 8px         |
 
 ---

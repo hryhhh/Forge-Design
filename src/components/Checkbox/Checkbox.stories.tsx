@@ -48,7 +48,10 @@ export const Controlled: Story = {
   render: () => {
     const [value, setValue] = React.useState<string[]>(['a'])
     return (
-      <Checkbox.Group value={value} onChange={(v: (string | number)[]) => setValue(v.map(String))}>
+      <Checkbox.Group
+        value={value}
+        onChange={(v: (string | number)[]) => setValue(v.map(String))}
+      >
         <Checkbox value="a">选项A</Checkbox>
         <Checkbox value="b">选项B</Checkbox>
         <Checkbox value="c">选项C</Checkbox>
@@ -112,9 +115,7 @@ export const ButtonStyle: Story = {
 
 // 半选状态
 export const Indeterminate: Story = {
-  render: () => (
-    <Checkbox indeterminate>半选状态</Checkbox>
-  ),
+  render: () => <Checkbox indeterminate>半选状态</Checkbox>,
 }
 
 // 带禁用选项
@@ -122,7 +123,9 @@ export const WithDisabled: Story = {
   render: () => (
     <Checkbox.Group defaultValue={['a']}>
       <Checkbox value="a">选项A</Checkbox>
-      <Checkbox value="b" disabled>选项B（禁用）</Checkbox>
+      <Checkbox value="b" disabled>
+        选项B（禁用）
+      </Checkbox>
       <Checkbox value="c">选项C</Checkbox>
     </Checkbox.Group>
   ),
@@ -146,7 +149,9 @@ export const WithOptions: Story = {
 // 完整示例
 export const CompleteExample: Story = {
   render: () => (
-    <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div
+      style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <h3>兴趣爱好</h3>
       <Checkbox.Group defaultValue={['reading']}>
         <Checkbox value="reading">阅读</Checkbox>
@@ -154,13 +159,13 @@ export const CompleteExample: Story = {
         <Checkbox value="sports">运动</Checkbox>
         <Checkbox value="music">音乐</Checkbox>
       </Checkbox.Group>
-      
+
       <h3>偏好设置</h3>
       <Checkbox.Group optionType="button" defaultValue={['dark']}>
         <Checkbox value="light">浅色模式</Checkbox>
         <Checkbox value="dark">深色模式</Checkbox>
       </Checkbox.Group>
-      
+
       <h3>通知选项</h3>
       <Checkbox.Group direction="vertical">
         <Checkbox value="email">邮件通知</Checkbox>

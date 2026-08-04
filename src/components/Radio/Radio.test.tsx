@@ -6,19 +6,25 @@ describe('Radio Component', () => {
   it('should render basic radio', () => {
     const { container } = render(<Radio>选项</Radio>)
     expect(container.querySelector('.forge-radio')).toBeInTheDocument()
-    expect(container.querySelector('.forge-radio-label')).toHaveTextContent('选项')
+    expect(container.querySelector('.forge-radio-label')).toHaveTextContent(
+      '选项'
+    )
   })
 
   it('should render radio with value', () => {
     const { container } = render(<Radio value="a">选项A</Radio>)
-    const input = container.querySelector('input[type="radio"]') as HTMLInputElement
+    const input = container.querySelector(
+      'input[type="radio"]'
+    ) as HTMLInputElement
     expect(input).toBeInTheDocument()
     expect(input.value).toBe('a')
   })
 
   it('should support defaultValue', () => {
     const { container } = render(<Radio defaultValue="b">选项B</Radio>)
-    const input = container.querySelector('input[type="radio"]') as HTMLInputElement
+    const input = container.querySelector(
+      'input[type="radio"]'
+    ) as HTMLInputElement
     expect(input.value).toBe('b')
   })
 
@@ -29,17 +35,22 @@ describe('Radio Component', () => {
 
   it('should support disabled state', () => {
     const { container } = render(<Radio disabled>禁用选项</Radio>)
-    const input = container.querySelector('input[type="radio"]') as HTMLInputElement
+    const input = container.querySelector(
+      'input[type="radio"]'
+    ) as HTMLInputElement
     expect(input).toBeDisabled()
-    expect(container.querySelector('.forge-radio--disabled')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-radio--disabled')
+    ).toBeInTheDocument()
   })
 
   it('should support onChange', () => {
     const handleChange = jest.fn()
     const { container } = render(
-      <Radio value="a" onChange={handleChange}>选项A</Radio>
+      <Radio value="a" onChange={handleChange}>
+        选项A
+      </Radio>
     )
-    const input = container.querySelector('input[type="radio"]') as HTMLInputElement
     // Clicking an already-checked radio does not trigger change in browsers
     // Simulate by directly calling the change handler via the input's onClick
     const label = container.querySelector('.forge-radio') as HTMLElement
@@ -52,9 +63,13 @@ describe('Radio Component', () => {
     const handleFocus = jest.fn()
     const handleBlur = jest.fn()
     const { container } = render(
-      <Radio onFocus={handleFocus} onBlur={handleBlur}>选项</Radio>
+      <Radio onFocus={handleFocus} onBlur={handleBlur}>
+        选项
+      </Radio>
     )
-    const input = container.querySelector('input[type="radio"]') as HTMLInputElement
+    const input = container.querySelector(
+      'input[type="radio"]'
+    ) as HTMLInputElement
     fireEvent.focus(input)
     expect(handleFocus).toHaveBeenCalled()
     fireEvent.blur(input)
@@ -90,38 +105,53 @@ describe('Radio Component', () => {
   it('should support Radio.Group controlled value', () => {
     const handleChange = jest.fn()
     const { container } = render(
-      <Radio.Group value="b" options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B' },
-        { value: 'c', label: '选项C' },
-      ]} onChange={handleChange} />
+      <Radio.Group
+        value="b"
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B' },
+          { value: 'c', label: '选项C' },
+        ]}
+        onChange={handleChange}
+      />
     )
     const checkedRadio = container.querySelector('.forge-radio--checked')
     expect(checkedRadio).toBeInTheDocument()
-    expect(checkedRadio?.querySelector('.forge-radio-label')?.textContent).toBe('选项B')
+    expect(checkedRadio?.querySelector('.forge-radio-label')?.textContent).toBe(
+      '选项B'
+    )
   })
 
   it('should support Radio.Group defaultValue', () => {
     const handleChange = jest.fn()
     const { container } = render(
-      <Radio.Group defaultValue="a" options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B' },
-      ]} onChange={handleChange} />
+      <Radio.Group
+        defaultValue="a"
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B' },
+        ]}
+        onChange={handleChange}
+      />
     )
     const checkedRadio = container.querySelector('.forge-radio--checked')
-    expect(checkedRadio?.querySelector('.forge-radio-label')?.textContent).toBe('选项A')
+    expect(checkedRadio?.querySelector('.forge-radio-label')?.textContent).toBe(
+      '选项A'
+    )
   })
 
   it('should handle Radio.Group change', async () => {
     const handleChange = jest.fn()
     const { container } = render(
-      <Radio.Group options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B' },
-      ]} onChange={handleChange} />
+      <Radio.Group
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B' },
+        ]}
+        onChange={handleChange}
+      />
     )
-    
+
     const radios = container.querySelectorAll('.forge-radio')
     if (radios.length >= 2) {
       fireEvent.click(radios[1])
@@ -134,12 +164,15 @@ describe('Radio Component', () => {
   it('should not select disabled option in Radio.Group', async () => {
     const handleChange = jest.fn()
     const { container } = render(
-      <Radio.Group options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B', disabled: true },
-      ]} onChange={handleChange} />
+      <Radio.Group
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B', disabled: true },
+        ]}
+        onChange={handleChange}
+      />
     )
-    
+
     const radios = container.querySelectorAll('.forge-radio')
     if (radios.length >= 2) {
       fireEvent.click(radios[1])
@@ -149,10 +182,13 @@ describe('Radio Component', () => {
 
   it('should support Radio.Group disabled', () => {
     const { container } = render(
-      <Radio.Group disabled options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B' },
-      ]} />
+      <Radio.Group
+        disabled
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B' },
+        ]}
+      />
     )
     const inputs = container.querySelectorAll('input[type="radio"]')
     inputs.forEach(input => {
@@ -162,41 +198,51 @@ describe('Radio Component', () => {
 
   it('should support Radio.Group size prop', () => {
     const { container } = render(
-      <Radio.Group size="large" options={[
-        { value: 'a', label: '选项A' },
-      ]} />
+      <Radio.Group size="large" options={[{ value: 'a', label: '选项A' }]} />
     )
-    expect(container.querySelector('.forge-radio-group--large')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-radio-group--large')
+    ).toBeInTheDocument()
   })
 
   it('should support Radio.Group direction vertical', () => {
     const { container } = render(
-      <Radio.Group direction="vertical" options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B' },
-      ]} />
+      <Radio.Group
+        direction="vertical"
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B' },
+        ]}
+      />
     )
-    expect(container.querySelector('.forge-radio-group--vertical')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-radio-group--vertical')
+    ).toBeInTheDocument()
   })
 
   it('should support Radio.Group optionType button', () => {
     const { container } = render(
-      <Radio.Group optionType="button" options={[
-        { value: 'a', label: '选项A' },
-        { value: 'b', label: '选项B' },
-      ]} />
+      <Radio.Group
+        optionType="button"
+        options={[
+          { value: 'a', label: '选项A' },
+          { value: 'b', label: '选项B' },
+        ]}
+      />
     )
-    expect(container.querySelector('.forge-radio-group--button')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-radio-group--button')
+    ).toBeInTheDocument()
     expect(container.querySelector('.forge-radio-button')).toBeInTheDocument()
   })
 
   it('should support autoFocus', () => {
     const { container } = render(
-      <Radio.Group autoFocus options={[
-        { value: 'a', label: '选项A' },
-      ]} />
+      <Radio.Group autoFocus options={[{ value: 'a', label: '选项A' }]} />
     )
-    const firstInput = container.querySelector('input[type="radio"]') as HTMLInputElement
+    const firstInput = container.querySelector(
+      'input[type="radio"]'
+    ) as HTMLInputElement
     expect(document.activeElement).toBe(firstInput)
   })
 })

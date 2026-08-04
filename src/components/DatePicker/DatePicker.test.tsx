@@ -30,26 +30,34 @@ describe('DatePicker Component', () => {
 
   it('should support size prop', () => {
     const { container } = render(<DatePicker size="large" />)
-    expect(container.querySelector('.forge-datepicker--large')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker--large')
+    ).toBeInTheDocument()
   })
 
   it('should support small size', () => {
     const { container } = render(<DatePicker size="small" />)
-    expect(container.querySelector('.forge-datepicker--small')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker--small')
+    ).toBeInTheDocument()
   })
 
   it('should support disabled state', () => {
     const { container } = render(<DatePicker disabled />)
     const input = container.querySelector('input') as HTMLInputElement
     expect(input).toBeDisabled()
-    expect(container.querySelector('.forge-datepicker--disabled')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker--disabled')
+    ).toBeInTheDocument()
   })
 
   it('should open calendar on focus', () => {
     const { container } = render(<DatePicker />)
     const input = container.querySelector('input') as HTMLInputElement
     fireEvent.focus(input)
-    expect(container.querySelector('.forge-datepicker-dropdown')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker-dropdown')
+    ).toBeInTheDocument()
   })
 
   it('should show calendar panel with current month', () => {
@@ -62,7 +70,9 @@ describe('DatePicker Component', () => {
 
   it('should support format prop', () => {
     const date = new Date(2024, 0, 15)
-    const { container } = render(<DatePicker value={date} format="YYYY/MM/DD" />)
+    const { container } = render(
+      <DatePicker value={date} format="YYYY/MM/DD" />
+    )
     const input = container.querySelector('input') as HTMLInputElement
     expect(input.value).toBe('2024/01/15')
   })
@@ -81,16 +91,20 @@ describe('DatePicker Component', () => {
 
   it('should not show clear button when no value', () => {
     const { container } = render(<DatePicker allowClear />)
-    expect(container.querySelector('.forge-datepicker-clear')).not.toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker-clear')
+    ).not.toBeInTheDocument()
   })
 
   it('should support disabledDate', () => {
     const { container } = render(
-      <DatePicker disabledDate={(current) => current.getDate() > 15} />
+      <DatePicker disabledDate={current => current.getDate() > 15} />
     )
     const input = container.querySelector('input') as HTMLInputElement
     fireEvent.focus(input)
-    const disabledDays = container.querySelectorAll('.forge-datepicker-day-disabled')
+    const disabledDays = container.querySelectorAll(
+      '.forge-datepicker-day-disabled'
+    )
     expect(disabledDays.length).toBeGreaterThan(0)
   })
 
@@ -98,8 +112,12 @@ describe('DatePicker Component', () => {
     const { container } = render(
       <DatePicker prefix={<span>📅</span>} suffix={<span>📍</span>} />
     )
-    expect(container.querySelector('.forge-datepicker-prefix')).toBeInTheDocument()
-    expect(container.querySelector('.forge-datepicker-suffix')).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker-prefix')
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker-suffix')
+    ).toBeInTheDocument()
   })
 
   it('should support onFocus and onBlur', () => {
@@ -125,10 +143,14 @@ describe('DatePicker Component', () => {
     const { container } = render(<DatePicker />)
     const input = container.querySelector('input') as HTMLInputElement
     fireEvent.focus(input)
-    expect(container.querySelector('.forge-datepicker-dropdown')).toBeInTheDocument()
-    
+    expect(
+      container.querySelector('.forge-datepicker-dropdown')
+    ).toBeInTheDocument()
+
     fireEvent.mouseDown(document.body)
-    expect(container.querySelector('.forge-datepicker-dropdown')).not.toBeInTheDocument()
+    expect(
+      container.querySelector('.forge-datepicker-dropdown')
+    ).not.toBeInTheDocument()
   })
 
   it('should render calendar with correct month', () => {
@@ -136,7 +158,7 @@ describe('DatePicker Component', () => {
     const { container } = render(<DatePicker value={date} />)
     const input = container.querySelector('input') as HTMLInputElement
     fireEvent.focus(input)
-    
+
     const monthLabel = container.querySelector('.forge-datepicker-month')
     expect(monthLabel).toHaveTextContent('2024年6月')
   })
@@ -146,10 +168,12 @@ describe('DatePicker Component', () => {
     const { container } = render(<DatePicker value={date} />)
     const input = container.querySelector('input') as HTMLInputElement
     fireEvent.focus(input)
-    
-    const prevBtn = container.querySelector('.forge-datepicker-prev') as HTMLButtonElement
+
+    const prevBtn = container.querySelector(
+      '.forge-datepicker-prev'
+    ) as HTMLButtonElement
     fireEvent.click(prevBtn)
-    
+
     const monthLabel = container.querySelector('.forge-datepicker-month')
     expect(monthLabel).toHaveTextContent('2024年5月')
   })

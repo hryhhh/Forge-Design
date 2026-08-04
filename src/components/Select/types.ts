@@ -71,7 +71,10 @@ export interface SelectProps {
   /** 自定义 expand 图标 */
   expandIcon?: ReactNode
   /** 下拉渲染函数 */
-  dropdownRender?: (menu: ReactNode, props: { options: SelectOption[] }) => ReactNode
+  dropdownRender?: (
+    menu: ReactNode,
+    props: { options: SelectOption[] }
+  ) => ReactNode
   /** 触发元素自定义 class */
   className?: string
   /** 触发元素自定义 style */

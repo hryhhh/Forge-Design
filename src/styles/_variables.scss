@@ -35,7 +35,9 @@ $light: #f6f8fa !default;
 $dark: #24292e !default;
 
 // 字体变量
-$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-base:
+  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+  Arial, sans-serif !default;
 $font-family-heading: $font-family-base !default;
 
 // 字体大小
