@@ -48,3 +48,42 @@ export interface DatePickerProps {
   /** 自动聚焦 */
   autoFocus?: boolean
 }
+
+export type RangePickerSize = DatePickerSize
+
+export type RangePickerPlaceholder = [string, string]
+
+export interface RangePickerProps {
+  /** 值（受控） [startDate, endDate] */
+  value?: [Date, Date] | null
+  /** 默认值 */
+  defaultValue?: [Date, Date] | null
+  /** 自定义 class */
+  className?: string
+  /** 自定义 style */
+  style?: CSSProperties
+  /** 是否禁用 */
+  disabled?: boolean
+  /** 尺寸 */
+  size?: RangePickerSize | `${RangePickerSize}`
+  /** 占位符 [startPlaceholder, endPlaceholder] */
+  placeholder?: RangePickerPlaceholder
+  /** 日期格式 */
+  format?: string
+  /** 是否允许清空 */
+  allowClear?: boolean
+  /** 前置内容 */
+  prefix?: ReactNode
+  /** 后缀内容 */
+  suffix?: ReactNode
+  /** disabled dates */
+  disabledDate?: (current: Date) => boolean
+  /** 变更回调 */
+  onChange?: (values: [Date, Date] | null, dateStrings: [string, string]) => void
+  /** 聚焦回调 */
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
+  /** 失焦回调 */
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+  /** 点击回调 */
+  onClick?: (e: React.MouseEvent) => void
+}

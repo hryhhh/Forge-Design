@@ -72,7 +72,7 @@ export const Sizes: Story = {
 
 // 不显示秒
 export const WithoutSeconds: Story = {
-  render: () => <TimePicker showSecond={false} placeholder="仅时分" />,
+  render: () => <TimePicker format="HH:mm" placeholder="仅时分" />,
 }
 
 // 允许清空
@@ -107,7 +107,6 @@ export const HideDisabledOptions: Story = {
   render: () => (
     <TimePicker
       disabledHours={() => [12, 13, 14]}
-      hideDisabledOptions
       placeholder="隐藏已禁用的时段"
     />
   ),
@@ -129,8 +128,8 @@ export const CompleteExample: Story = {
         placeholder="工作日时段（9:00-20:00）"
       />
 
-      <h3>显示选项</h3>
-      <TimePicker showSecond={false} placeholder="仅选择时分" />
+      <h3>时分格式</h3>
+      <TimePicker format="HH:mm" placeholder="仅选择时分" />
     </div>
   ),
 }

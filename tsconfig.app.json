@@ -9,14 +9,14 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
+    "rootDir": "./src",
     "outDir": "./build",
     "jsx": "react-jsx",
     "types": ["react", "react-dom", "vite/client"],
@@ -30,11 +30,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"]
-    },
     "resolveJsonModule": true
   },
   "include": ["src", "global.d.ts", "vite-plugin-sass.d.ts"]

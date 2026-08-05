@@ -169,9 +169,7 @@ describe('DatePicker Component', () => {
     const input = container.querySelector('input') as HTMLInputElement
     fireEvent.focus(input)
 
-    const prevBtn = container.querySelector(
-      '.forge-datepicker-prev'
-    ) as HTMLButtonElement
+    const prevBtn = container.querySelectorAll('.forge-datepicker-prev')[1] as HTMLButtonElement;
     fireEvent.click(prevBtn)
 
     const monthLabel = container.querySelector('.forge-datepicker-month')

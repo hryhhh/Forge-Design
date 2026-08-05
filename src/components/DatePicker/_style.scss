@@ -23,7 +23,6 @@
     }
   }
 
-  // 尺寸
   &--large {
     .forge-datepicker-input {
       height: 40px;
@@ -41,7 +40,6 @@
   }
 }
 
-// 附加元素
 .forge-datepicker-addon {
   display: flex;
   align-items: center;
@@ -53,7 +51,6 @@
   color: #9ca3af;
 }
 
-// 包装器
 .forge-datepicker-wrapper {
   position: relative;
   display: flex;
@@ -64,17 +61,13 @@
   background-color: #fff;
   transition: all 0.2s;
 
-  &:hover {
-    border-color: #8fc3fb;
-  }
-
+  &:hover { border-color: #8fc3fb; }
   &:focus-within {
     border-color: #8fc3fb;
     box-shadow: 0 0 0 2px rgba(143, 195, 251, 0.2);
   }
 }
 
-// 输入框
 .forge-datepicker-input {
   flex: 1;
   height: 32px;
@@ -86,17 +79,10 @@
   color: #333;
   width: 100%;
 
-  &::placeholder {
-    color: #9ca3af;
-  }
-
-  &:disabled {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
-  }
+  &::placeholder { color: #9ca3af; }
+  &:disabled { background-color: #f5f5f5; cursor: not-allowed; }
 }
 
-// 前缀
 .forge-datepicker-prefix {
   display: flex;
   align-items: center;
@@ -105,7 +91,6 @@
   color: #9ca3af;
 }
 
-// 后缀
 .forge-datepicker-suffix {
   display: flex;
   align-items: center;
@@ -113,7 +98,6 @@
   color: #9ca3af;
 }
 
-// 清除按钮
 .forge-datepicker-clear {
   position: absolute;
   right: 8px;
@@ -124,17 +108,11 @@
   font-size: 16px;
   line-height: 1;
 
-  &:hover {
-    color: #666;
-  }
+  &:hover { color: #666; }
 }
 
-// 图标
-.forge-datepicker-icon {
-  fill: currentColor;
-}
+.forge-datepicker-icon { fill: currentColor; }
 
-// 下拉面板
 .forge-datepicker-dropdown {
   position: absolute;
   top: 100%;
@@ -149,12 +127,8 @@
   min-width: 280px;
 }
 
-// 日历面板
-.forge-datepicker-panel {
-  width: 100%;
-}
+.forge-datepicker-panel { width: 100%; }
 
-// 头部
 .forge-datepicker-header {
   display: flex;
   align-items: center;
@@ -172,10 +146,8 @@
   color: #666;
   border-radius: 4px;
 
-  &:hover {
-    background-color: #f5f5f5;
-    color: #8fc3fb;
-  }
+  &:hover:not(:disabled) { background-color: #f5f5f5; color: #0969da; }
+  &:disabled { color: #d9d9d9; cursor: not-allowed; }
 }
 
 .forge-datepicker-month {
@@ -184,7 +156,6 @@
   color: #333;
 }
 
-// 星期
 .forge-datepicker-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -198,11 +169,7 @@
   padding: 8px 0;
 }
 
-// 日期网格
-.forge-datepicker-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
+.forge-datepicker-days { display: grid; grid-template-columns: repeat(7, 1fr); }
 
 .forge-datepicker-day {
   text-align: center;
@@ -211,37 +178,314 @@
   color: #333;
   cursor: pointer;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: background-color 0.15s, color 0.15s;
+  position: relative;
 
-  &:hover {
-    background-color: #f0f7ff;
-    color: #8fc3fb;
+  &:hover:not(&-disabled) { background-color: #f0f7ff; color: #0969da; }
+
+  &-disabled {
+    color: #d9d9d9;
+    cursor: not-allowed;
+    &:hover { background-color: transparent; color: #d9d9d9; }
+  }
+
+  &-selected {
+    background-color: #0969da;
+    color: #fff;
+    &:hover { background-color: #0969da; color: #fff; }
+  }
+
+  &-today:not(&-selected) {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid #0969da;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+  }
+
+  &-in-range {
+    background-color: #ddf3ff;
+    color: #333;
+    border-radius: 0;
+    &:hover:not(&-disabled) { background-color: #c7ebf7; color: #333; }
+  }
+
+  &-range-start { border-radius: 4px 0 0 4px !important; }
+  &-range-end { border-radius: 0 4px 4px 0 !important; }
+}
+
+// RangePicker
+.forge-range-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+
+  &--disabled {
+    .forge-range-picker-input {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+  }
+
+  &--open {
+    .forge-range-picker-wrapper {
+      border-color: #0969da;
+      box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.2);
+    }
+  }
+
+  &--large {
+    .forge-range-picker-input {
+      height: 40px;
+      padding: 9px 11px;
+      font-size: 16px;
+    }
+  }
+
+  &--small {
+    .forge-range-picker-input {
+      height: 24px;
+      padding: 1px 7px;
+      font-size: 12px;
+    }
+  }
+}
+
+.forge-range-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: all 0.2s;
+  padding-right: 12px;
+
+  &:hover { border-color: #0969da; }
+  &:focus-within {
+    border-color: #0969da;
+    box-shadow: 0 0 0 2px rgba(9, 105, 218, 0.2);
+  }
+}
+
+.forge-range-picker-input {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 5px 11px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+
+  &::placeholder { color: #9ca3af; }
+  &:disabled { background-color: #f5f5f5; cursor: not-allowed; }
+}
+
+.forge-range-picker-separator {
+  padding: 0 6px;
+  color: #9ca3af;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.forge-range-picker-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-right: 1px solid #d9d9d9;
+  color: #9ca3af;
+}
+
+.forge-range-picker-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.forge-range-picker-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+}
+
+.forge-range-picker-panels {
+  display: flex;
+  gap: 0;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 50%;
+    width: 1px;
+    background-color: #eaeaea;
+    transform: translateX(-50%);
+  }
+}
+
+.forge-range-picker-panel {
+  min-width: 260px;
+  flex: 1;
+
+  &:first-child { padding-right: 8px; }
+  &:last-child { padding-left: 8px; }
+}
+
+// Month picker
+.forge-datepicker-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.forge-datepicker-month-item {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+
+  &:hover:not(&-disabled) { background-color: #f0f7ff; color: #0969da; }
+
+  &-selected {
+    background-color: #0969da;
+    color: #fff;
+    &:hover { background-color: #0969da; color: #fff; }
   }
 
   &-disabled {
     color: #d9d9d9;
     cursor: not-allowed;
-
-    &:hover {
-      background-color: transparent;
-      color: #d9d9d9;
-    }
+    &:hover { background-color: transparent; color: #d9d9d9; }
   }
+}
+
+// Year picker
+.forge-datepicker-years {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.forge-datepicker-year-item {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+
+  &:hover:not(&-disabled) { background-color: #f0f7ff; color: #0969da; }
 
   &-selected {
-    background-color: #8fc3fb;
+    background-color: #0969da;
     color: #fff;
-
-    &:hover {
-      background-color: #8fc3fb;
-      color: #fff;
-    }
+    &:hover { background-color: #0969da; color: #fff; }
   }
 
-  &-today {
-    &.forge-datepicker-day:not(.forge-datepicker-day-selected) {
-      color: #8fc3fb;
-      font-weight: 600;
-    }
+  &-disabled {
+    color: #d9d9d9;
+    cursor: not-allowed;
+    &:hover { background-color: transparent; color: #d9d9d9; }
+  }
+}
+
+.forge-datepicker-month-view-footer {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 8px;
+}
+
+.forge-datepicker-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #0969da;
+  padding: 4px 12px;
+  border-radius: 4px;
+
+  &:hover { background-color: #f0f7ff; }
+}
+
+// Shortcuts
+.forge-range-picker-shortcuts {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.forge-range-picker-shortcut-btn {
+  padding: 4px 12px;
+  font-size: 13px;
+  color: #666;
+  background: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    color: #0969da;
+    border-color: #0969da;
+    background: #fff;
+  }
+}
+
+// 快捷选项
+.forge-datepicker-shortcuts {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.forge-datepicker-shortcut-btn {
+  padding: 4px 12px;
+  font-size: 13px;
+  color: #666;
+  background: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    color: #0969da;
+    border-color: #0969da;
+    background: #fff;
   }
 }

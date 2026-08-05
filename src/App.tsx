@@ -6,7 +6,7 @@ import Select from './components/Select'
 import Radio from './components/Radio'
 import Checkbox from './components/Checkbox'
 import Switch from './components/Switch'
-import DatePicker from './components/DatePicker'
+import DatePicker, { RangePicker } from './components/DatePicker'
 import TimePicker from './components/TimePicker'
 import { FormItem } from './components/Form'
 import Form from './components/Form'
@@ -28,35 +28,52 @@ function App() {
   const [submitStatus, setSubmitStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle')
-  const [menuMode, setMenuMode] = useState<'horizontal' | 'vertical'>(
-    'horizontal'
-  )
   const [selectValue, setSelectValue] = useState<string>('')
   const [radioValue, setRadioValue] = useState<string>('web')
   const [checkboxValues, setCheckboxValues] = useState<string[]>([])
   const [swtch, setSwtch] = useState<boolean>(false)
   const [dateValue, setDateValue] = useState<Date | null>(null)
   const [timeValue, setTimeValue] = useState<Date | null>(null)
+  const [rangeValue, setRangeValue] = useState<[Date, Date] | null>(null)
 
   const handleCreateProject = async (values: any) => {
     setSubmitting(true)
     setSubmitStatus('idle')
 
-    // 模拟 API 调用
-    await new Promise(resolve => setTimeout(resolve, 800))
+    try {
+      const response = await fetch('/api/forms', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formName: 'project-creation',
+          values,
+        }),
+      })
 
-    const newProject: Project = {
-      id: Date.now(),
-      name: values.name,
-      category: values.category,
-      description: values.description || '',
-      createdAt: new Date().toLocaleDateString('zh-CN'),
+      if (!response.ok) {
+        throw new Error('提交失败')
+      }
+
+      await response.json()
+      
+      const newProject: Project = {
+        id: Date.now(),
+        name: values.name,
+        category: values.category,
+        description: values.description || '',
+        createdAt: new Date().toLocaleDateString('zh-CN'),
+      }
+
+      setProjects([newProject, ...projects])
+      setSubmitStatus('success')
+      setCurrentPage('projects')
+    } catch (error) {
+      setSubmitStatus('error')
+    } finally {
+      setSubmitting(false)
     }
-
-    setProjects([newProject, ...projects])
-    setSubmitting(false)
-    setSubmitStatus('success')
-    setCurrentPage('projects')
   }
 
   const handleDeleteProject = (id: number) => {
@@ -151,133 +168,81 @@ function App() {
 
                 <div className="demo-card">
                   <h3>Select</h3>
-                  <div className="demo-form">
-                    <Select
-                      placeholder="请选择"
-                      value={selectValue}
-                      onChange={v => setSelectValue(v as string)}
-                      style={{ width: '100%' }}
-                      options={[
-                        { value: 'web', label: 'Web 应用' },
-                        { value: 'mobile', label: '移动应用' },
-                        { value: 'desktop', label: '桌面应用' },
-                        { value: 'api', label: 'API 服务' },
-                      ]}
-                    />
-                  </div>
+                  <Select
+                    placeholder="请选择"
+                    options={[
+                      { value: 'option1', label: '选项一' },
+                      { value: 'option2', label: '选项二' },
+                      { value: 'option3', label: '选项三' },
+                    ]}
+                    value={selectValue}
+                    onChange={(v) => setSelectValue(v as string)}
+                    style={{ width: '100%' }}
+                  />
                 </div>
 
                 <div className="demo-card">
                   <h3>Radio</h3>
-                  <div className="demo-form">
-                    <Radio.Group
-                      value={radioValue}
-                      onChange={v => setRadioValue(v as string)}
-                      options={[
-                        { value: 'web', label: 'Web 应用' },
-                        { value: 'mobile', label: '移动应用' },
-                        { value: 'desktop', label: '桌面应用' },
-                      ]}
-                    />
-                  </div>
+                  <Radio.Group
+                    value={radioValue}
+                    onChange={(v) => setRadioValue(v as string)}
+                    options={[
+                      { value: 'web', label: 'Web 应用' },
+                      { value: 'mobile', label: '移动应用' },
+                      { value: 'desktop', label: '桌面应用' },
+                    ]}
+                  />
                 </div>
 
                 <div className="demo-card">
                   <h3>Checkbox</h3>
-                  <div className="demo-form">
-                    <Checkbox.Group
-                      value={checkboxValues}
-                      onChange={v => setCheckboxValues(v as string[])}
-                      options={[
-                        { value: 'react', label: 'React' },
-                        { value: 'vue', label: 'Vue' },
-                        { value: 'angular', label: 'Angular' },
-                        { value: 'svelte', label: 'Svelte' },
-                      ]}
-                    />
-                  </div>
+                  <Checkbox.Group
+                    value={checkboxValues}
+                    onChange={(v) => setCheckboxValues(v as string[])}
+                    options={[
+                      { value: 'react', label: 'React' },
+                      { value: 'vue', label: 'Vue' },
+                      { value: 'angular', label: 'Angular' },
+                    ]}
+                  />
                 </div>
 
                 <div className="demo-card">
                   <h3>Switch</h3>
-                  <div className="demo-form">
-                    <Switch
-                      checked={swtch}
-                      onChange={v => setSwtch(v)}
-                      checkedChildren="开"
-                      unCheckedChildren="关"
-                    />
-                  </div>
+                  <Switch checked={swtch} onChange={setSwtch} />
                 </div>
 
                 <div className="demo-card">
                   <h3>DatePicker</h3>
-                  <div className="demo-form">
-                    <DatePicker
-                      value={dateValue}
-                      onChange={d => setDateValue(d)}
-                      style={{ width: '100%' }}
-                      placeholder="选择日期"
-                    />
-                  </div>
+                  <DatePicker
+                    value={dateValue}
+                    onChange={setDateValue}
+                    style={{ width: '100%' }}
+                  />
                 </div>
 
                 <div className="demo-card">
                   <h3>TimePicker</h3>
-                  <div className="demo-form">
-                    <TimePicker
-                      value={timeValue}
-                      onChange={d => setTimeValue(d)}
-                      style={{ width: '100%' }}
-                      placeholder="选择时间"
-                    />
-                  </div>
+                  <TimePicker
+                    value={timeValue}
+                    onChange={setTimeValue}
+                    style={{ width: '100%' }}
+                  />
                 </div>
-
-                <div className="demo-card demo-card--menu">
-                  <h3>Menu</h3>
-                  <div className="menu-toggle">
-                    <Button
-                      size="small"
-                      type={menuMode === 'horizontal' ? 'primary' : 'secondary'}
-                      onClick={() => setMenuMode('horizontal')}
-                    >
-                      水平
-                    </Button>
-                    <Button
-                      size="small"
-                      type={menuMode === 'vertical' ? 'primary' : 'secondary'}
-                      onClick={() => setMenuMode('vertical')}
-                    >
-                      垂直
-                    </Button>
-                  </div>
-                  <Menu mode={menuMode} defaultIndex="0">
-                    {menuMode === 'horizontal' ? (
-                      <>
-                        <Menu.Item index="0">首页</Menu.Item>
-                        <Menu.Item index="1">产品</Menu.Item>
-                        <Menu.Item index="2">关于</Menu.Item>
-                      </>
-                    ) : (
-                      <>
-                        <Menu.Item index="0">仪表盘</Menu.Item>
-                        <Menu.Item index="1">订单管理</Menu.Item>
-                        <Menu.Item index="2">用户中心</Menu.Item>
-                        <Menu.Item index="3">系统设置</Menu.Item>
-                      </>
-                    )}
-                  </Menu>
+              </div>
+                <div className="demo-card">
+                  <h3>RangePicker</h3>
+                  <RangePicker
+                    value={rangeValue}
+                    onChange={(v) => setRangeValue(v as [Date, Date] | null)}
+                    style={{ width: '100%' }}
+                  />
                 </div>
 
                 <div className="demo-card">
                   <h3>Upload</h3>
                   <Upload action="/api/upload" />
-                  <p className="upload-hint">
-                    支持拖拽或点击上传，建议尺寸 1200×630
-                  </p>
                 </div>
-              </div>
             </section>
           </div>
         )}
@@ -342,6 +307,11 @@ function App() {
                   {submitStatus === 'success' && (
                     <div className="submit-success">
                       项目创建成功，正在跳转到项目列表...
+                    </div>
+                  )}
+                  {submitStatus === 'error' && (
+                    <div className="submit-error">
+                      提交失败，请稍后重试
                     </div>
                   )}
 

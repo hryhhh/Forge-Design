@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model FormSubmission {
+  id          String   @id @default(uuid())
+  formName    String
+  values      String
+  submittedAt DateTime @default(now())
+
+  @@index([formName])
+  @@index([submittedAt])
+}
+
+model UploadRecord {
+  id         String   @id @default(uuid())
+  fileName   String
+  filePath   String
+  mimeType   String
+  size       Int
+  uploadedAt DateTime @default(now())
+
+  @@index([uploadedAt])
+}

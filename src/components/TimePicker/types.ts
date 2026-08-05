@@ -17,10 +17,12 @@ export interface TimePickerProps {
   size?: TimePickerSize | `${TimePickerSize}`
   /** 占位符 */
   placeholder?: string
-  /** 时间格式 */
+  /** 时间格式 HH:mm 或 HH:mm:ss */
   format?: string
-  /** 是否显示秒 */
-  showSecond?: boolean
+  /** 分钟步长 */
+  minuteStep?: number
+  /** 秒钟步长 */
+  secondStep?: number
   /** 是否允许清空 */
   allowClear?: boolean
   /** 前置内容 */
@@ -35,8 +37,6 @@ export interface TimePickerProps {
   disabledHours?: () => number[]
   disabledMinutes?: (hour: number) => number[]
   disabledSeconds?: (hour: number, minute: number) => number[]
-  /** 隐藏滚动条 */
-  hideDisabledOptions?: boolean
   /** 变更回调 */
   onChange?: (value: Date | null, dateString: string) => void
   /** 聚焦回调 */

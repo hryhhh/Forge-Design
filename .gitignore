@@ -4,7 +4,6 @@ node_modules/
 # Build outputs (基于你的构建脚本)
 /build/
 
-
 # Test coverage (基于 jest.config.ts)
 /coverage/
 
@@ -17,6 +16,10 @@ storybook-static/
 .env.development.local
 .env.test.local
 .env.production.local
+server/.env
+server/node_modules/
+server/dist/
+server/.prisma/
 
 # IDE and editor files
 .vscode/
@@ -48,8 +51,12 @@ lerna-debug.log*
 
 # Optional eslint cache
 .eslintcache
-.env.local
 
 # Documentation
 /docs/
 .jest-cache/
+
+# Server uploads
+server/uploads/
+server/prisma/dev.db
+server/prisma/migrations/

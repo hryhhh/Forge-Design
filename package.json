@@ -61,7 +61,12 @@
     "prepublishOnly": "npm run build",
     "prepare": "husky",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "server:dev": "cd server && npm run start:dev",
+    "server:start": "cd server && npm run start",
+    "server:build": "cd server && npm run build",
+    "server:prisma:migrate": "cd server && npx prisma migrate dev --name init",
+    "server:prisma:studio": "cd server && npx prisma studio"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.1",

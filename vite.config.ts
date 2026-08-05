@@ -11,16 +11,20 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       output: {
-        // 手动分割代码块
         manualChunks: {
-          // 将 React 相关库分离
           react: ['react', 'react-dom'],
-          // 将工具库分离
           utils: ['classnames', '@fortawesome/fontawesome-svg-core'],
-          // 将 Storybook 相关分离
           storybook: ['@storybook/react-vite', '@storybook/addon-docs/blocks'],
         },
       },

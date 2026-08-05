@@ -60,8 +60,8 @@ export { default as TimePicker } from './components/TimePicker'
 export type { TimePickerProps, TimePickerSize } from './components/TimePicker'
 
 // DatePicker
-export { default as DatePicker } from './components/DatePicker'
-export type { DatePickerProps, DatePickerSize } from './components/DatePicker'
+export { default as DatePicker, RangePicker } from './components/DatePicker'
+export type { DatePickerProps, DatePickerSize, RangePickerProps, RangePickerSize } from './components/DatePicker'
 export { default as Switch } from './components/Switch'
 export type { SwitchProps, SwitchSize } from './components/Switch'
 export { default as Checkbox } from './components/Checkbox'
